@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="en" data-layout="split" data-theme="dark" data-modules="stats,slideshow,features,artists,albums,faq,subscribe">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xyzaroom Records - Digital Music Distribution & Publishing Platform</title>
+    <meta name="description" content="Professional digital music distribution to all major streaming platforms including Spotify, Apple Music, YouTube Music. VEVO distribution, ISWC/PRS/PPL registration, and music publishing services.">
+    <meta name="keywords" content="music distribution, digital music, streaming platforms, VEVO, music publishing, ISWC, PRS, PPL, Spotify distribution">
+    <link rel="canonical" href="https://xyzaroomrecords.com">
+    <meta property="og:title" content="Xyzaroom Records - Digital Music Distribution Platform">
+    <meta property="og:description" content="Distribute your music to all major streaming platforms with professional publishing services and rights management.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xyzaroomrecords.com">
+    <meta property="og:image" content="https://xyzaroomrecords.com/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Xyzaroom Records - Digital Music Distribution">
+    <meta name="twitter:description" content="Professional music distribution and publishing services for independent artists worldwide.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Xyzaroom Records",
+        "description": "Digital music distribution and publishing platform",
+        "url": "https://xyzaroomrecords.com",
+        "logo": "https://xyzaroomrecords.com/logo.png",
+        "sameAs": [
+            "https://twitter.com/xyzaroomrecords",
+            "https://instagram.com/xyzaroomrecords"
+        ]
+    }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        /* Enhanced gradient backgrounds */
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        .section-gradient {
+            background: linear-gradient(135deg, #0f0f23 0%, #16213e 100%);
+        }
+        
+        .card-gradient {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .gradient-text { 
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+        }
+        
+        /* Enhanced glass effects */
+        .glass-effect { 
+            backdrop-filter: blur(20px); 
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card {
+            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Animated slideshow */
+        .slideshow-container { overflow: hidden; }
+        .slideshow-track { display: flex; animation: slide 40s linear infinite; }
+        @keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        
+        /* Enhanced hover effects */
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.3);
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Pulse animation for CTA buttons */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(96, 165, 250, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(96, 165, 250, 0.8); }
+        }
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        /* Enhanced focus states */
+        .focus-visible:focus-visible {
+            outline: 2px solid #60a5fa;
+            outline-offset: 2px;
+        }
+        
+        button:focus-visible,
+        a:focus-visible {
+            outline: 2px solid #60a5fa;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .text-gray-300 { color: #ffffff; }
+            .text-gray-400 { color: #e5e7eb; }
+            .text-gray-500 { color: #d1d5db; }
+            .border-gray-800 { border-color: #4b5563; }
+            .bg-gray-900 { background-color: #1f2937; }
+        }
+        
+        /* Enhanced navigation */
+        .nav-link {
+            color: #e5e7eb;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover,
+        .nav-link:focus {
+            color: #60a5fa;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .footer-link {
+            color: #9ca3af;
+            transition: color 0.2s ease;
+        }
+        .footer-link:hover,
+        .footer-link:focus {
+            color: #60a5fa;
+        }
+        
+        /* Enhanced button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(96, 165, 250, 0.4);
+        }
+        
+        .btn-secondary {
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #60a5fa, #a78bfa) 1;
+            color: #ffffff;
+            background-color: transparent;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(96, 165, 250, 0.4);
+        }
+        
+        /* Enhanced card styles */
+        .feature-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(96, 165, 250, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(96, 165, 250, 0.25);
+        }
+        
+        /* Enhanced FAQ styles */
+        .faq-button {
+            transition: all 0.3s ease;
+        }
+        .faq-button:hover {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        .faq-button:focus-visible {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        /* Pricing card enhancements */
+        .pricing-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .pricing-featured {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #60a5fa, #a78bfa) 1;
+        }
+        
+        /* Parallax effect for hero section */
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans antialiased">
+    <header class="fixed top-0 w-full z-50 glass-effect">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                    <i data-lucide="music" class="w-6 h-6 text-white"></i>
+                </div>
+                <span class="text-xl font-bold gradient-text">Xyzaroom Records</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#features" class="nav-link focus-visible">Distribution Services</a>
+                <a href="#artists" class="nav-link focus-visible">Featured Artists</a>
+                <a href="#pricing" class="nav-link focus-visible">Pricing Plans</a>
+                <a href="#contact" class="nav-link focus-visible">Get Started</a>
+                <button class="btn-primary px-6 py-2 rounded-full font-medium focus-visible pulse-glow">Start Distributing</button>
+            </div>
+            <button class="md:hidden focus-visible" id="mobile-menu-btn" aria-label="Open mobile menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-gradient pt-24 pb-20 px-4 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+                <div class="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style="animation-delay: 2s;"></div>
+                <div class="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style="animation-delay: 4s;"></div>
+            </div>
+            <div class="container mx-auto max-w-6xl relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-8">
+                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                            <span class="gradient-text">Distribute Your Music</span><br>
+                            <span class="text-white">To Every Platform</span>
+                        </h1>
+                        <p class="text-xl text-gray-200 leading-relaxed">
+                            Get your music on Spotify, Apple Music, YouTube Music, VEVO, and 150+ streaming platforms worldwide. Complete music publishing services including ISWC registration, PRS Music, and PPL Music rights management.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button class="btn-primary px-8 py-4 rounded-full font-semibold text-lg focus-visible flex items-center justify-center space-x-2 hover-glow">
+                                <span>Upload Your Music</span>
+                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </button>
+                            <button class="btn-secondary px-8 py-4 rounded-full font-semibold text-lg focus-visible">
+                                See How It Works
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative float-animation">
+                        <div class="relative w-full" style="padding-top:56.25%">
+                            <img src="https://cdn.ailandingpage.ai/landingpage_io/0f0671e1-4bd0-49c8-ba9e-c67a96088758/0f0671e1-4bd0-49c8-ba9e-c67a96088758/auto-img-1/a58ee435ad_0.png" 
+                                 alt="Music distribution dashboard showing streaming platform analytics and release management" 
+                                 class="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl hover-lift block rounded-lg"
+                                 width="800" height="450" loading="eager" decoding="async"
+                                 style="aspect-ratio:800/450;">
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 animate-ping"></div>
+                        <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full opacity-20 animate-ping" style="animation-delay: 1s;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 section-gradient">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4">Your Music on Every Major Platform</h2>
+                    <p class="text-xl text-gray-300">Reach millions of listeners across all streaming services</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+                    <div class="flex items-center justify-center p-6 glass-card rounded-xl hover-lift">
+                        <i data-lucide="music-2" class="w-12 h-12 text-green-400"></i>
+                        <span class="ml-3 text-lg font-semibold">Spotify</span>
+                    </div>
+                    <div class="flex items-center justify-center p-6 glass-card rounded-xl hover-lift">
+                        <i data-lucide="play-circle" class="w-12 h-12 text-gray-300"></i>
+                        <span class="ml-3 text-lg font-semibold">Apple Music</span>
+                    </div>
+                    <div class="flex items-center justify-center p-6 glass-card rounded-xl hover-lift">
+                        <i data-lucide="youtube" class="w-12 h-12 text-red-400"></i>
+                        <span class="ml-3 text-lg font-semibold">YouTube Music</span>
+                    </div>
+                    <div class="flex items-center justify-center p-6 glass-card rounded-xl hover-lift">
+                        <i data-lucide="video" class="w-12 h-12 text-blue-400"></i>
+                        <span class="ml-3 text-lg font-semibold">VEVO</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-20 px-4">
+            <div class="container mx-auto max-w-6xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold mb-6">
+                        <span class="gradient-text">Everything You Need</span> to Succeed
+                    </h2>
+                    <p class="text-xl text-gray-300">Professional music distribution and publishing services for independent artists</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="feature-card card-gradient p-8 rounded-2xl hover-lift focus-visible" tabindex="0">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                            <i data-lucide="globe" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 gradient-text">Worldwide Distribution</h3>
+                        <p class="text-gray-300 leading-relaxed">Get your music on 150+ streaming platforms including Spotify, Apple Music, Amazon Music, Deezer, Tidal, and more.</p>
+                    </div>
+                    <div class="feature-card card-gradient p-8 rounded-2xl hover-lift focus-visible" tabindex="0">
+                        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                            <i data-lucide="video" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 gradient-text">VEVO Music Videos</h3>
+                        <p class="text-gray-300 leading-relaxed">Professional music video distribution to VEVO with YouTube integration, custom branding, and full monetization.</p>
+                    </div>
+                    <div class="feature-card card-gradient p-8 rounded-2xl hover-lift focus-visible" tabindex="0">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                            <i data-lucide="file-text" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 gradient-text">Rights Management</h3>
+                        <p class="text-gray-300 leading-relaxed">Complete music publishing with ISWC registration, PRS Music and PPL Music registration for maximum royalty collection.</p>
+                    </div>
+                    <div class="feature-card card-gradient p-8 rounded-2xl hover-lift focus-visible" tabindex="0">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                            <i data-lucide="smartphone" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 gradient-text">Mobile Control Center</h3>
+                        <p class="text-gray-300 leading-relaxed">Manage releases, track performance, and monitor earnings from anywhere with our intuitive mobile app.</p>
+                    </div>
+                    <div class="feature-card card-gradient p-8 rounded-2xl hover-lift focus-visible" tabindex="0">
+                        <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                            <i data-lucide="bar-chart-3" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 gradient-text">Detailed Analytics</h3>
+                        <p class="text-gray-300 leading-relaxed">Real-time streaming data, audience demographics, revenue tracking, and performance insights across all platforms.</p>
+                    </div>
+                    <div class="feature-card card-gradient p-8 rounded-2xl hover-lift focus-visible" tabindex="0">
+                        <div class="w-16 h-16 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                            <i data-lucide="headphones" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 gradient-text">Expert Support</h3>
+                        <p class="text-gray-300 leading-relaxed">24/7 dedicated support team with music industry expertise to help with distribution, publishing, and technical questions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="artists" class="py-20 section-gradient px-4">
+            <div class="container mx-auto max-w-6xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold mb-6">
+                        <span class="gradient-text">Artists We're Proud</span> to Work With
+                    </h2>
+                    <p class="text-xl text-gray-300">Discover talented artists who trust us with their music distribution</p>
+                </div>
+                <div class="slideshow-container mb-16">
+                    <div class="slideshow-track">
+                        <div class="flex space-x-8 min-w-full">
+                            <div class="flex-shrink-0 w-56 glass-card rounded-2xl overflow-hidden hover-lift">
+                                <div class="relative w-full" style="padding-top:100%">
+                                    <img src="https://cdn.ailandingpage.ai/landingpage_io/0f0671e1-4bd0-49c8-ba9e-c67a96088758/0f0671e1-4bd0-49c8-ba9e-c67a96088758/auto-img-2/c7d8821f3f_0.png" 
+                                         alt="Luna Waves - Electronic music artist" class="absolute inset-0 w-full h-full object-cover block rounded-lg"
+                                         width="200" height="200" loading="lazy" decoding="async" style="aspect-ratio:200/200;">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="font-semibold text-lg">Luna Waves</h3>
+                                    <p class="text-sm text-gray-300">Electronic</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-56 glass-card rounded-2xl overflow-hidden hover-lift">
+                                <div class="relative w-full" style="padding-top:100%">
+                                    <img src="https://cdn.ailandingpage.ai/landingpage_io/0f0671e1-4bd0-49c8-ba9e-c67a96088758/0f0671e1-4bd0-49c8-ba9e-c67a96088758/auto-img-3/dfc630cdc6_0.png" 
+                                         alt="Midnight Echo - Indie rock band" class="absolute inset-0 w-full h-full object-cover block rounded-lg"
+                                         width="200" height="200" loading="lazy" decoding="async" style="aspect-ratio:200/200;">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="font-semibold text-lg">Midnight Echo</h3>
+                                    <p class="text-sm text-gray-300">Indie Rock</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-56 glass-card rounded-2xl overflow-hidden hover-lift">
+                                <div class="relative w-full" style="padding-top:100%">
+                                    <img src="https://cdn.ailandingpage.ai/landingpage_io/0f0671e1-4bd0-49c8-ba9e-c67a96088758/0f0671e1-4bd0-49c8-ba9e-c67a96088758/auto-img-4/175ef80fed_0.png" 
+                                         alt="Solar Flare - Hip hop artist" class="absolute inset-0 w-full h-full object-cover block rounded-lg"
+                                         width="200" height="200" loading="lazy" decoding="async" style="aspect-ratio:200/200;">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="font-semibold text-lg">Solar Flare</h3>
+                                    <p class="text-sm text-gray-300">Hip Hop</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-56 glass-card rounded-2xl overflow-hidden hover-lift">
+                                <div class="relative w-full" style="padding-top:100%">
+                                    <img src="https://cdn.ailandingpage.ai/landingpage_io/0f0671e1-4bd0-49c8-ba9e-c67a96088758/0f0671e1-4bd0-49c8-ba9e-c67a96088758/auto-img-5/ced4744c32_0.png" 
+                                         alt="Neon Dreams - Synthwave artist" class="absolute inset-0 w-full h-full object-cover block rounded-lg"
+                                         width="200" height="200" loading="lazy" decoding="async" style="aspect-ratio:200/200;">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="font-semibold text-lg">Neon Dreams</h3>
+                                    <p class="text-sm text-gray-300">Synthwave</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-56 glass-card rounded-2xl overflow-hidden hover-lift">
+                                <div class="relative w-full" style="padding-top:100%">
+                                    <img src="https://cdn.ailandingpage.ai/landingpage_io/0f0671e1-4bd0-49c8-ba9e-c67a96088758/0f0671e1-4bd0-49c8-ba9e-c67a96088758/auto-img-6/3e1e518986_0.png" 
+                                         alt="Cosmic Drift - Ambient music artist" class="absolute inset-0 w-full h-full object-cover block rounded-lg"
+                                         width="200" height="200" loading="lazy" decoding="async" style="aspect-ratio:200/200;">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="font-semibold text-lg">Cosmic Drift</h3>
+                                    <p class="text-sm text-gray-300">Ambient</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-8 min-w-full">
+                            <div class="flex-shrink-0 w-56 glass-card rounded-2xl overflow-hidden hover-lift">
+                                <div class="relative w-full" style="padding-top:100%">
+                                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop" 
+                                         alt="Luna Waves - Electronic music artist" class="absolute inset-0 w-full h-full object-cover"
+                                         width="200" height="200" loading="lazy" decoding="async">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="font-semibold text-lg">Luna Waves</h3>
+                                    <p class="text-sm text-gray-300">Electronic</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-56 glass-card rounded-2xl overflow-hidden hover-lift">
+                                <div class="relative w-full" style="padding-top:100%">
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop" 
+                                         alt="Midnight Echo - Indie rock band" class="absolute inset-0 w-full h-full object-cover"
+                                         width="200" height="200" loading="lazy" decoding="async">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="font-semibold text-lg">Midnight Echo</h3>
+                                    <p class="text-sm text-gray-300">Indie Rock</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-56 glass-card rounded-2xl overflow-hidden hover-lift">
+                                <div class="relative w-full" style="padding-top:100%">
+                                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=200&h=200&fit=crop" 
+                                         alt="Solar Flare - Hip hop artist" class="absolute inset-0 w-full h-full object-cover"
+                                         width="200" height="200" loading="lazy" decoding="async">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="font-semibold text-lg">Solar Flare</h3>
+                                    <p class="text-sm text-gray-300">Hip Hop</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-56 glass-card rounded-2xl overflow-hidden hover-lift">
+                                <div class="relative w-full" style="padding-top:100%">
+                                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop" 
+                                         alt="Neon Dreams - Synthwave artist" class="absolute inset-0 w-full h-full object-cover"
+                                         width="200" height="200" loading="lazy" decoding="async">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="font-semibold text-lg">Neon Dreams</h3>
+                                    <p class="text-sm text-gray-300">Synthwave</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-56 glass-card rounded-2xl overflow-hidden hover-lift">
+                                <div class="relative w-full" style="padding-top:100%">
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop" 
+                                         alt="Cosmic Drift - Ambient music artist" class="absolute inset-0 w-full h-full object-cover"
+                                         width="200" height="200" loading="lazy" decoding="async">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="font-semibold text-lg">Cosmic Drift</h3>
+                                    <p class="text-sm text-gray-300">Ambient</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold mb-8 gradient-text">Recent Releases</h3>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass-card rounded-2xl overflow-hidden hover-lift">
+                        <div class="relative w-full" style="padding-top:100%">
+                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" 
+                                 alt="Midnight Frequencies album cover" class="absolute inset-0 w-full h-full object-cover"
+                                 width="300" height="300" loading="lazy" decoding="async">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-semibold text-lg">Midnight Frequencies</h4>
+                            <p class="text-sm text-gray-300">Luna Waves</p>
+                            <p class="text-xs text-gray-400 mt-2">Released 2024</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl overflow-hidden hover-lift">
+                        <div class="relative w-full" style="padding-top:100%">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop" 
+                                 alt="Urban Legends album cover" class="absolute inset-0 w-full h-full object-cover"
+                                 width="300" height="300" loading="lazy" decoding="async">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-semibold text-lg">Urban Legends</h4>
+                            <p class="text-sm text-gray-300">Solar Flare</p>
+                            <p class="text-xs text-gray-400 mt-2">Released 2024</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl overflow-hidden hover-lift">
+                        <div class="relative w-full" style="padding-top:100%">
+                            <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=300&h=300&fit=crop" 
+                                 alt="Neon Nights album cover" class="absolute inset-0 w-full h-full object-cover"
+                                 width="300" height="300" loading="lazy" decoding="async">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-semibold text-lg">Neon Nights</h4>
+                            <p class="text-sm text-gray-300">Neon Dreams</p>
+                            <p class="text-xs text-gray-400 mt-2">Released 2024</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl overflow-hidden hover-lift">
+                        <div class="relative w-full" style="padding-top:100%">
+                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" 
+                                 alt="Echoes in Time album cover" class="absolute inset-0 w-full h-full object-cover"
+                                 width="300" height="300" loading="lazy" decoding="async">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-semibold text-lg">Echoes in Time</h4>
+                            <p class="text-sm text-gray-300">Midnight Echo</p>
+                            <p class="text-xs text-gray-400 mt-2">Released 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="py-20 px-4">
+            <div class="container mx-auto max-w-5xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold mb-6">
+                        <span class="gradient-text">Choose Your</span> Distribution Plan
+                    </h2>
+                    <p class="text-xl text-gray-300">Transparent pricing with no hidden fees - keep 100% of your royalties</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="pricing-card card-gradient p-10 rounded-2xl border border-gray-700 hover-lift">
+                        <h3 class="text-3xl font-bold mb-6">Essential Plan</h3>
+                        <div class="mb-8">
+                            <span class="text-5xl font-bold gradient-text">$19</span>
+                            <span class="text-gray-300 text-lg">/single release</span>
+                        </div>
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-6 h-6 text-green-400 mr-4"></i>
+                                <span class="text-lg">Distribute to 150+ streaming platforms</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-6 h-6 text-green-400 mr-4"></i>
+                                <span class="text-lg">Keep 100% of your streaming royalties</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-6 h-6 text-green-400 mr-4"></i>
+                                <span class="text-lg">Real-time streaming analytics</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-6 h-6 text-green-400 mr-4"></i>
+                                <span class="text-lg">Mobile app dashboard access</span>
+                            </li>
+                        </ul>
+                        <button class="btn-primary w-full py-4 rounded-full font-semibold text-lg focus-visible">
+                            Start Essential Plan
+                        </button>
+                    </div>
+                    <div class="pricing-card pricing-featured text-black p-10 rounded-2xl relative hover-lift">
+                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-lg">
+                            Recommended
+                        </div>
+                        <h3 class="text-3xl font-bold mb-6">Professional Plan</h3>
+                        <div class="mb-8">
+                            <span class="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">$49</span>
+                            <span class="text-gray-600 text-lg">/single release</span>
+                        </div>
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-6 h-6 text-green-600 mr-4"></i>
+                                <span class="text-lg">Everything in Essential Plan</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-6 h-6 text-green-600 mr-4"></i>
+                                <span class="text-lg">VEVO music video distribution</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-6 h-6 text-green-600 mr-4"></i>
+                                <span class="text-lg">Complete ISWC/PRS/PPL registration</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-6 h-6 text-green-600 mr-4"></i>
+                                <span class="text-lg">Advanced audience insights</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check" class="w-6 h-6 text-green-600 mr-4"></i>
+                                <span class="text-lg">Priority customer support</span>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-full font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transition-all focus-visible shadow-lg">
+                            Start Professional Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 section-gradient px-4">
+            <div class="container mx-auto max-w-4xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold mb-6">
+                        <span class="gradient-text">Common Questions</span> About Music Distribution
+                    </h2>
+                </div>
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl border border-gray-700">
+                        <button class="faq-button w-full p-8 text-left flex items-center justify-between faq-toggle focus-visible" data-target="faq-1" aria-expanded="false">
+                            <span class="font-semibold text-lg">How quickly will my music appear on streaming platforms?</span>
+                            <i data-lucide="chevron-down" class="w-6 h-6 transition-transform text-blue-400"></i>
+                        </button>
+                        <div id="faq-1" class="hidden px-8 pb-8">
+                            <p class="text-gray-300 text-lg leading-relaxed">Your music is typically delivered to platforms within 24-48 hours. Most streaming services like Spotify and Apple Music will make your music live within 1-2 weeks of submission.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl border border-gray-700">
+                        <button class="faq-button w-full p-8 text-left flex items-center justify-between faq-toggle focus-visible" data-target="faq-2" aria-expanded="false">
+                            <span class="font-semibold text-lg">Do I retain full ownership of my music and master recordings?</span>
+                            <i data-lucide="chevron-down" class="w-6 h-6 transition-transform text-blue-400"></i>
+                        </button>
+                        <div id="faq-2" class="hidden px-8 pb-8">
+                            <p class="text-gray-300 text-lg leading-relaxed">Absolutely. You maintain 100% ownership of your music, master recordings, and publishing rights. We act solely as your distribution partner and never claim any ownership of your creative work.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl border border-gray-700">
+                        <button class="faq-button w-full p-8 text-left flex items-center justify-between faq-toggle focus-visible" data-target="faq-3" aria-expanded="false">
+                            <span class="font-semibold text-lg">What exactly is VEVO and why do I need it?</span>
+                            <i data-lucide="chevron-down" class="w-6 h-6 transition-transform text-blue-400"></i>
+                        </button>
+                        <div id="faq-3" class="hidden px-8 pb-8">
+                            <p class="text-gray-300 text-lg leading-relaxed">VEVO is the world's leading music video platform, powering official music videos on YouTube. We help you create a professional VEVO channel, distribute your music videos with high-quality presentation, and maximize monetization opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl border border-gray-700">
+                        <button class="faq-button w-full p-8 text-left flex items-center justify-between faq-toggle focus-visible" data-target="faq-4" aria-expanded="false">
+                            <span class="font-semibold text-lg">What are ISWC, PRS Music, and PPL Music registrations?</span>
+                            <i data-lucide="chevron-down" class="w-6 h-6 transition-transform text-blue-400"></i>
+                        </button>
+                        <div id="faq-4" class="hidden px-8 pb-8">
+                            <p class="text-gray-300 text-lg leading-relaxed">ISWC provides unique identification codes for your musical works. PRS Music collects performance royalties for songwriters and publishers. PPL Music collects royalties for performers and record labels. We handle all these registrations to ensure you collect every penny you're owed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 px-4">
+            <div class="container mx-auto max-w-4xl text-center">
+                <h2 class="text-5xl font-bold mb-6">
+                    <span class="gradient-text">Ready to Share Your Music</span> with the World?
+                </h2>
+                <p class="text-xl text-gray-300 mb-12 leading-relaxed">Join thousands of independent artists who trust Xyzaroom Records for professional music distribution</p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <button class="btn-primary px-10 py-5 rounded-full font-semibold text-xl focus-visible hover-glow pulse-glow">
+                        Upload Your First Release
+                    </button>
+                    <button class="btn-secondary px-10 py-5 rounded-full font-semibold text-xl focus-visible">
+                        Book a Free Consultation
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="section-gradient border-t border-gray-700 py-16 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                            <i data-lucide="music" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold gradient-text">Xyzaroom Records</span>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">Professional music distribution and publishing services for independent artists worldwide.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-6 text-lg">Distribution Services</h4>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><a href="#" class="footer-link focus-visible">Streaming Platform Distribution</a></li>
+                        <li><a href="#" class="footer-link focus-visible">VEVO Music Videos</a></li>
+                        <li><a href="#" class="footer-link focus-visible">Music Publishing Services</a></li>
+                        <li><a href="#" class="footer-link focus-visible">Rights Management</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-6 text-lg">Artist Support</h4>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><a href="#" class="footer-link focus-visible">Help Center</a></li>
+                        <li><a href="#" class="footer-link focus-visible">Contact Support Team</a></li>
+                        <li><a href="#" class="footer-link focus-visible">Artist Resources</a></li>
+                        <li><a href="#" class="footer-link focus-visible">API Documentation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-6 text-lg">Stay Connected</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center hover:scale-110 transition-transform focus-visible shadow-lg" aria-label="Follow us on Twitter">
+                            <i data-lucide="twitter" class="w-5 h-5 text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center hover:scale-110 transition-transform focus-visible shadow-lg" aria-label="Follow us on Instagram">
+                            <i data-lucide="instagram" class="w-5 h-5 text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center hover:scale-110 transition-transform focus-visible shadow-lg" aria-label="Subscribe to our YouTube channel">
+                            <i data-lucide="youtube" class="w-5 h-5 text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-300">
+                <p>&copy; 2024 Xyzaroom Records. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const target = document.getElementById(button.dataset.target);
+                const icon = button.querySelector('[data-lucide="chevron-down"]');
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                
+                if (target.classList.contains('hidden')) {
+                    target.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                    button.setAttribute('aria-expanded', 'true');
+                } else {
+                    target.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                    button.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // Mobile Menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            // Mobile menu implementation would go here
+            console.log('Mobile menu clicked');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Keyboard navigation for feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero-gradient');
+            const speed = scrolled * 0.5;
+            if (parallax) {
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+    </script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

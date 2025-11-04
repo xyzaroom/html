@@ -1,122 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Xyzaroom Records</title>
-    
-    <!-- Swiper.js CSS via CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
-
-    <link rel="stylesheet" href="css/index.css" />
-    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>red | Red Music Digital</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Source+Code+Pro:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <h1>Xyzaroom Records</h1>
-            </div>
-            <nav class="nav">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#releases">Releases</a></li>
-                    <li><a href="#artists">Artists</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Swiper Slider -->
-    <section id="home" class="hero">
-        <div class="swiper hero-swiper">
-            <div class="swiper-wrapper">
-                <!-- Slide 1 -->
-                <div class="swiper-slide">
-                    <img src="assets/img/hero-1.jpg" alt="Latest Release">
-                    <div class="hero-content">
-                        <h2>New Era of Sound</h2>
-                        <p>Independent artists. Digital-first. Global reach.</p>
-                        <button class="cta-btn">Listen Now</button>
-                    </div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="swiper-slide">
-                    <img src="assets/img/hero-2.jpg" alt="Featured Artist">
-                    <div class="hero-content">
-                        <h2>Artist Spotlight: Nova X</h2>
-                        <p>Debut album "Echoes" out now.</p>
-                        <button class="cta-btn">Stream</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Pagination & Navigation -->
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-    </section>
+  <!-- Mobile Nav Toggle -->
+  <input type="checkbox" id="mobileNavToggle" class="mobile-nav-toggle-box" />
+  <label for="mobileNavToggle" class="mobile-nav-toggle-label">
+    <span></span><span></span><span></span>
+  </label>
 
-    <!-- Featured Releases -->
-    <section id="releases" class="releases">
-        <div class="container">
-            <h2>Featured Releases</h2>
-            <div class="grid">
-                <div class="card">
-                    <img src="assets/img/album-1.jpg" alt="Album 1">
-                    <h3>Void Echo</h3>
-                    <p>Darkwave / Synth</p>
-                    <button>Buy Digital</button>
-                </div>
-                <div class="card">
-                    <img src="assets/img/album-2.jpg" alt="Album 2">
-                    <h3>Neon Pulse</h3>
-                    <p>Future Bass</p>
-                    <button>Stream</button>
-                </div>
-                <div class="card">
-                    <img src="assets/img/album-3.jpg" alt="Album 3">
-                    <h3>Underground Kings</h3>
-                    <p>Hip-Hop / Trap</p>
-                    <button>Listen</button>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Overlay Nav -->
+  <div id="overlayNav">
+    <nav id="mobileNavigation">
+      <a href="index.html#home">Home</a>
+      <a href="artists.html">Artists</a>
+      <a href="contact.html">Contact</a>
+      <a href="aboutus.html">About Us</a>
+    </nav>
+  </div>
 
-    <!-- Artists -->
-    <section id="artists" class="artists">
-        <div class="container">
-            <h2>Our Artists</h2>
-            <ul>
-                <li>Nova X - Electronic / Ambient</li>
-                <li>Kael - Hip-Hop / Lo-Fi</li>
-                <li>Luna Ray - Indie Pop</li>
-                <li>Drift - Synthwave</li>
-            </ul>
-        </div>
-    </section>
+  <!-- Header -->
+  <header id="header">
+    <div class="header-inner">
+      <a href="index.html" id="logo">
+        <img src="images/logo.png" alt="red" />
+      </a>
+      <nav id="mainNavigation">
+        <a href="index.html#home">Home</a>
+        <a href="artists.html">Artists</a>
+        <a href="contact.html">Contact</a>
+        <a href="aboutus.html">About Us</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Footer -->
-    <footer id="contact" class="footer">
-        <div class="container">
-            <p>© 2025 Xyzaroom Records. All rights reserved.</p>
-            <div class="social">
-                <a href="#">Instagram</a> |
-                <a href="#">Twitter</a> |
-                <a href="#">Spotify</a> |
-                <a href="#">SoundCloud</a>
-            </div>
-        </div>
-    </footer>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <img src="images/banner.jpg" alt="Background" class="hero-bg" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img src="images/logo.png" alt="red" class="hero-logo" />
+      <a href="https://www.youtube.com/channel/UC3Eo8CI5HdK7yJEFgr_-xvQ?sub_confirmation=1" 
+         target="_blank" class="btn-large">GO TO OUR YOUTUBE Channel</a>
+      <div class="social-icons">
+        <a href="https://youtube.com/c/RedMusicDigital" target="_blank">YT</a>
+        <a href="https://facebook.com/redmusicdigital" target="_blank">FB</a>
+        <a href="https://instagram.com/redmusicdigital" target="_blank">IG</a>
+        <a href="https://twitter.com/RedMusicDigital" target="_blank">TW</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Swiper.js JS via CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="js/index.js"></script>
+  <!-- Footer -->
+  <footer id="footer">
+    <a href="#header" class="back-to-top">Back To Top</a>
+    <a href="mailto:info@redmusicdigital.com" class="email">info@redmusicdigital.com</a>
+    <div class="social-icons">
+      <a href="https://youtube.com/c/RedMusicDigital" target="_blank">YT</a>
+      <a href="https://facebook.com/redmusicdigital" target="_blank">FB</a>
+      <a href="https://instagram.com/redmusicdigital" target="_blank">IG</a>
+      <a href="https://twitter.com/RedMusicDigital" target="_blank">TW</a>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
 </body>
 </html>

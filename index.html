@@ -1,428 +1,122 @@
-<!doctype html>
-<html lang="en" data-layout="grid" data-theme="dark-space" data-modules="hero,artists,releases,newsletter">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xyzaroom Records - Premium Indie Electronic Music Label</title>
-    <meta name="description" content="Discover cutting-edge electronic music from emerging artists. Xyzaroom Records - where sound meets innovation. Stream, download, and connect with the future of electronic music.">
-    <meta property="og:title" content="Xyzaroom Records - Premium Indie Electronic Music Label">
-    <meta property="og:description" content="Discover cutting-edge electronic music from emerging artists. Stream latest releases and connect with innovative electronic sounds.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://xyzaroomrecords.com">
-    <meta property="og:image" content="https://xyzaroomrecords.com/og-image.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Xyzaroom Records - Premium Electronic Music">
-    <meta name="twitter:description" content="Discover cutting-edge electronic music from emerging artists worldwide.">
-    <link rel="canonical" href="https://xyzaroomrecords.com">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'space-navy': '#0a0f1c',
-                        'deep-navy': '#1a1f35',
-                        'electric-purple': '#8b5cf6',
-                        'bright-cyan': '#06b6d4',
-                        'glow-cyan': '#67e8f9'
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite alternate',
-                        'particle': 'particle 20s linear infinite',
-                        'vinyl-spin': 'vinyl-spin 8s linear infinite'
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-20px) rotate(180deg)' }
-                        },
-                        'pulse-glow': {
-                            '0%': { boxShadow: '0 0 20px rgba(103, 232, 249, 0.5)' },
-                            '100%': { boxShadow: '0 0 40px rgba(103, 232, 249, 0.8)' }
-                        },
-                        particle: {
-                            '0%': { transform: 'translateY(100vh) translateX(0px)', opacity: '0' },
-                            '10%': { opacity: '1' },
-                            '90%': { opacity: '1' },
-                            '100%': { transform: 'translateY(-100vh) translateX(100px)', opacity: '0' }
-                        },
-                        'vinyl-spin': {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Xyzaroom Records",
-        "description": "Premium indie electronic music label featuring cutting-edge artists and innovative sounds",
-        "url": "https://xyzaroomrecords.com",
-        "logo": "https://xyzaroomrecords.com/logo.png",
-        "sameAs": [
-            "https://soundcloud.com/xyzaroomrecords",
-            "https://spotify.com/xyzaroomrecords",
-            "https://instagram.com/xyzaroomrecords"
-        ]
-    }
-    </script>
-</head>
-<body class="bg-space-navy text-white overflow-x-hidden">
-    <div class="fixed inset-0 pointer-events-none">
-        <div class="absolute top-1/4 left-1/4 w-1 h-1 bg-glow-cyan rounded-full animate-particle opacity-60"></div>
-        <div class="absolute top-3/4 left-3/4 w-1 h-1 bg-electric-purple rounded-full animate-particle opacity-40" style="animation-delay: -5s;"></div>
-        <div class="absolute top-1/2 left-1/3 w-1 h-1 bg-bright-cyan rounded-full animate-particle opacity-50" style="animation-delay: -10s;"></div>
-        <div class="absolute top-1/6 right-1/4 w-1 h-1 bg-glow-cyan rounded-full animate-particle opacity-30" style="animation-delay: -15s;"></div>
-    </div>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Xyzaroom Records</title>
+    
+    <!-- Swiper.js CSS via CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
 
-    <header class="relative z-50">
-        <nav class="container mx-auto px-6 py-6">
-            <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold bg-gradient-to-r from-electric-purple to-bright-cyan bg-clip-text text-transparent">
-                    XYZAROOM
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#artists" class="hover:text-glow-cyan transition-colors duration-300">Artists</a>
-                    <a href="#releases" class="hover:text-glow-cyan transition-colors duration-300">Releases</a>
-                    <a href="#contact" class="hover:text-glow-cyan transition-colors duration-300">Contact</a>
-                </div>
-                <button class="md:hidden" aria-label="Menu">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Xyzaroom Records</h1>
             </div>
-        </nav>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#releases">Releases</a></li>
+                    <li><a href="#artists">Artists</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-space-navy via-deep-navy to-space-navy"></div>
-            
-            <div class="absolute top-1/4 left-1/4 w-32 h-32 opacity-60 animate-float">
-                <div class="relative w-full h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-electric-purple to-transparent rounded-full animate-vinyl-spin"></div>
-                    <div class="absolute inset-2 bg-space-navy rounded-full"></div>
-                    <div class="absolute inset-6 bg-gradient-to-br from-bright-cyan to-electric-purple rounded-full"></div>
-                </div>
-            </div>
-            
-            <div class="absolute top-1/3 right-1/4 w-24 h-24 opacity-40 animate-float" style="animation-delay: -2s;">
-                <div class="relative w-full h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-bright-cyan to-transparent rounded-full animate-vinyl-spin" style="animation-direction: reverse;"></div>
-                    <div class="absolute inset-2 bg-space-navy rounded-full"></div>
-                    <div class="absolute inset-6 bg-gradient-to-br from-electric-purple to-glow-cyan rounded-full"></div>
-                </div>
-            </div>
-            
-            <div class="absolute bottom-1/3 left-1/3 w-20 h-20 opacity-50 animate-float" style="animation-delay: -4s;">
-                <div class="relative w-full h-full">
-                    <div class="absolute inset-0 bg-gradient-to-br from-glow-cyan to-transparent rounded-full animate-vinyl-spin"></div>
-                    <div class="absolute inset-2 bg-space-navy rounded-full"></div>
-                    <div class="absolute inset-6 bg-gradient-to-br from-electric-purple to-bright-cyan rounded-full"></div>
-                </div>
-            </div>
-
-            <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-                <div class="mb-8">
-                    <h1 class="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-electric-purple via-bright-cyan to-glow-cyan bg-clip-text text-transparent animate-pulse-glow">
-                        XYZAROOM
-                    </h1>
-                    <div class="text-xl md:text-2xl text-gray-300 mb-2">RECORDS</div>
-                </div>
-                
-                <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-                    Where Electronic Music Meets Innovation
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <button class="px-8 py-4 bg-gradient-to-r from-electric-purple to-bright-cyan rounded-full text-white font-semibold hover:shadow-lg hover:shadow-bright-cyan/25 transition-all duration-300 transform hover:scale-105">
-                        Explore Releases
-                    </button>
-                    <button class="px-8 py-4 border-2 border-glow-cyan text-glow-cyan rounded-full font-semibold hover:bg-glow-cyan hover:text-space-navy transition-all duration-300">
-                        Join Our Label
-                    </button>
-                </div>
-            </div>
-
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <i data-lucide="chevron-down" class="w-8 h-8 text-glow-cyan"></i>
-            </div>
-        </section>
-
-        <section id="artists" class="py-20 px-6">
-            <div class="container mx-auto max-w-6xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-electric-purple to-bright-cyan bg-clip-text text-transparent">
-                    Featured Artists
-                </h2>
-                
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="group relative bg-gradient-to-br from-deep-navy to-space-navy rounded-2xl p-6 hover:shadow-2xl hover:shadow-electric-purple/20 transition-all duration-500 transform hover:scale-105">
-                        <div class="relative w-full mb-6" style="padding-top:100%">
-                            <img src="https://cdn.ailandingpage.ai/landingpage_io/f1969173-9360-4dfa-a86c-5c37fa248ee8/f1969173-9360-4dfa-a86c-5c37fa248ee8/artist-1/433a1ba2ad_0.png" 
-                                 alt="Neon Pulse - Electronic Music Artist" 
-                                 class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg block rounded-lg"
-                                 width="400" height="400" loading="lazy" decoding="async"
-                                 style="aspect-ratio:400/400;">
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2 text-glow-cyan">Neon Pulse</h3>
-                        <p class="text-gray-400 mb-4">Synthwave • Cyberpunk</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-electric-purple">12 Releases</span>
-                            <button class="p-2 rounded-full bg-electric-purple/20 hover:bg-electric-purple/40 transition-colors">
-                                <i data-lucide="play" class="w-5 h-5 text-electric-purple"></i>
-                            </button>
-                        </div>
+    <!-- Hero Swiper Slider -->
+    <section id="home" class="hero">
+        <div class="swiper hero-swiper">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <img src="assets/img/hero-1.jpg" alt="Latest Release">
+                    <div class="hero-content">
+                        <h2>New Era of Sound</h2>
+                        <p>Independent artists. Digital-first. Global reach.</p>
+                        <button class="cta-btn">Listen Now</button>
                     </div>
-                    
-                    <div class="group relative bg-gradient-to-br from-deep-navy to-space-navy rounded-2xl p-6 hover:shadow-2xl hover:shadow-bright-cyan/20 transition-all duration-500 transform hover:scale-105">
-                        <div class="relative w-full mb-6" style="padding-top:100%">
-                            <img src="https://cdn.ailandingpage.ai/landingpage_io/f1969173-9360-4dfa-a86c-5c37fa248ee8/f1969173-9360-4dfa-a86c-5c37fa248ee8/artist-2/2e6f9cfcc5_0.png" 
-                                 alt="Digital Waves - Ambient Electronic Producer" 
-                                 class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg block rounded-lg"
-                                 width="400" height="400" loading="lazy" decoding="async"
-                                 style="aspect-ratio:400/400;">
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2 text-glow-cyan">Digital Waves</h3>
-                        <p class="text-gray-400 mb-4">Ambient • Downtempo</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-bright-cyan">8 Releases</span>
-                            <button class="p-2 rounded-full bg-bright-cyan/20 hover:bg-bright-cyan/40 transition-colors">
-                                <i data-lucide="play" class="w-5 h-5 text-bright-cyan"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="group relative bg-gradient-to-br from-deep-navy to-space-navy rounded-2xl p-6 hover:shadow-2xl hover:shadow-glow-cyan/20 transition-all duration-500 transform hover:scale-105">
-                        <div class="relative w-full mb-6" style="padding-top:100%">
-                            <img src="https://cdn.ailandingpage.ai/landingpage_io/f1969173-9360-4dfa-a86c-5c37fa248ee8/f1969173-9360-4dfa-a86c-5c37fa248ee8/artist-3/a429fffd6b_0.png" 
-                                 alt="Quantum Bass - Future Bass Artist" 
-                                 class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg block rounded-lg"
-                                 width="400" height="400" loading="lazy" decoding="async"
-                                 style="aspect-ratio:400/400;">
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2 text-glow-cyan">Quantum Bass</h3>
-                        <p class="text-gray-400 mb-4">Future Bass • Trap</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-glow-cyan">15 Releases</span>
-                            <button class="p-2 rounded-full bg-glow-cyan/20 hover:bg-glow-cyan/40 transition-colors">
-                                <i data-lucide="play" class="w-5 h-5 text-glow-cyan"></i>
-                            </button>
-                        </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <img src="assets/img/hero-2.jpg" alt="Featured Artist">
+                    <div class="hero-content">
+                        <h2>Artist Spotlight: Nova X</h2>
+                        <p>Debut album "Echoes" out now.</p>
+                        <button class="cta-btn">Stream</button>
                     </div>
                 </div>
             </div>
-        </section>
+            <!-- Pagination & Navigation -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </section>
 
-        <section id="releases" class="py-20 px-6 bg-gradient-to-b from-space-navy to-deep-navy">
-            <div class="container mx-auto max-w-6xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-bright-cyan to-glow-cyan bg-clip-text text-transparent">
-                    Latest Releases
-                </h2>
-                
-                <div class="relative">
-                    <div class="flex overflow-x-auto space-x-6 pb-6 scrollbar-hide">
-                        <div class="flex-none w-80 bg-gradient-to-br from-deep-navy to-space-navy rounded-2xl p-6 hover:shadow-2xl hover:shadow-electric-purple/20 transition-all duration-500">
-                            <div class="relative w-full mb-6" style="padding-top:100%">
-                                <img src="https://cdn.ailandingpage.ai/landingpage_io/f1969173-9360-4dfa-a86c-5c37fa248ee8/f1969173-9360-4dfa-a86c-5c37fa248ee8/release-1/d57ce8c0b3_0.png" 
-                                     alt="Cosmic Frequencies - Latest Electronic Album" 
-                                     class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg block rounded-lg"
-                                     width="400" height="400" loading="lazy" decoding="async"
-                                     style="aspect-ratio:400/400;">
-                            </div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Cosmic Frequencies</h3>
-                            <p class="text-gray-400 mb-2">by Neon Pulse</p>
-                            <p class="text-sm text-electric-purple mb-4">Released 2 days ago</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <button class="p-2 rounded-full bg-electric-purple hover:bg-electric-purple/80 transition-colors">
-                                        <i data-lucide="play" class="w-4 h-4 text-white"></i>
-                                    </button>
-                                    <button class="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors">
-                                        <i data-lucide="heart" class="w-4 h-4 text-white"></i>
-                                    </button>
-                                </div>
-                                <span class="text-sm text-gray-400">4.2k plays</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex-none w-80 bg-gradient-to-br from-deep-navy to-space-navy rounded-2xl p-6 hover:shadow-2xl hover:shadow-bright-cyan/20 transition-all duration-500">
-                            <div class="relative w-full mb-6" style="padding-top:100%">
-                                <img src="https://cdn.ailandingpage.ai/landingpage_io/f1969173-9360-4dfa-a86c-5c37fa248ee8/f1969173-9360-4dfa-a86c-5c37fa248ee8/release-2/f4aa722118_0.png" 
-                                     alt="Digital Dreams - Ambient Electronic EP" 
-                                     class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg block rounded-lg"
-                                     width="400" height="400" loading="lazy" decoding="async"
-                                     style="aspect-ratio:400/400;">
-                            </div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Digital Dreams</h3>
-                            <p class="text-gray-400 mb-2">by Digital Waves</p>
-                            <p class="text-sm text-bright-cyan mb-4">Released 1 week ago</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <button class="p-2 rounded-full bg-bright-cyan hover:bg-bright-cyan/80 transition-colors">
-                                        <i data-lucide="play" class="w-4 h-4 text-white"></i>
-                                    </button>
-                                    <button class="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors">
-                                        <i data-lucide="heart" class="w-4 h-4 text-white"></i>
-                                    </button>
-                                </div>
-                                <span class="text-sm text-gray-400">8.7k plays</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex-none w-80 bg-gradient-to-br from-deep-navy to-space-navy rounded-2xl p-6 hover:shadow-2xl hover:shadow-glow-cyan/20 transition-all duration-500">
-                            <div class="relative w-full mb-6" style="padding-top:100%">
-                                <img src="https://cdn.ailandingpage.ai/landingpage_io/f1969173-9360-4dfa-a86c-5c37fa248ee8/f1969173-9360-4dfa-a86c-5c37fa248ee8/release-3/65a2f50d73_0.png" 
-                                     alt="Bass Dimension - Future Bass Album" 
-                                     class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg block rounded-lg"
-                                     width="400" height="400" loading="lazy" decoding="async"
-                                     style="aspect-ratio:400/400;">
-                            </div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Bass Dimension</h3>
-                            <p class="text-gray-400 mb-2">by Quantum Bass</p>
-                            <p class="text-sm text-glow-cyan mb-4">Released 2 weeks ago</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <button class="p-2 rounded-full bg-glow-cyan hover:bg-glow-cyan/80 transition-colors">
-                                        <i data-lucide="play" class="w-4 h-4 text-space-navy"></i>
-                                    </button>
-                                    <button class="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors">
-                                        <i data-lucide="heart" class="w-4 h-4 text-white"></i>
-                                    </button>
-                                </div>
-                                <span class="text-sm text-gray-400">12.1k plays</span>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Featured Releases -->
+    <section id="releases" class="releases">
+        <div class="container">
+            <h2>Featured Releases</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="assets/img/album-1.jpg" alt="Album 1">
+                    <h3>Void Echo</h3>
+                    <p>Darkwave / Synth</p>
+                    <button>Buy Digital</button>
+                </div>
+                <div class="card">
+                    <img src="assets/img/album-2.jpg" alt="Album 2">
+                    <h3>Neon Pulse</h3>
+                    <p>Future Bass</p>
+                    <button>Stream</button>
+                </div>
+                <div class="card">
+                    <img src="assets/img/album-3.jpg" alt="Album 3">
+                    <h3>Underground Kings</h3>
+                    <p>Hip-Hop / Trap</p>
+                    <button>Listen</button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="newsletter" class="py-20 px-6">
-            <div class="container mx-auto max-w-4xl text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-electric-purple to-glow-cyan bg-clip-text text-transparent">
-                    Stay Connected
-                </h2>
-                <p class="text-xl text-gray-300 mb-12 leading-relaxed">
-                    Get exclusive access to new releases, artist spotlights, and behind-the-scenes content from the Xyzaroom universe.
-                </p>
-                
-                <div class="max-w-md mx-auto">
-                    <div class="relative">
-                        <input type="email" 
-                               placeholder="Enter your email address" 
-                               class="w-full px-6 py-4 bg-deep-navy border-2 border-electric-purple/30 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-glow-cyan focus:shadow-lg focus:shadow-glow-cyan/25 transition-all duration-300 animate-pulse-glow"
-                               aria-label="Email address">
-                        <button class="absolute right-2 top-2 px-6 py-2 bg-gradient-to-r from-electric-purple to-bright-cyan rounded-full text-white font-semibold hover:shadow-lg hover:shadow-bright-cyan/25 transition-all duration-300 transform hover:scale-105">
-                            Subscribe
-                        </button>
-                    </div>
-                    <p class="text-sm text-gray-400 mt-4">
-                        No spam, just pure electronic vibes. Unsubscribe anytime.
-                    </p>
-                </div>
-                
-                <div class="flex justify-center space-x-6 mt-12">
-                    <a href="#" class="p-3 rounded-full bg-electric-purple/20 hover:bg-electric-purple/40 transition-colors" aria-label="Spotify">
-                        <i data-lucide="music" class="w-6 h-6 text-electric-purple"></i>
-                    </a>
-                    <a href="#" class="p-3 rounded-full bg-bright-cyan/20 hover:bg-bright-cyan/40 transition-colors" aria-label="SoundCloud">
-                        <i data-lucide="headphones" class="w-6 h-6 text-bright-cyan"></i>
-                    </a>
-                    <a href="#" class="p-3 rounded-full bg-glow-cyan/20 hover:bg-glow-cyan/40 transition-colors" aria-label="Instagram">
-                        <i data-lucide="instagram" class="w-6 h-6 text-glow-cyan"></i>
-                    </a>
-                    <a href="#" class="p-3 rounded-full bg-electric-purple/20 hover:bg-electric-purple/40 transition-colors" aria-label="Twitter">
-                        <i data-lucide="twitter" class="w-6 h-6 text-electric-purple"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
+    <!-- Artists -->
+    <section id="artists" class="artists">
+        <div class="container">
+            <h2>Our Artists</h2>
+            <ul>
+                <li>Nova X - Electronic / Ambient</li>
+                <li>Kael - Hip-Hop / Lo-Fi</li>
+                <li>Luna Ray - Indie Pop</li>
+                <li>Drift - Synthwave</li>
+            </ul>
+        </div>
+    </section>
 
-    <footer class="py-12 px-6 bg-gradient-to-t from-space-navy to-deep-navy border-t border-electric-purple/20">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="text-2xl font-bold mb-4 bg-gradient-to-r from-electric-purple to-bright-cyan bg-clip-text text-transparent">
-                        XYZAROOM
-                    </div>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Pushing the boundaries of electronic music since 2020. Where innovation meets sound.
-                    </p>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-glow-cyan">Music</h3>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Latest Releases</a></li>
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Featured Artists</a></li>
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Playlists</a></li>
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Genres</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-glow-cyan">Label</h3>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Submit Demo</a></li>
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Press Kit</a></li>
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-glow-cyan">Support</h3>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Help Center</a></li>
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-glow-cyan transition-colors">Licensing</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-electric-purple/20 mt-12 pt-8 text-center">
-                <p class="text-gray-400 text-sm">
-                    © 2024 Xyzaroom Records. All rights reserved. Made with ❤️ for electronic music lovers.
-                </p>
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <p>© 2025 Xyzaroom Records. All rights reserved.</p>
+            <div class="social">
+                <a href="#">Instagram</a> |
+                <a href="#">Twitter</a> |
+                <a href="#">Spotify</a> |
+                <a href="#">SoundCloud</a>
             </div>
         </div>
     </footer>
 
-    <script>
-        lucide.createIcons();
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Newsletter form submission
-        document.querySelector('input[type="email"]').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const email = this.value;
-                if (email) {
-                    alert('Thanks for subscribing! Welcome to the Xyzaroom family.');
-                    this.value = '';
-                }
-            }
-        });
-    </script>
+    <!-- Swiper.js JS via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>

@@ -26,3 +26,17 @@ A modern, responsive digital music label website. Cloned & enhanced from Red Mus
 
 ---
 Made with 🔥 by © 2025  Xyzaroom Records Inc.
+
+musicdigital-clone/
+├── index.html          ← (file ini)
+├── artists.html
+├── contact.html
+├── aboutus.html
+├── css/
+│   └── style.css
+├── js/
+│   └── script.js
+└── images/
+    ├── logo.png
+    ├── banner.jpg
+    └── favicon.ico

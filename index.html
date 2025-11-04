@@ -1,78 +1,41 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>FUGA • Xyzaroom Records</title>
-  <style>
-    body{background:#000;color:#fff;font-family:monospace;margin:0}
-    header{position:fixed;top:0;width:100%;padding:20px;background:rgba(0,0,0,.9);backdrop-filter:blur(10px);z-index:99;text-align:center}
-    .logo{font-size:30px;font-weight:900}
-    .logo span{color:#00ff88}
-    .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
-    .grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;padding:40px}
-    .card{cursor:pointer;padding:40px;border-radius:25px;text-align:center;font-size:22px;font-weight:700;transition:.4s}
-    .card:hover{transform:scale(1.1)}
-    .pink{background:#e91e63}
-    .cyan{background:#00bcd4}
-    .brown{background:#795548}
-    .yellow{background:#ffeb3b;color:#000}
-    .purple{background:#9c27b0}
-    .blue{background:#2196f3}
-    .red{background:#f44336}
-    #demo{padding:100px 20px;text-align:center;display:none}
-    pre{background:#111;padding:20px;border-radius:15px;overflow:auto}
-  </style>
-</head>
-<body>
-  <header><div class="logo">FUGA <span>XYZAROOM</span></div></header>
-  
-  <div class="hero">
-    <h1>7 BAHASA<br><span>1 KLIK</span></h1>
-    <p>Klik bahasa → langsung jalan di browser</p>
-  </div>
+<html lang="id"><head><meta charset="UTF-8"><title>FUGA • Xyzaroom</title><style>
+  body{margin:0;background:#000;color:#fff;font-family:monospace}
+  header{position:fixed;top:0;width:100%;padding:20px;background:#111;text-align:center;z-index:9}
+  .logo{font-size:32px;font-weight:900}.logo span{color:#00ff88}
+  .grid{max-width:1200px;margin:80px auto 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px}
+  .card{cursor:pointer;padding:30px;border-radius:20px;text-align:center;font-size:20px;font-weight:700;transition:.3s}
+  .card:hover{transform:scale(1.1);box-shadow:0 0 30px #00ff88}
+  .pink{background:#e91e63}.cyan{background:#00bcd4}.brown{background:#795548}
+  .yellow{background:#ffeb3b;color:#000}.purple{background:#9c27b0}
+  .blue{background:#2196f3}.red{background:#f44336}
+  #demo{padding:40px;background:#111;border:2px solid #00ff88;border-radius:20px;margin:20px;display:none}
+  pre{background:#222;padding:15px;border-radius:10px;overflow:auto}
+</style></head><body>
+<header><div class="logo">FUGA <span>XYZAROOM</span></div></header>
+<div class="grid">
+  <div class="card pink"   data-f="midi.cpp">PLAY MIDI</div>
+  <div class="card cyan"   data-f="beat.go">GO BEAT</div>
+  <div class="card brown"  data-f="cover.java">JAVA COVER</div>
+  <div class="card yellow" data-f="upload.js">UPLOAD 300 TOKO</div>
+  <div class="card purple" data-f="royalty.php">ROYALTY $</div>
+  <div class="card blue"   data-f="lyric.py">AI LYRIC</div>
+  <div class="card red"    data-f="backup.rb">1TB BACKUP</div>
+</div>
+<div id="demo"><h2 id="title"></h2><pre id="code"></pre><pre id="out"></pre></div>
 
-  <div class="grid">
-    <div class="card pink"   data-lang="cpp">C++</div>
-    <div class="card cyan"   data-lang="go">Go</div>
-    <div class="card brown"  data-lang="java">Java</div>
-    <div class="card yellow" data-lang="js">JavaScript</div>
-    <div class="card purple" data-lang="php">PHP</div>
-    <div class="card blue"   data-lang="py">Python</div>
-    <div class="card red"    data-lang="rb">Ruby</div>
-  </div>
-
-  <div id="demo">
-    <h2 id="title"></h2>
-    <pre id="code"></pre>
-    <button onclick="run()">RUN →</button>
-    <pre id="output"></pre>
-  </div>
-
-  <script>
-    const demos = {
-      cpp:  {title:"C++ MIDI Player", code:`#include <iostream>\nint main() { std::cout << "♫ Playing beat..."; return 0; }`, out:"♫ Beat 128 BPM ready!"},
-      go:   {title:"Go Beat Generator", code:`package main\nfmt.Println("♫ Go beat drop!")`, out:"♫ Go beat drop!"},
-      java: {title:"Java Cover Art", code:`System.out.println("🎨 Cover 3000x3000");`, out:"🎨 Cover AI generated!"},
-      js:   {title:"JS Upload RouteNote", code:`console.log("🚀 Uploaded to 300 stores");`, out:"🚀 Uploaded!"},
-      php:  {title:"PHP Royalty Calc", code:`<?php echo "💰 $0.003/stream"; ?>`, out:"💰 $0.003/stream"},
-      py:   {title:"Python AI Lyric", code:`print("🎤 Verse 1: fire emoji")`, out:"🎤 Verse 1: fire emoji"},
-      rb:   {title:"Ruby Backup Storadera", code:`puts "☁️ 1TB backup done"`, out:"☁️ 1TB backup done"}
+<script>
+  const demo={cpp:"♪ MIDI 128 BPM",go:"♫ Drum loop 4/4",java:"🎨 Cover 3000px",js:"🚀 300 toko",php:"💰 $0.003/stream",py:"🎤 Verse 1: fire!",rb:"☁️ 1 TB selesai"};
+  document.querySelectorAll('.card').forEach(c=>{
+    c.onclick=()=>{
+      const f=c.dataset.f;
+      document.getElementById('title').innerText=c.innerText;
+      fetch(f).then(r=>r.text()).then(t=>{
+        document.getElementById('code').innerText=t;
+        document.getElementById('out').innerText=demo[f.slice(0,2)];
+        document.getElementById('demo').style.display='block';
+      });
     };
-
-    document.querySelectorAll('.card').forEach(c => {
-      c.onclick = () => {
-        const l = c.dataset.lang;
-        document.getElementById('title').innerText = demos[l].title;
-        document.getElementById('code').innerText = demos[l].code;
-        document.getElementById('demo').style.display = 'block';
-        window.demoLang = l;
-      };
-    });
-
-    function run() {
-      const l = window.demoLang;
-      document.getElementById('output').innerText = demos[l].out;
-    }
-  </script>
-</body>
-</html>
+  });
+</script>
+</body></html>

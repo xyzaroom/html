@@ -1,74 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>red | Red Music Digital</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Source+Code+Pro:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Xyzaroom Records</title>
+  <style>
+    body { background:#0f0c29; color:#fff; font-family:Arial; text-align:center; margin:0; }
+    header { padding:30px; background:#302b63; }
+    h1 span { color:#00ff88; }
+    button { padding:15px 40px; background:#00ff88; border:none; border-radius:50px; font-size:20px; margin:20px; cursor:pointer; }
+    #status { font-size:28px; margin:30px; }
+  </style>
 </head>
 <body>
-
-  <!-- Mobile Nav Toggle -->
-  <input type="checkbox" id="mobileNavToggle" class="mobile-nav-toggle-box" />
-  <label for="mobileNavToggle" class="mobile-nav-toggle-label">
-    <span></span><span></span><span></span>
-  </label>
-
-  <!-- Overlay Nav -->
-  <div id="overlayNav">
-    <nav id="mobileNavigation">
-      <a href="index.html#home">Home</a>
-      <a href="artists.html">Artists</a>
-      <a href="contact.html">Contact</a>
-      <a href="aboutus.html">About Us</a>
-    </nav>
-  </div>
-
-  <!-- Header -->
-  <header id="header">
-    <div class="header-inner">
-      <a href="index.html" id="logo">
-        <img src="images/logo.png" alt="red" />
-      </a>
-      <nav id="mainNavigation">
-        <a href="index.html#home">Home</a>
-        <a href="artists.html">Artists</a>
-        <a href="contact.html">Contact</a>
-        <a href="aboutus.html">About Us</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <img src="images/banner.jpg" alt="Background" class="hero-bg" />
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <img src="images/logo.png" alt="red" class="hero-logo" />
-      <a href="https://www.youtube.com/channel/UC3Eo8CI5HdK7yJEFgr_-xvQ?sub_confirmation=1" 
-         target="_blank" class="btn-large">GO TO OUR YOUTUBE Channel</a>
-      <div class="social-icons">
-        <a href="https://youtube.com/c/RedMusicDigital" target="_blank">YT</a>
-        <a href="https://facebook.com/redmusicdigital" target="_blank">FB</a>
-        <a href="https://instagram.com/redmusicdigital" target="_blank">IG</a>
-        <a href="https://twitter.com/RedMusicDigital" target="_blank">TW</a>
-      </div>
-    </div>
+  <header><h1>XYZAROOM <span>RECORDS</span></h1></header>
+  <section>
+    <h2>Kuota by.U 65 GB + Backup 1 TB</h2>
+    <button id="beli">BELI Rp 100rb</button>
+    <button id="login">LOGIN</button>
+    <div id="status">Backup: 0%</div>
   </section>
 
-  <!-- Footer -->
-  <footer id="footer">
-    <a href="#header" class="back-to-top">Back To Top</a>
-    <a href="mailto:info@redmusicdigital.com" class="email">info@redmusicdigital.com</a>
-    <div class="social-icons">
-      <a href="https://youtube.com/c/RedMusicDigital" target="_blank">YT</a>
-      <a href="https://facebook.com/redmusicdigital" target="_blank">FB</a>
-      <a href="https://instagram.com/redmusicdigital" target="_blank">IG</a>
-      <a href="https://twitter.com/RedMusicDigital" target="_blank">TW</a>
-    </div>
-  </footer>
-
-  <script src="js/script.js"></script>
+  <script>
+    document.getElementById('beli').onclick = () => {
+      alert('Kuota aktif! Cek WA lo.');
+      backup();
+    };
+    document.getElementById('login').onclick = () => {
+      let nama = prompt('Nama lo?');
+      alert(`Selamat ${nama}! Data lo aman di cloud.`);
+    };
+    function backup() {
+      let p = 0;
+      let t = setInterval(() => {
+        p += 10;
+        document.getElementById('status').innerText = `Backup: ${p}%`;
+        if (p >= 100) {
+          clearInterval(t);
+          document.getElementById('status').style.color = '#00ff88';
+        }
+      }, 200);
+    }
+  </script>
 </body>
-      </html>
+</html>

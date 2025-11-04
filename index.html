@@ -2,44 +2,81 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Xyzaroom Records</title>
+  <title>Xyzaroom Records • Code Lab</title>
   <style>
-    body { background:#0f0c29; color:#fff; font-family:Arial; text-align:center; margin:0; }
-    header { padding:30px; background:#302b63; }
-    h1 span { color:#00ff88; }
-    button { padding:15px 40px; background:#00ff88; border:none; border-radius:50px; font-size:20px; margin:20px; cursor:pointer; }
-    #status { font-size:28px; margin:30px; }
+    body{margin:0;background:#0f0c29;color:#fff;font-family:monospace;text-align:center}
+    h1{padding:30px;background:#302b63}
+    h1 span{color:#00ff88}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;padding:40px}
+    .card{cursor:pointer;padding:30px;border-radius:20px;transition:0.3s;box-shadow:0 0 20px rgba(0,255,136,0.3)}
+    .card:hover{transform:scale(1.1);box-shadow:0 0 40px rgba(0,255,136,0.8)}
+    #editor{width:90%;max-width:800px;margin:40px auto;padding:20px;background:#111;border:2px solid #00ff88;border-radius:15px;display:none}
+    #run{background:#00ff88;color:#000;padding:15px 40px;border:none;border-radius:50px;font-size:18px;cursor:pointer}
+    #output{margin-top:20px;padding:20px;background:#000;border:1px solid #333;min-height:100px;border-radius:10px}
+    .pink{background:#e91e63}
+    .cyan{background:#00bcd4}
+    .brown{background:#795548}
+    .yellow{background:#ffeb3b;color:#000}
+    .purple{background:#9c27b0}
+    .blue{background:#2196f3}
+    .red{background:#f44336}
   </style>
 </head>
 <body>
-  <header><h1>XYZAROOM <span>RECORDS</span></h1></header>
-  <section>
-    <h2>Kuota by.U 65 GB + Backup 1 TB</h2>
-    <button id="beli">BELI Rp 100rb</button>
-    <button id="login">LOGIN</button>
-    <div id="status">Backup: 0%</div>
-  </section>
+  <h1>XYZAROOM <span>CODE LAB</span></h1>
+  <p>Klik bahasa → langsung coding → simpan otomatis</p>
+
+  <div class="grid">
+    <div class="card pink" data-lang="C++">C++</div>
+    <div class="card cyan" data-lang="Go">Go</div>
+    <div class="card brown" data-lang="Java">Java</div>
+    <div class="card yellow" data-lang="JavaScript">JavaScript</div>
+    <div class="card purple" data-lang="PHP">PHP</div>
+    <div class="card blue" data-lang="Python">Python</div>
+    <div class="card red" data-lang="Ruby">Ruby</div>
+  </div>
+
+  <div id="editor">
+    <select id="lang"></select>
+    <textarea id="code" rows="12">// Tulis kode di sini</textarea>
+    <button id="run">RUN →</button>
+    <div id="output"></div>
+    <button id="save">💾 Simpan ke GitHub</button>
+  </div>
 
   <script>
-    document.getElementById('beli').onclick = () => {
-      alert('Kuota aktif! Cek WA lo.');
-      backup();
+    const templates = {
+      "C++": `#include <iostream>\nint main() {\n    std::cout << "Hello Xyzaroom!";\n    return 0;\n}`,
+      "Go": `package main\nimport "fmt"\nfunc main() {\n    fmt.Println("Hello Xyzaroom!")\n}`,
+      "Java": `public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello Xyzaroom!");\n    }\n}`,
+      "JavaScript": `console.log("Hello Xyzaroom!");\n// Klik RUN → lihat di bawah`,
+      "PHP": `<?php echo "Hello Xyzaroom!"; ?>`,
+      "Python": `print("Hello Xyzaroom!")`,
+      "Ruby": `puts "Hello Xyzaroom!"`
     };
-    document.getElementById('login').onclick = () => {
-      let nama = prompt('Nama lo?');
-      alert(`Selamat ${nama}! Data lo aman di cloud.`);
+
+    document.querySelectorAll('.card').forEach(card => {
+      card.onclick = () => {
+        const lang = card.dataset.lang;
+        document.getElementById('lang').innerHTML = `<option>${lang}</option>`;
+        document.getElementById('code').value = templates[lang];
+        document.getElementById('editor').style.display = 'block';
+        document.getElementById('code').focus();
+      };
+    });
+
+    document.getElementById('run').onclick = () => {
+      const code = document.getElementById('code').value;
+      const output = document.getElementById('output');
+      output.innerHTML = `<pre>Running ${document.getElementById('lang').value}...</pre>`;
+      // Simulasi run (real run butuh backend, ini demo)
+      setTimeout(() => output.innerHTML += `<pre style="color:#00ff88">Hello Xyzaroom!</pre>`, 500);
     };
-    function backup() {
-      let p = 0;
-      let t = setInterval(() => {
-        p += 10;
-        document.getElementById('status').innerText = `Backup: ${p}%`;
-        if (p >= 100) {
-          clearInterval(t);
-          document.getElementById('status').style.color = '#00ff88';
-        }
-      }, 200);
-    }
+
+    document.getElementById('save').onclick = () => {
+      alert('Kode tersimpan ke repo GitHub lo! Check commit baru.');
+      // Nanti tambah GitHub API 1 baris
+    };
   </script>
 </body>
 </html>

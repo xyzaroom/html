@@ -6,32 +6,125 @@
   <title>XYZAROOM</title>
   <link rel="icon" href="logo.png">
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{background:#000;color:#fff;font-family:monospace;overflow-x:hidden}
-    header{position:fixed;top:0;width:100%;padding:20px 5%;background:rgba(0,0,0,.9);backdrop-filter:blur(10px);z-index:99;display:flex;justify-content:space-between;align-items:center}
-    .logo img{width:80px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 20px #fff;animation:pulse 3s infinite}
-    @keyframes pulse{0%,100%{box-shadow:0 0 20px #fff}50%{box-shadow:0 0 40px #00ff88}}
-    nav a{color:#fff;margin:0 15px;text-decoration:none;font-weight:600;transition:.3s}
-    nav a:hover{color:#00ff88}
-    .demo{background:#00ff88;color:#000;padding:12px 30px;border-radius:50px;font-weight:700;cursor:pointer}
-    .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-    .hero h1{font-size:70px;font-weight:900;letter-spacing:-2px}
-    .hero h1 span{color:#00ff88}
-    .hero p{font-size:24px;max-width:700px;margin:30px 0}
-    .grid{max-width:1200px;margin:40px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:25px;padding:20px}
-    .card{cursor:pointer;padding:40px;border-radius:25px;text-align:center;font-size:20px;font-weight:700;transition:.4s}
-    .card:hover{transform:translateY(-15px);box-shadow:0 20px 40px rgba(0,255,136,.5)}
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {
+      background:#000; color:#fff; font-family:monospace;
+      overflow-x:hidden; display:flex; flex-direction:column; min-height:100vh;
+    }
+
+    /* HEADER */
+    header {
+      position:fixed; top:0; left:0; width:100%;
+      background:rgba(0,0,0,.9); backdrop-filter:blur(10px);
+      z-index:99; display:flex; justify-content:space-between;
+      align-items:center; padding:15px 5%;
+      border-bottom:1px solid #00ff88;
+    }
+
+    .logo img {
+      width:70px; border-radius:50%; border:2px solid #fff;
+      box-shadow:0 0 20px #fff; animation:pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% {box-shadow:0 0 20px #fff}
+      50% {box-shadow:0 0 40px #00ff88}
+    }
+
+    nav a {
+      color:#fff; margin:0 15px; text-decoration:none; font-weight:600; transition:.3s;
+    }
+
+    nav a:hover {color:#00ff88}
+    .demo {
+      background:#00ff88; color:#000; padding:10px 25px; border-radius:50px; font-weight:700; cursor:pointer;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      position:fixed; left:0; top:70px; bottom:0;
+      width:220px; background:#111; border-right:2px solid #00ff88;
+      padding:20px; transition:.4s; z-index:90;
+    }
+    .sidebar a {
+      display:block; color:#fff; padding:10px 0;
+      text-decoration:none; font-weight:600; transition:.3s;
+    }
+    .sidebar a:hover {color:#00ff88;}
+
+    /* TOGGLE BUTTON */
+    .toggle {
+      display:none; cursor:pointer; font-size:24px; color:#00ff88;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      margin-top:100px;
+      margin-left:240px;
+      flex:1;
+      transition:.4s;
+    }
+
+    .hero {
+      min-height:100vh; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; text-align:center;
+    }
+    .hero h1 {
+      font-size:60px; font-weight:900; letter-spacing:-2px;
+    }
+    .hero h1 span {color:#00ff88}
+    .hero p {font-size:20px; max-width:700px; margin:30px 0}
+    .hero .demo {margin-top:10px;}
+
+    .grid {
+      max-width:1200px; margin:40px auto;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:25px; padding:20px;
+    }
+
+    .card {
+      cursor:pointer; padding:40px; border-radius:25px; text-align:center;
+      font-size:20px; font-weight:700; transition:.4s;
+    }
+    .card:hover {transform:translateY(-10px); box-shadow:0 10px 30px rgba(0,255,136,.5)}
     .pink{background:#e91e63}.cyan{background:#00bcd4}.brown{background:#795548}
     .yellow{background:#ffeb3b;color:#000}.purple{background:#9c27b0}
     .blue{background:#2196f3}.red{background:#f44336}
-    #demo{max-width:900px;margin:40px auto;padding:30px;background:#111;border:2px solid #00ff88;border-radius:20px;display:none}
-    pre{background:#000;padding:15px;border-radius:10px;overflow:auto;font-size:14px}
-    footer{padding:40px;text-align:center;background:#111}
+
+    #demo {
+      max-width:900px; margin:40px auto; padding:30px; background:#111;
+      border:2px solid #00ff88; border-radius:20px; display:none;
+    }
+
+    pre {background:#000; padding:15px; border-radius:10px; overflow:auto; font-size:14px;}
+
+    footer {
+      padding:30px; text-align:center; background:#111; border-top:1px solid #00ff88;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width:900px) {
+      .sidebar {
+        left:-240px;
+      }
+      .sidebar.active {
+        left:0;
+      }
+      .toggle {
+        display:block;
+      }
+      nav {display:none;}
+      main {
+        margin-left:0;
+      }
+    }
   </style>
 </head>
 <body>
+
   <header>
     <div class="logo"><img src="logo.png" alt="XYZAROOM"></div>
+    <div class="toggle" onclick="toggleSidebar()">☰</div>
     <nav>
       <a href="#products">Products</a>
       <a href="#case">Case</a>
@@ -42,31 +135,47 @@
     </nav>
   </header>
 
-  <div class="hero">
-    <h1>XYZA</span>ROOM</span></h1>
-    <p>Distribusi • Backup • Code • 1 Klik</p>
-    <button class="demo" onclick="alert('Chat WA langsung terbuka!')">MULAI GRATIS</button>
+  <div class="sidebar" id="sidebar">
+    <a href="#products">Products</a>
+    <a href="#case">Case</a>
+    <a href="#resources">Resources</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
   </div>
 
-  <div class="grid">
-    <div class="card pink"   data-f="index.cpp">C++ MIDI</div>
-    <div class="card cyan"   data-f="index.go">GO BEAT</div>
-    <div class="card brown"  data-f="index.java">JAVA COVER</div>
-    <div class="card yellow" data-f="index.js">JS UPLOAD</div>
-    <div class="card purple" data-f="index.php">PHP ROYALTY</div>
-    <div class="card blue"   data-f="index.py">PY LYRIC</div>
-    <div class="card red"    data-f="index.rb">RB BACKUP</div>
-  </div>
+  <main>
+    <div class="hero">
+      <h1><span>XYZA</span>ROOM</h1>
+      <p>Distribusi • Backup • Code • 1 Klik</p>
+      <button class="demo" onclick="alert('Chat WA langsung terbuka!')">MULAI GRATIS</button>
+    </div>
 
-  <div id="demo">
-    <h2 id="title"></h2>
-    <pre id="code"></pre>
-    <pre id="out" style="color:#00ff88"></pre>
-  </div>
+    <div class="grid">
+      <div class="card pink"   data-f="index.cpp">C++ MIDI</div>
+      <div class="card cyan"   data-f="index.go">GO BEAT</div>
+      <div class="card brown"  data-f="index.java">JAVA COVER</div>
+      <div class="card yellow" data-f="index.js">JS UPLOAD</div>
+      <div class="card purple" data-f="index.php">PHP ROYALTY</div>
+      <div class="card blue"   data-f="index.py">PY LYRIC</div>
+      <div class="card red"    data-f="index.rb">RB BACKUP</div>
+    </div>
 
-  <footer>© 2025 Xyzaroom Records Inc. • Alright Reserved.</footer>
+    <div id="demo">
+      <h2 id="title"></h2>
+      <pre id="code"></pre>
+      <pre id="out" style="color:#00ff88"></pre>
+    </div>
+  </main>
+
+  <footer>© 2025 Xyzaroom Records Inc. • All Rights Reserved.</footer>
 
   <script>
+    // Sidebar toggle
+    function toggleSidebar(){
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+
+    // Demo code logic
     const demo = {
       cpp:"♪ MIDI 128 BPM", go:"♫ Drum loop", java:"🎨 Cover 3000px",
       js:"🚀 300 toko", php:"💰 $0.003/stream", py:"🎤 Verse AI", rb:"☁️ 1TB backup"

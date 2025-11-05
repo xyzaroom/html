@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>XYZAROOM — Albums</title>
+  <link rel="icon" href="assets/logo.png" />
+  <!--
+    ALBUMS:
+    - Folder contoh: assets/albums/
+      - album1.jpg
+      - album2.jpg
+      - album3.jpg
+    - Ukuran ideal cover: 600x600 px (maks ~200 KB)
+  -->
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#000;color:#fff;font-family:monospace;min-height:100vh;display:flex;flex-direction:column}
+    .overlay{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .6s}
+    .overlay.hidden{opacity:0;visibility:hidden}
+    .typewriter{font-size:26px;color:#00ff88;margin-bottom:22px}
+    .cd{width:86px;height:86px;border-radius:50%;animation:spin 1.8s linear infinite;border:6px solid rgba(255,255,255,.06);background:conic-gradient(#00ff8822,#00ff8822)}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    header{position:fixed;top:0;left:0;width:100%;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.6);z-index:100}
+    .logo img{width:64px;border-radius:12px;border:2px solid #fff}
+    .toggle{display:none;font-size:26px;color:#00ff88;cursor:pointer}
+    .sidebar{position:fixed;left:0;top:88px;bottom:0;width:230px;padding:22px;background:#0b0b0b;border-right:2px solid rgba(0,255,136,.08)}
+    main{flex:1;margin-top:110px;margin-left:260px;padding:30px 5%}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px}
+    .album{background:#0b0b0b;padding:12px;border-radius:10px;text-align:center}
+    .album img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+    .meta{margin-top:8px;font-weight:800}
+    footer{padding:26px;text-align:center;background:#080808}
+    @media(max-width:900px){.toggle{display:block}.sidebar{top:74px}main{margin-left:0;padding:18px}}
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"><div class="typewriter" id="typeText"></div><div class="cd"></div></div>
+
+  <header>
+    <div class="logo"><img src="assets/logo.png" alt="XYZAROOM"></div>
+    <div class="toggle" id="toggleBtn">☰</div>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+    <nav>
+      <a href="https://xyzaroomrecords.github.io/">Homepage</a>
+      <a href="https://xyzaroomrecords.github.io/about/">About</a>
+      <a href="https://xyzaroomrecords.github.io/artists">Artists</a>
+      <a href="https://xyzaroomrecords.github.io/albums/">Albums</a>
+      <a href="https://xyzaroomrecords.github.io/event">Event</a>
+      <a href="https://xyzaroomrecords.github.io/contact">Contact</a>
+    </nav>
+  </aside>
+
+  <main>
+    <h1 style="font-size:28px">Albums</h1>
+    <p style="color:#ccc;margin-top:8px">Letakkan cover album di <code>assets/albums/</code> dengan nama: <strong>album1.jpg, album2.jpg, album3.jpg</strong>.</p>
+
+    <div class="grid" style="margin-top:18px">
+      <div class="album">
+        <img src="assets/albums/album1.jpg" alt="Album 1" onerror="this.style.filter='grayscale(80%)'">
+        <div class="meta">Album 1 • 2024</div>
+      </div>
+      <div class="album">
+        <img src="assets/albums/album2.jpg" alt="Album 2" onerror="this.style.filter='grayscale(80%)'">
+        <div class="meta">Album 2 • 2023</div>
+      </div>
+      <div class="album">
+        <img src="assets/albums/album3.jpg" alt="Album 3" onerror="this.style.filter='grayscale(80%)'">
+        <div class="meta">Album 3 • 2022</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>© 2025 Xyzaroom Records Inc.</footer>
+
+  <script>
+    const overlay=document.getElementById('overlay'), typeText=document.getElementById('typeText');
+    const full='XYZAROOM RECORDS'; let i=0;
+    function typeStep(){ if(i<=full.length){ typeText.innerText=full.slice(0,i); i++; setTimeout(typeStep,90) } else setTimeout(()=>overlay.classList.add('hidden'),600) }
+    document.addEventListener('DOMContentLoaded', ()=>{ setTimeout(typeStep,150);
+      document.getElementById('toggleBtn').addEventListener('click', ()=> document.getElementById('sidebar').classList.toggle('hidden'));
+      document.querySelectorAll('.sidebar nav a').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const href=this.getAttribute('href'); if(!href || href.startsWith('http')) return;
+          e.preventDefault(); overlay.classList.remove('hidden'); typeText.innerText=''; i=0; setTimeout(typeStep,80); setTimeout(()=>location.href=href,1200);
+        });
+      });
+    });
+  </script>
+</body>
+  </html>

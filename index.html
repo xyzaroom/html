@@ -6,7 +6,7 @@
   <title>XYZAROOM — Homepage</title>
   <link rel="icon" href="assets/logo.png" />
   <!--
-    Struktur direktori:
+    ROOT STRUCTURE (place in repo root):
     /xyzaroom/
       index.html
       about.html
@@ -17,19 +17,14 @@
       assets/
         logo.png
         artists/
-          artist1.jpg
-          artist2.jpg
-          artist3.jpg
+          artist1.jpg artist2.jpg artist3.jpg
         albums/
-          album1.jpg
-          album2.jpg
-          album3.jpg
+          album1.jpg album2.jpg album3.jpg
 
-    Rekomendasi ukuran gambar:
-    - Square cover/artist: 600x600 px (maks ~200 KB) untuk pengalaman loading yang baik.
+    Image recommendation: 600x600 px, < ~200 KB
   -->
   <style>
-    /* ---------- RESET ---------- */
+    /* RESET */
     *{margin:0;padding:0;box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -38,20 +33,15 @@
       display:flex;flex-direction:column;overflow-x:hidden;
     }
 
-    /* ---------- LOADING OVERLAY ---------- */
+    /* OVERLAY LOADING (typewriter + CD) */
     .overlay{
-      position:fixed;inset:0;background:linear-gradient(180deg,#000,#00110b);
-      display:flex;flex-direction:column;justify-content:center;align-items:center;
-      z-index:9999;transition:opacity .6s ease,visibility .6s;opacity:1;visibility:visible;
+      position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .5s ease,visibility .5s;
+      opacity:1;visibility:visible;
     }
     .overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
-    .typewriter{
-      font-size:28px;letter-spacing:6px;font-weight:800;color:#00ff88;margin-bottom:26px;
-      display:flex;gap:10px;align-items:center;white-space:nowrap;
-    }
-    .typewriter .text{min-height:1.2em}
-    /* CD */
-    .cd {
+    .typewriter{font-size:28px;letter-spacing:4px;font-weight:800;color:#00ff88;margin-bottom:18px;min-height:1.2em}
+    .cd{
       width:86px;height:86px;border-radius:50%;border:6px solid rgba(255,255,255,.06);
       background:conic-gradient(#00ff8822,#00ff8822);display:flex;align-items:center;justify-content:center;
       box-shadow:0 6px 30px rgba(0,255,136,.06), inset 0 0 12px rgba(255,255,255,.02);
@@ -63,87 +53,87 @@
     }
     @keyframes spin{to{transform:rotate(360deg)}}
 
-    /* ---------- HEADER ---------- */
+    /* HEADER */
     header{
-      position:fixed;top:0;left:0;width:100%;padding:14px 5%;
-      display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.6);
-      backdrop-filter:blur(6px);z-index:100; border-bottom:1px solid rgba(0,255,136,.08);
+      position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;
+      z-index:90;pointer-events:auto;
     }
-    .logo{display:flex;gap:12px;align-items:center}
-    .logo img{width:64px;height:64px;border-radius:12px;border:2px solid #fff;box-shadow:0 0 18px #00ff88}
-    .toggle{display:none;font-size:26px;color:#00ff88;cursor:pointer}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo img{width:64px;height:64px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88}
+    .logo .brand{font-weight:900;letter-spacing:1px}
+    .toggle{font-size:28px;color:#00ff88;cursor:pointer;user-select:none;padding:8px;border-radius:8px}
 
-    /* ---------- SIDEBAR ---------- */
+    /* SIDEBAR (HIDDEN BY DEFAULT ON ALL DEVICES) */
     .sidebar{
-      position:fixed;left:0;top:88px;bottom:0;width:230px;padding:22px;background:#0b0b0b;border-right:2px solid rgba(0,255,136,.08);
-      transition:transform .36s ease,opacity .36s;z-index:90;
+      position:fixed;left:0;top:100px;bottom:0;width:260px;padding:20px;background:#070707;border-right:1px solid rgba(0,255,136,.06);
+      transform:translateX(-100%);opacity:0;visibility:hidden;transition:transform .32s ease,opacity .32s,visibility .32s;
+      z-index:95;
     }
-    .sidebar.hidden{transform:translateX(-100%);opacity:0}
-    .sidebar nav a{display:block;padding:10px 8px;color:#fff;text-decoration:none;font-weight:700;margin-bottom:6px;border-radius:8px}
-    .sidebar nav a:hover{color:#000;background:#00ff88}
+    .sidebar.open{transform:translateX(0);opacity:1;visibility:visible}
+    .sidebar nav a{display:block;padding:10px 10px;color:#fff;text-decoration:none;font-weight:700;margin-bottom:8px;border-radius:10px}
+    .sidebar nav a:hover{background:#00ff88;color:#000}
 
-    /* ---------- MAIN ---------- */
-    main{flex:1;margin-top:110px;margin-left:260px;padding:30px 5%;transition:margin .36s ease}
-    .hero{min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-    .hero h1{font-size:64px;letter-spacing:-3px;font-weight:900}
+    /* MAIN */
+    main{flex:1;margin-top:110px;padding:40px 5%;transition:opacity .36s ease;opacity:0}
+    main.visible{opacity:1}
+    .hero{min-height:65vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+    .hero h1{font-size:64px;letter-spacing:-2px;font-weight:900}
     .hero h1 span{color:#00ff88}
-    .hero p{margin-top:18px;font-size:20px;max-width:760px}
-    .hero .controls{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-    .btn{background:#00ff88;color:#000;padding:10px 22px;border-radius:40px;font-weight:800;border:none;cursor:pointer}
-    .btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.06)}
+    .hero p{margin-top:16px;font-size:18px;color:#cfd8cc;max-width:780px}
+    .controls{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .btn{background:#00ff88;color:#000;padding:10px 20px;border-radius:40px;font-weight:800;border:none;cursor:pointer}
+    .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.06);color:#fff}
 
-    .grid{max-width:1200px;margin:40px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px;padding:8px}
-    .card{padding:30px;border-radius:18px;text-align:center;font-size:18px;font-weight:800;background:#111;cursor:pointer;transition:transform .28s,box-shadow .28s}
-    .card:hover{transform:translateY(-8px);box-shadow:0 18px 36px rgba(0,255,136,.06)}
-    .tag{display:inline-block;margin-top:10px;padding:6px 10px;border-radius:999px;background:#000;color:#00ff88;font-weight:800}
+    .grid{max-width:1200px;margin:40px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px}
+    .card{background:#0b0b0b;padding:20px;border-radius:12px;text-align:center;font-weight:800;cursor:pointer;transition:transform .28s}
+    .card:hover{transform:translateY(-8px);box-shadow:0 12px 30px rgba(0,255,136,.04)}
 
-    /* ---------- DEMO BOX ---------- */
-    #demo{max-width:920px;margin:20px auto;background:#0b0b0b;padding:22px;border-radius:12px;border:1px solid rgba(0,255,136,.06)}
+    /* DEMO BOX */
+    #demo{max-width:920px;margin:24px auto;background:#0b0b0b;padding:18px;border-radius:10px;border:1px solid rgba(0,255,136,.04);display:none}
     pre{background:#000;padding:12px;border-radius:8px;overflow:auto;font-size:13px;color:#ddd}
 
-    /* ---------- FOOTER ---------- */
-    footer{padding:26px;text-align:center;background:#080808;border-top:1px solid rgba(0,255,136,.04)}
+    /* FOOTER */
+    footer{padding:20px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03);font-size:14px}
 
-    /* ---------- Responsiveness ---------- */
-    @media (max-width:900px){
-      .toggle{display:block}
-      nav {display:none}
-      .sidebar{top:74px}
-      main{margin-left:0;padding:18px}
+    /* RESPONSIVE NOTE: sidebar stays hidden by default on all sizes; toggle opens it */
+    @media(max-width:720px){
+      .hero h1{font-size:40px}
+      .logo img{width:56px;height:56px}
     }
   </style>
 </head>
 <body>
-  <!-- LOADING OVERLAY: mengetik + CD -->
-  <div class="overlay" id="overlay" aria-hidden="false">
-    <div class="typewriter">
-      <div class="text" id="typeText"></div>
-    </div>
+  <!-- OVERLAY: typewriter + CD -->
+  <div class="overlay" id="overlay" role="status" aria-live="polite">
+    <div class="typewriter" id="typeText"></div>
     <div class="cd" aria-hidden="true"></div>
   </div>
 
   <header>
     <div class="logo">
-      <img src="assets/logo.png" alt="XYZAROOM Logo">
-      <div style="font-weight:800">XYZAROOM</div>
+      <img src="assets/logo.png" alt="XYZAROOM logo" onerror="this.style.filter='grayscale(80%)'">
+      <div style="display:flex;flex-direction:column">
+        <div class="brand">XYZAROOM</div>
+        <div style="font-size:12px;color:#9fbf9f">Records</div>
+      </div>
     </div>
     <div style="display:flex;gap:12px;align-items:center">
-      <div class="toggle" id="toggleBtn">☰</div>
+      <div class="toggle" id="toggleBtn" aria-controls="sidebar" aria-expanded="false">☰</div>
     </div>
   </header>
 
-  <aside class="sidebar" id="sidebar">
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
     <nav>
-      <a href="#">Homepage</a>
-      <a href="/p/about.html">About</a>
-      <a href="/p/artists.html">Artists</a>
-      <a href="/p/albums.html">Albums</a>
-      <a href="/p/event.html">Event</a>
-      <a href="/p/contact.html">Contact</a>
+      <a href="index.html">Homepage</a>
+      <a href="about.html">About</a>
+      <a href="artists.html">Artists</a>
+      <a href="albums.html">Albums</a>
+      <a href="event.html">Event</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </aside>
 
-  <main id="mainContent" class="fade">
+  <main id="mainContent" class="">
     <section class="hero" aria-labelledby="heroTitle">
       <h1 id="heroTitle"><span>XYZA</span>ROOM</h1>
       <p>Distribusi • Backup • Code • 1 Klik — Platform untuk artis & label independen.</p>
@@ -153,122 +143,105 @@
       </div>
     </section>
 
-    <section>
-      <h2 style="margin:12px 0 10px 0">Bahasa & Tools (contoh)</h2>
+    <section style="margin-top:32px">
+      <h2 style="margin-bottom:12px">Bahasa & Tools (contoh)</h2>
       <div class="grid">
-        <div class="card">C++ <div class="tag">C++ MIDI</div></div>
-        <div class="card">Go <div class="tag">GO BEAT</div></div>
-        <div class="card">Java <div class="tag">JAVA COVER</div></div>
-        <div class="card">JavaScript <div class="tag">JS UPLOAD</div></div>
-        <div class="card">PHP <div class="tag">PHP ROYALTY</div></div>
-        <div class="card">Python <div class="tag">PY LYRIC</div></div>
-        <div class="card">Ruby <div class="tag">RB BACKUP</div></div>
+        <div class="card">C++ <div style="margin-top:8px;color:#00ff88;font-weight:900">C++ MIDI</div></div>
+        <div class="card">Go <div style="margin-top:8px;color:#00ff88;font-weight:900">GO BEAT</div></div>
+        <div class="card">Java <div style="margin-top:8px;color:#00ff88;font-weight:900">JAVA COVER</div></div>
+        <div class="card">JavaScript <div style="margin-top:8px;color:#00ff88;font-weight:900">JS UPLOAD</div></div>
+        <div class="card">PHP <div style="margin-top:8px;color:#00ff88;font-weight:900">PHP ROYALTY</div></div>
+        <div class="card">Python <div style="margin-top:8px;color:#00ff88;font-weight:900">PY LYRIC</div></div>
+        <div class="card">Ruby <div style="margin-top:8px;color:#00ff88;font-weight:900">RB BACKUP</div></div>
       </div>
     </section>
 
-    <section id="demo" style="display:none">
+    <section id="demo" style="margin-top:28px;display:none">
       <h3 id="title"></h3>
       <pre id="code"></pre>
       <pre id="out" style="color:#00ff88"></pre>
     </section>
   </main>
 
-  <footer>© 2025 Xyzaroom Records Inc. • All Rights Reserved.</footer>
+  <footer>© 2025 XYZAROOM RECORDS • All Rights Reserved.</footer>
 
   <script>
-    /* ---------- Helper: open WA ---------- */
+    /* Helper: open WA */
     function openWA(){ window.open('https://wa.me/message/63P7KUGSCCZDE1!','_blank') }
 
-    /* ---------- Sidebar toggle ---------- */   
-const toggleBtn = document.getElementById('toggleBtn');
-const sidebar = document.getElementById('sidebar');
-toggleBtn.addEventListener('click', ()=> {
-  sidebar.classList.toggle('open');
-});
-
-// tutup sidebar jika klik di luar (hanya di layar kecil)
-document.addEventListener('click', (e) => {
-  if (window.innerWidth <= 900) {
-    const clickInside = sidebar.contains(e.target) || toggleBtn.contains(e.target);
-    if (!clickInside) sidebar.classList.remove('open');
-  }
-});
-
-// intercept nav link agar:
-// - menutup sidebar (UX lebih rapi)
-// - tampilkan overlay loading (typing + cd) lalu pindah halaman
-document.querySelectorAll('.sidebar nav a').forEach(a=>{
-  a.addEventListener('click', function(e){
-    const href = this.getAttribute('href');
-    if(!href || href.startsWith('http')) return; // biarkan external link normal
-    e.preventDefault();
-
-    // tutup sidebar dulu
-    sidebar.classList.remove('open');
-
-    // tampilkan overlay typing + cd, lalu pindah
-    overlay.classList.remove('hidden');
-    // reset typewriter index (sesuaikan nama variabel index di file)
-    if (typeof idx !== 'undefined') idx = 0;
-    if (typeof i !== 'undefined') i = 0;
-    // kosongkan teks dan mulai typing (pastikan typeStep ada)
-    if (document.getElementById('typeText')) document.getElementById('typeText').innerText = '';
-    setTimeout(()=> {
-      if (typeof typeStep === 'function') typeStep();
-    }, 80);
-
-    // navigasi setelah delay (600-1200ms)
-    setTimeout(()=> location.href = href, 700);
-  });
-});
-
-    toggleBtn.addEventListener('click', ()=> sidebar.classList.toggle('hidden'));
-
-    /* ---------- Loading overlay (typewriter + CD) ---------- */
+    /* ELEMENTS */
     const overlay = document.getElementById('overlay');
     const typeText = document.getElementById('typeText');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+
+    /* TYPEWRITER */
     const fullText = 'XYZAROOM RECORDS';
-    let idx = 0;
+    let tIdx = 0;
     function typeStep(){
-      if(idx <= fullText.length){
-        typeText.innerText = fullText.slice(0, idx);
-        idx++;
-        setTimeout(typeStep, 90);
+      if(tIdx <= fullText.length){
+        typeText.innerText = fullText.slice(0, tIdx);
+        tIdx++;
+        setTimeout(typeStep, 80);
       } else {
-        // selesai ketik — delay sedikit lalu sembunyikan overlay (fade)
-        setTimeout(()=> overlay.classList.add('hidden'), 700);
+        // hide overlay and show main with fade
+        setTimeout(()=> {
+          overlay.classList.add('hidden');
+          mainContent.classList.add('visible');
+        }, 220);
       }
     }
-    // start saat DOM siap
+
+    /* Start on DOM ready */
     document.addEventListener('DOMContentLoaded', ()=> {
-      setTimeout(typeStep, 180);
-      // intercept internal nav links to show overlay + fade effect
+      // start typing
+      tIdx = 0;
+      typeText.innerText = '';
+      setTimeout(typeStep, 120);
+
+      // toggle sidebar
+      toggleBtn.addEventListener('click', ()=>{
+        const open = sidebar.classList.toggle('open');
+        sidebar.setAttribute('aria-hidden', !open);
+        toggleBtn.setAttribute('aria-expanded', open);
+      });
+
+      // close sidebar on click outside (mobile & desktop)
+      document.addEventListener('click', (e)=>{
+        const inside = sidebar.contains(e.target) || toggleBtn.contains(e.target);
+        if(!inside) sidebar.classList.remove('open');
+      });
+
+      // intercept internal nav links to show overlay + navigate
       document.querySelectorAll('.sidebar nav a').forEach(a=>{
         a.addEventListener('click', function(e){
-          const href=this.getAttribute('href');
-          if(!href || href.startsWith('http')) return; // external default
+          const href = this.getAttribute('href');
+          if(!href || href.startsWith('http')) return;
           e.preventDefault();
-          // show overlay again then navigate
+          // close sidebar
+          sidebar.classList.remove('open');
+          // show overlay + restart typewriter
           overlay.classList.remove('hidden');
-          typeText.innerText=''; idx=0;
-          setTimeout(typeStep, 80);
-          setTimeout(()=> location.href = href, 1200);
+          typeText.innerText=''; tIdx=0;
+          setTimeout(typeStep, 90);
+          // navigate after short delay (fade)
+          setTimeout(()=> location.href = href, 700);
         });
       });
-    });
 
-    /* ---------- Optional: demo cards (placeholder behavior) ---------- */
-    document.querySelectorAll('.card').forEach(c=>{
-      c.addEventListener('click', ()=>{
-        // tampilkan demo sederhana
-        document.getElementById('demo').style.display='block';
-        document.getElementById('title').innerText = c.innerText.trim();
-        document.getElementById('code').innerText = '// contoh snippet untuk ' + c.innerText;
-        document.getElementById('out').innerText = '✔ Demo ready';
-        window.scrollTo({top:document.getElementById('demo').offsetTop-20,behavior:'smooth'});
+      // demo card behavior
+      document.querySelectorAll('.card').forEach(c=>{
+        c.addEventListener('click', ()=>{
+          document.getElementById('demo').style.display='block';
+          document.getElementById('title').innerText = c.innerText.trim();
+          document.getElementById('code').innerText = '// contoh snippet for ' + c.innerText;
+          document.getElementById('out').innerText = '✔ Demo ready';
+          window.scrollTo({top:document.getElementById('demo').offsetTop-20,behavior:'smooth'});
+        });
       });
     });
   </script>
 </body>
-        </html>
-        
+  </html>
+          

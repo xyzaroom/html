@@ -1,97 +1,67 @@
-###### © 2025  Xyzaroom Records Inc.
+# XYZAROOM
 
-# template
+**XYZAROOM** adalah proyek frontend eksperimental yang menggabungkan **musik, teknologi, dan eksplorasi digital**.  
+Nama **XYZAROOM** diambil dari ide *eksplorasi gen XYZA* — simbol masa depan, inovasi, dan ruang virtual bagi artis independen untuk berkarya.
 
-**Xyzaroom** is a passionate frontend project dedicated to [Describe project goals/mission].
+---
 
-## Key Features & Benefits
+## 🎧 Tujuan & Misi
 
-*   **Feature 1:** [Describe the feature and its benefits. e.g., Immersive User Experience: Delivers a visually appealing and engaging experience for music lovers.]
-*   **Feature 2:** [Describe the feature and its benefits. e.g., Responsive Design: Adapts seamlessly to various screen sizes and devices.]
-*   **Feature 3:** [Describe the feature and its benefits. e.g., Easy Navigation: Provides intuitive and user-friendly navigation throughout the website.]
+> “To explore the fusion of art, data, and sound.”
 
-## Prerequisites & Dependencies
+Proyek ini bertujuan untuk:
+- Membangun **identitas digital** bagi artis independen dan label kecil.  
+- Menyediakan **sistem navigasi interaktif** dengan gaya futuristik tanpa ketergantungan framework berat.  
+- Menyatukan **data artis dan album** dengan cara sinkron dan efisien.
 
-*   **Node.js:**  [Specify required version, e.g., v14 or higher]
-*   **npm:** [Specify required version, e.g., v6 or higher.  Included with Node.js]
-*   **Git:** [Required for version control, specify version if necessary, e.g., version 2 or higher]
-*   **[Specific Library/Framework - if any]:** [Specify the version, e.g., React v17+, Vue v3+, etc.]
+---
 
-## Installation & Setup Instructions
+## 🚀 Fitur Utama
 
-1.  **Clone the repository:**
+- **Dynamic Artist–Album Sync**  
+  Sistem yang menghubungkan halaman *Artists*, *Albums*, dan *Biodata* secara otomatis, memungkinkan pembaruan cepat tanpa duplikasi data.
 
-    ```bash
-    git clone https://github.com/xyzaroom/xyzaroom.github.io.git
-    cd xyzaroom.github.io
-    ```
+- **Futuristic UI (Black–Neon Green Theme)**  
+  Desain monokrom dengan efek neon hijau dan animasi loading bertema *CD-ROM spin*, mencerminkan identitas visual label musik modern.
 
-2.  **Install dependencies:**
+- **Code Language Representation**  
+  Setiap halaman menampilkan ornamen atau snippet dari 7 bahasa pemrograman (C++, Go, Java, JavaScript, PHP, Python, Ruby) sebagai simbol teknologi lintas platform.
 
-    ```bash
-    npm install  # or yarn install if you're using yarn
-    ```
+- **Lightweight & Fast**  
+  Dibangun hanya dengan **HTML, CSS, dan JavaScript vanilla**, tanpa framework, memaksimalkan efisiensi dan kompatibilitas browser.
 
-3.  **[Optional: Configuration Step, if any. e.g., Set up environment variables]:**
+---
 
-    [Explain the configuration process. e.g., Create a `.env` file based on `.env.example` and fill in the necessary API keys and settings.]
+## 🧩 Struktur Halaman
 
-4.  **Run the development server:**
+| Halaman | Deskripsi |
+|----------|------------|
+| `index.html` | Homepage dengan animasi *typewriter* dan efek CD-ROM loading. |
+| `about.html` | Penjelasan visi dan misi label. |
+| `artists.html` | Daftar artis dan tautan ke biodata masing-masing. |
+| `albums.html` | Koleksi album dengan filter per artis dan navigasi otomatis ke biodata. |
+| `event.html` | Jadwal acara dan rilis mendatang. |
+| `contact.html` | Form kontak dan informasi label. |
+| `biodata.html` | Halaman dinamis yang menampilkan profil artis berdasarkan query parameter. |
 
-    ```bash
-    npm start # or yarn start if you're using yarn
-    ```
+---
 
-    This will typically start the application on `http://localhost:3000`.
+## ⚙️ Prasyarat & Dependensi
 
-## Usage Examples & API Documentation
+Tidak memerlukan dependensi eksternal, namun disarankan:
 
-[If applicable, provide code examples demonstrating common use cases.]
+- **Node.js (opsional):** v14+ untuk menjalankan server lokal.  
+- **Git:** v2+ untuk version control.  
+- **Browser Modern:** Chrome, Firefox, Edge, Safari.
 
-```javascript
-// Example code snippet (if applicable)
-console.log("Hello, Xyzaroom Records!");
-```
+---
 
-[If the project includes an API, provide details on how to use it.  Include information on endpoints, request methods, and data formats.]
+## 🛠️ Instalasi & Menjalankan Secara Lokal
 
-## Configuration Options
+```bash
+# 1. Clone repository
+git clone https://github.com/xyzaroom/xyzaroom.github.io.git
+cd xyzaroom.github.io
 
-[Explain any configurable settings that can be adjusted to customize the application's behavior.]
-
-*   **[Configuration Option 1]:** [Describe the option and its available values. e.g., `API_URL`:  The base URL for the backend API. Defaults to `https://api.example.com`.]
-*   **[Configuration Option 2]:** [Describe the option and its available values. e.g., `THEME`:  The visual theme of the website.  Possible values: `light`, `dark`.]
-
-These options are typically set using environment variables.
-
-## Contributing Guidelines
-
-We welcome contributions from the community! To contribute:
-
-1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix:
-
-    ```bash
-    git checkout -b feature/your-feature-name
-    ```
-
-3.  Make your changes and commit them with descriptive messages.
-4.  Push your branch to your forked repository.
-5.  Submit a pull request to the main repository.
-
-Please follow these guidelines when contributing:
-
-*   Write clear and concise commit messages.
-*   Adhere to the existing code style.
-*   Include tests for your changes.
-*   Ensure your code passes all tests before submitting a pull request.
-
-## License Information
-
-This project is open source under the [License Type] License - see the [LICENSE](LICENSE) file for details.  (If no specific license is used, state: "All rights reserved.").  If you choose to use a license, include the LICENSE file in the repo. Common licenses are MIT, Apache 2.0, and GPLv3.
-
-## Acknowledgments
-
-*   [Mention any third-party libraries or resources used in the project. e.g., This project uses React.js for the user interface.]
-*   [Credit any contributors or individuals who have helped with the project.]
-
+# 2. Jalankan server lokal (opsional)
+npx serve .   # atau gunakan ekstensi Live Server di VSCode

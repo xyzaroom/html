@@ -1,55 +1,47 @@
-<!-- Save as: biodata.html -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>XYZAROOM — Artist</title>
-  <link rel="icon" href="/assets/logo.png" />
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    html,body{height:100%}
-    body{background:#000;color:#fff;font-family:monospace;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
-    .overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .5s;opacity:1;visibility:visible}
-    .overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
-    .typewriter{font-size:26px;color:#00ff88;margin-bottom:18px;min-height:1.2em}
-    .cd{width:86px;height:86px;border-radius:50%;border:6px solid rgba(255,255,255,.06);background:conic-gradient(#00ff8822,#00ff8822);animation:spin 1.8s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    header{position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;z-index:90}
-    .toggle{font-size:26px;color:#00ff88;cursor:pointer}
-    .logo img{width:60px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88}
-    .sidebar{position:fixed;left:0;top:100px;bottom:0;width:260px;padding:18px;background:#070707;border-right:1px solid rgba(0,255,136,.06);
-      transform:translateX(-100%);opacity:0;visibility:hidden;transition:transform .32s,opacity .32s;z-index:95}
-    .sidebar.open{transform:translateX(0);opacity:1;visibility:visible}
-    .sidebar nav a{display:block;padding:10px 8px;color:#fff;text-decoration:none;font-weight:700;margin-bottom:8px;border-radius:8px}
-    .sidebar nav a:hover{background:#00ff88;color:#000}
-    main{flex:1;margin-top:110px;padding:30px 5%;transition:opacity .36s;opacity:0}
-    main.visible{opacity:1}
-    .profile{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;gap:18px}
-    .profile img{width:100%;height:260px;object-fit:cover;border-radius:12px}
-    .bio h1{font-size:28px;margin-bottom:10px}
-    .bio p{color:#cbd9c6}
-    .discography{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
-    .disc{background:#0b0b0b;padding:12px;border-radius:10px;text-align:center}
-    footer{padding:30px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03)}
-    .footer-links{margin-bottom:10px}
-    .footer-links a{color:#00ff88;margin:0 12px;text-decoration:none}
-    @media(max-width:920px){.profile{grid-template-columns:1fr;}.profile img{height:220px}}
-  </style>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>XYZAROOM — Artist</title>
+<link rel="icon" href="assets/logo.png" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{font-family:monospace;background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column}
+  .overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .45s}
+  .overlay.hidden{opacity:0;visibility:hidden}
+  .typewriter{font-size:26px;color:#00ff88;margin-bottom:18px;min-height:1.2em}
+  .cd{width:86px;height:86px;border-radius:50%;border:6px solid rgba(255,255,255,.06);background:conic-gradient(#00ff8822,#00ff8822);animation:spin 1.8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  header{position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;z-index:90}
+  .toggle{font-size:26px;color:#00ff88;cursor:pointer}
+  .sidebar{position:fixed;left:0;top:100px;bottom:0;width:260px;padding:18px;background:#070707;border-right:1px solid rgba(0,255,136,.06);transform:translateX(-100%);opacity:0;visibility:hidden;z-index:95}
+  .sidebar.open{transform:translateX(0);opacity:1;visibility:visible}
+  main{flex:1;margin-top:110px;padding:30px 5%;transition:opacity .36s;opacity:0}
+  main.visible{opacity:1}
+  .profile{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;gap:18px}
+  .profile img{width:100%;height:260px;object-fit:cover;border-radius:12px}
+  .discography{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+  .disc{background:#0b0b0b;padding:10px;border-radius:8px;text-align:center}
+  footer{padding:24px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03)}
+  /* data-sync pulse (subtle) */
+  .sync-pulse{position:fixed;right:24px;bottom:24px;width:16px;height:16px;border-radius:50%;background:rgba(0,255,136,.12);box-shadow:0 0 6px rgba(0,255,136,.12);pointer-events:none}
+  .sync-pulse.active{animation: pulse 1.6s infinite;}
+  @keyframes pulse{0%{transform:scale(.8);opacity:.6}50%{transform:scale(1.4);opacity:1}100%{transform:scale(.8);opacity:.6}}
+</style>
 </head>
 <body>
-  <!-- embedded data: reuse same albums + artists data -->
   <script id="artistsData" type="application/json">
   [
-    {"name":"Xyzaroom","genre":"Various","bio":"Indonesian Musican Producer","release_date":"2018-03-18","image":"placeholder"},
-    {"name":"Sukabumi Philharmonic Orchestra","genre":"Classic/Soundtrack","bio":"Indonesian Orchestra Group","release_date":"2018-03-18","image":"placeholder"}
+    {"name":"Xyzaroom","genre":"Various","bio":"Indonesian Music Producer","release_date":"2018-03-18","image":"https://dl.dropboxusercontent.com/scl/fi/ipu27a7mjhps8qmx7jekd/AddText_03-28-05.44.25.png?rlkey=cmyqencbyrbmqquku5qy5gf8a"},
+    {"name":"Sukabumi Philharmonic Orchestra","genre":"Classic/Soundtrack","bio":"Indonesian Orchestra Group","release_date":"2018-03-18","image":"https://dl.dropboxusercontent.com/scl/fi/qzdvm8v9dp5mt5jyn4cxo/AddText_08-05-07.24.01.jpg?rlkey=4a1hyc36a2ksck0juv8n21v42"}
   ]
   </script>
 
   <script id="albumsData" type="application/json">
   [
-    {"title":"Composer Framework","artist":"Xyzaroom","year":"2018","cover":"https://dl.dropboxusercontent.com/scl/fi/ipu27a7mjhps8qmx7jekd/AddText_03-28-05.44.25.png?rlkey=cmyqencbyrbmqquku5qy5gf8a&st=nb7v19eq"},
-    {"title":"Composer Framework","artist":"Sukabumi Philharmonic Orchestra","year":"2018","cover":"https://dl.dropboxusercontent.com/scl/fi/ipu27a7mjhps8qmx7jekd/AddText_03-28-05.44.25.png?rlkey=cmyqencbyrbmqquku5qy5gf8a&st=nb7v19eq"},
-    {"title":"Mise En Scene","artist":"Sukabumi Philharmonic Orchestra","year":"2019","cover":"https://dl.dropboxusercontent.com/scl/fi/qzdvm8v9dp5mt5jyn4cxo/AddText_08-05-07.24.01.jpg?rlkey=4a1hyc36a2ksck0juv8n21v42&st=qua8y631"},
+    {"title":"Composer Framework","artist":"Xyzaroom","year":"2018","cover":"https://dl.dropboxusercontent.com/scl/fi/ipu27a7mjhps8qmx7jekd/AddText_03-28-05.44.25.png?rlkey=cmyqencbyrbmqquku5qy5gf8a"},
+    {"title":"Mise En Scene","artist":"Sukabumi Philharmonic Orchestra","year":"2019","cover":"https://dl.dropboxusercontent.com/scl/fi/qzdvm8v9dp5mt5jyn4cxo/AddText_08-05-07.24.01.jpg?rlkey=4a1hyc36a2ksck0juv8n21v42"},
     {"title":"Julid Fisabilillah","artist":"Sukabumi Philharmonic Orchestra","year":"2020","cover":"https://dl.dropboxusercontent.com/scl/fi/sykxsq91k3sbswk6rptl1/AddText_12-31-02.02.08.png?rlkey=mst14eg05cuqfxhefkwug5ysf&st=n07t7p59"}
   ]
   </script>
@@ -58,7 +50,7 @@
 
   <header>
     <div style="display:flex;align-items:center;gap:12px">
-      <img src="assets/logo.png" alt="logo" onerror="this.style.filter='grayscale(80%)'">
+      <img src="assets/logo.png" alt="logo" style="width:60px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88" onerror="this.style.filter='grayscale(80%)'">
       <div style="font-weight:900">XYZAROOM</div>
     </div>
     <div class="toggle" id="toggleBtn">☰</div>
@@ -66,7 +58,7 @@
 
   <aside class="sidebar" id="sidebar">
     <nav>
-      <a href="https://xyzaroomrecords.github.io/">Homepage</a>
+      <a href="index.html">Homepage</a>
       <a href="about.html">About</a>
       <a href="artists.html">Artists</a>
       <a href="albums.html">Albums</a>
@@ -79,80 +71,81 @@
     <div id="profileWrap"></div>
   </main>
 
+  <div class="sync-pulse" id="syncPulse" aria-hidden="true"></div>
+
   <footer>
-    <div class="footer-links"><a href="/FAQ/privacy-policy.html">Privacy Policy</a><a href="/FAQ/terms-condition.html">Terms Conditions</a></div>
-    <p>© 2025 XYZAROOM RECORDS • All Rights Reserved.</p>
+    <div style="color:#cbd9c6;font-size:13px">/* Go snippet (ornamental) */</div>
+    <div style="color:#cbd9c6;margin-top:8px">/* Languages: HTML · CSS · JS · JSON · Go · Python · Rust */</div>
+    <p style="color:#cbd9c6;margin-top:8px">© 2025 XYZAROOM RECORDS</p>
   </footer>
 
-  <script>
-    const overlay=document.getElementById('overlay'), typeText=document.getElementById('typeText'),
-          toggleBtn=document.getElementById('toggleBtn'), sidebar=document.getElementById('sidebar'),
-          mainContent=document.getElementById('mainContent');
-    const full='XYZAROOM RECORDS'; let tIdx=0;
-    function typeStep(){ if(tIdx<=full.length){ typeText.innerText=full.slice(0,tIdx); tIdx++; setTimeout(typeStep,80) } else setTimeout(()=>{ overlay.classList.add('hidden'); mainContent.classList.add('visible') },200) }
+<script>
+  const overlay=document.getElementById('overlay'), typeText=document.getElementById('typeText'),
+        toggleBtn=document.getElementById('toggleBtn'), sidebar=document.getElementById('sidebar'),
+        mainContent=document.getElementById('mainContent'), syncPulse=document.getElementById('syncPulse');
+  const full='XYZAROOM RECORDS'; let tIdx=0;
+  function typeStep(){ if(tIdx<=full.length){ typeText.innerText=full.slice(0,tIdx); tIdx++; setTimeout(typeStep,80) } else setTimeout(()=>{overlay.classList.add('hidden'); mainContent.classList.add('visible')},200) }
 
-    function getQueryParam(name){
-      const params = new URLSearchParams(window.location.search);
-      return params.get(name);
-    }
+  function getQueryParam(name){
+    const params = new URLSearchParams(window.location.search);
+    return params.get(name);
+  }
 
-    document.addEventListener('DOMContentLoaded', ()=>{
-      tIdx=0; typeText.innerText=''; setTimeout(typeStep,120);
-      toggleBtn.addEventListener('click', ()=> sidebar.classList.toggle('open'));
-      document.addEventListener('click',(e)=>{ if(!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) sidebar.classList.remove('open'); });
-      document.querySelectorAll('.sidebar nav a').forEach(a=>{
-        a.addEventListener('click', function(e){ const href=this.getAttribute('href'); if(!href||href.startsWith('http')) return; e.preventDefault(); sidebar.classList.remove('open'); overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90); setTimeout(()=> location.href = href,700); });
-      });
-
-      renderProfile();
+  document.addEventListener('DOMContentLoaded', ()=>{
+    tIdx=0; typeText.innerText=''; setTimeout(typeStep,120);
+    toggleBtn.addEventListener('click', ()=> sidebar.classList.toggle('open'));
+    document.addEventListener('click',(e)=>{ if(!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) sidebar.classList.remove('open'); });
+    document.querySelectorAll('.sidebar nav a').forEach(a=>{
+      a.addEventListener('click', function(e){ const href=this.getAttribute('href'); if(!href||href.startsWith('http')) return; e.preventDefault(); sidebar.classList.remove('open'); overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90); setTimeout(()=> location.href = href,700); });
     });
 
-    function renderProfile(){
-      const artists = JSON.parse(document.getElementById('artistsData').textContent);
-      const albums = JSON.parse(document.getElementById('albumsData').textContent);
-      const artistName = getQueryParam('artist');
-      if(!artistName){
-        document.getElementById('profileWrap').innerHTML = '<p style="color:#cbd9c6">Artist not specified. Kembali ke <a href="artists.html" style="color:#00ff88">Artists</a>.</p>';
-        overlay.classList.add('hidden'); mainContent.classList.add('visible'); return;
-      }
-      const artist = artists.find(a => a.name === artistName);
-      if(!artist){
-        // try decode and find ignoring encoding
-        const decoded = decodeURIComponent(artistName);
-        const art2 = artists.find(a => a.name === decoded);
-        if(art2) return renderArtist(art2, albums);
-        document.getElementById('profileWrap').innerHTML = '<p style="color:#cbd9c6">Artist tidak ditemukan. Kembali ke <a href="artists.html" style="color:#00ff88">Artists</a>.</p>';
-        overlay.classList.add('hidden'); mainContent.classList.add('visible'); return;
-      }
-      renderArtist(artist, albums);
-    }
+    renderProfile();
+  });
 
-    function renderArtist(artist, albums){
-      const wrap = document.getElementById('profileWrap');
-      const artistAlbums = albums.filter(x => x.artist === artist.name);
-      wrap.innerHTML = `<div class="profile">
-        <div><img src="${(artist.image && artist.image!=='placeholder')? artist.image : 'assets/artists/placeholder.jpg'}" alt="${artist.name}" onerror="this.style.filter='grayscale(80%)'"></div>
-        <div class="bio">
-          <h1>${artist.name}</h1>
-          <div style="color:#00ff88;font-weight:800">${artist.genre}</div>
-          <p style="margin-top:12px;color:#cbd9c6">${artist.bio}</p>
-          <div style="margin-top:12px;color:#cbd9c6">Latest release: ${artist.release_date || '-'}</div>
-          <div class="discography"><h3 style="grid-column:1/-1;margin-top:18px">Discography</h3></div>
-        </div>
-      </div>`;
-      const disc = wrap.querySelector('.discography');
-      if(artistAlbums.length===0) disc.innerHTML += '<p style="color:#cbd9c6">Belum ada album terdaftar.</p>';
-      else artistAlbums.forEach(a=>{
-        const div = document.createElement('div'); div.className='disc';
-        div.innerHTML = `<img src="${a.cover}" alt="${a.title}" style="width:100%;height:140px;object-fit:cover;border-radius:8px" onerror="this.style.filter='grayscale(80%)'">
-                         <div style="margin-top:8px;font-weight:800">${a.title}</div>
-                         <div style="color:#cbd9c6">${a.year}</div>`;
-        div.addEventListener('click', ()=> { overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90); setTimeout(()=> location.href = 'albums.html?artist=' + encodeURIComponent(a.artist),700); });
-        disc.appendChild(div);
-      });
+  function renderProfile(){
+    const artists = JSON.parse(document.getElementById('artistsData').textContent);
+    const albums = JSON.parse(document.getElementById('albumsData').textContent);
+    const artistName = getQueryParam('artist');
+    const wrap = document.getElementById('profileWrap');
 
+    if(!artistName){
+      wrap.innerHTML = '<p style="color:#cbd9c6">Artist tidak spesifik. Kembali ke <a href="artists.html" style="color:#00ff88">Artists</a>.</p>';
       overlay.classList.add('hidden'); mainContent.classList.add('visible');
+      return;
     }
-  </script>
+
+    // find by exact or decoded name
+    let artist = artists.find(a => a.name === artistName);
+    if(!artist){
+      const decoded = decodeURIComponent(artistName);
+      artist = artists.find(a => a.name === decoded);
+    }
+    if(!artist){
+      wrap.innerHTML = '<p style="color:#cbd9c6">Artist tidak ditemukan. Kembali ke <a href="artists.html" style="color:#00ff88">Artists</a>.</p>';
+      overlay.classList.add('hidden'); mainContent.classList.add('visible');
+      return;
+    }
+
+    // show pulse (sync) when loading data
+    syncPulse.classList.add('active');
+    setTimeout(()=> syncPulse.classList.remove('active'), 2200);
+
+    const artistAlbums = albums.filter(x => x.artist === artist.name);
+    let html = `<div class="profile"><div><img src="${artist.image && artist.image!=='placeholder' ? artist.image : 'assets/logo.png'}" alt="${artist.name}" onerror="this.style.filter='grayscale(80%)';this.src='assets/logo.png'"></div><div class="bio"><h1>${artist.name}</h1><div style="color:#00ff88;font-weight:800">${artist.genre}</div><p style="margin-top:12px;color:#cbd9c6">${artist.bio}</p><div style="margin-top:12px;color:#cbd9c6">Latest release: ${artist.release_date || '-'}</div><div class="discography"><h3 style="grid-column:1/-1;margin-top:18px">Discography</h3></div></div></div>`;
+
+    wrap.innerHTML = html;
+    const disc = wrap.querySelector('.discography');
+
+    if(artistAlbums.length===0) disc.innerHTML += '<p style="color:#cbd9c6">Belum ada album terdaftar.</p>';
+    else artistAlbums.forEach(a=>{
+      const div = document.createElement('div'); div.className='disc';
+      div.innerHTML = `<img src="${a.cover}" alt="${a.title}" style="width:100%;height:120px;object-fit:cover;border-radius:8px" onerror="this.style.filter='grayscale(80%)';this.src='assets/logo.png'"><div style="margin-top:8px;font-weight:800">${a.title}</div><div style="color:#cbd9c6">${a.year}</div>`;
+      div.addEventListener('click', ()=> { overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90); setTimeout(()=> location.href = 'albums.html?artist=' + encodeURIComponent(a.artist),700); });
+      disc.appendChild(div);
+    });
+
+    overlay.classList.add('hidden'); mainContent.classList.add('visible');
+  }
+</script>
 </body>
 </html>

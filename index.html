@@ -179,9 +179,49 @@
     /* ---------- Helper: open WA ---------- */
     function openWA(){ window.open('https://wa.me/message/63P7KUGSCCZDE1!','_blank') }
 
-    /* ---------- Sidebar toggle ---------- */
-    const toggleBtn = document.getElementById('toggleBtn');
-    const sidebar = document.getElementById('sidebar');
+    /* ---------- Sidebar toggle ---------- */   
+const toggleBtn = document.getElementById('toggleBtn');
+const sidebar = document.getElementById('sidebar');
+toggleBtn.addEventListener('click', ()=> {
+  sidebar.classList.toggle('open');
+});
+
+// tutup sidebar jika klik di luar (hanya di layar kecil)
+document.addEventListener('click', (e) => {
+  if (window.innerWidth <= 900) {
+    const clickInside = sidebar.contains(e.target) || toggleBtn.contains(e.target);
+    if (!clickInside) sidebar.classList.remove('open');
+  }
+});
+
+// intercept nav link agar:
+// - menutup sidebar (UX lebih rapi)
+// - tampilkan overlay loading (typing + cd) lalu pindah halaman
+document.querySelectorAll('.sidebar nav a').forEach(a=>{
+  a.addEventListener('click', function(e){
+    const href = this.getAttribute('href');
+    if(!href || href.startsWith('http')) return; // biarkan external link normal
+    e.preventDefault();
+
+    // tutup sidebar dulu
+    sidebar.classList.remove('open');
+
+    // tampilkan overlay typing + cd, lalu pindah
+    overlay.classList.remove('hidden');
+    // reset typewriter index (sesuaikan nama variabel index di file)
+    if (typeof idx !== 'undefined') idx = 0;
+    if (typeof i !== 'undefined') i = 0;
+    // kosongkan teks dan mulai typing (pastikan typeStep ada)
+    if (document.getElementById('typeText')) document.getElementById('typeText').innerText = '';
+    setTimeout(()=> {
+      if (typeof typeStep === 'function') typeStep();
+    }, 80);
+
+    // navigasi setelah delay (600-1200ms)
+    setTimeout(()=> location.href = href, 700);
+  });
+});
+
     toggleBtn.addEventListener('click', ()=> sidebar.classList.toggle('hidden'));
 
     /* ---------- Loading overlay (typewriter + CD) ---------- */

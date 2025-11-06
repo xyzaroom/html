@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>XYZAROOM — Event</title>
-  <link rel="icon" href="assets/logo.png" />
+  <link rel="icon" href="/assets/logo.png" />
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     html,body{height:100%}
@@ -36,7 +36,7 @@
 
   <header>
     <div style="display:flex;align-items:center;gap:12px">
-      <img src="assets/logo.png" alt="logo" style="width:64px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88" onerror="this.style.filter='grayscale(80%)'">
+      <img src="/assets/logo.png" alt="logo" style="width:64px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88" onerror="this.style.filter='grayscale(80%)'">
       <div style="font-weight:900">XYZAROOM</div>
     </div>
     <div class="toggle" id="toggleBtn">☰</div>
@@ -44,7 +44,7 @@
 
   <aside class="sidebar" id="sidebar">
     <nav>
-      <a href="index.html">Homepage</a>
+      <a href="https://xyzaroomrecords.github.io/">Homepage</a>
       <a href="/p/about.html">About</a>
       <a href="/p/artists.html">Artists</a>
       <a href="/p/albums.html">Albums</a>
@@ -76,7 +76,13 @@
     </div>
   </main>
 
-  <footer>© 2025 XYZAROOM RECORDS • All Rights Reserved.</footer>
+  <footer>
+  <div class="footer-links">
+    <a href="/FAQ/privacy-policy.html">Privacy Policy</a>
+    <a href="/FAQ/terms-condition.html">Terms & Conditions</a>
+  </div>
+  <p>© 2025 XYZAROOM RECORDS • All Rights Reserved.</p>
+  </footer>
 
   <script>
     const overlay=document.getElementById('overlay'), typeText=document.getElementById('typeText');

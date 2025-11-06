@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>XYZAROOM — Artists</title>
-  <link rel="icon" href="assets/logo.png" />
+  <link rel="icon" href="/assets/logo.png" />
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     html,body{height:100%}
@@ -40,7 +40,7 @@
 
   <header>
     <div style="display:flex;align-items:center;gap:12px">
-      <img src="assets/logo.png" alt="logo" style="width:64px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88" onerror="this.style.filter='grayscale(80%)'">
+      <img src="/assets/logo.png" alt="logo" style="width:64px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88" onerror="this.style.filter='grayscale(80%)'">
       <div style="font-weight:900">XYZAROOM</div>
     </div>
     <div class="toggle" id="toggleBtn">☰</div>
@@ -63,21 +63,27 @@
 
     <div class="gallery" style="margin-top:12px">
       <div class="artist">
-        <img src="assets/artists/artist1.jpg" alt="Artist 1" onerror="this.style.filter='grayscale(80%)'">
+        <img src="/assets/artists/artist1.jpg" alt="Artist 1" onerror="this.style.filter='grayscale(80%)'">
         <div style="margin-top:8px;font-weight:800">Artist 1</div>
       </div>
-      <div class="artist">
-        <img src="assets/artists/artist2.jpg" alt="Artist 2" onerror="this.style.filter='grayscale(80%)'">
+      <div class="/artist">
+        <img src="/assets/artists/artist2.jpg" alt="Artist 2" onerror="this.style.filter='grayscale(80%)'">
         <div style="margin-top:8px;font-weight:800">Artist 2</div>
       </div>
       <div class="artist">
-        <img src="assets/artists/artist3.jpg" alt="Artist 3" onerror="this.style.filter='grayscale(80%)'">
+        <img src="/assets/artists/artist3.jpg" alt="Artist 3" onerror="this.style.filter='grayscale(80%)'">
         <div style="margin-top:8px;font-weight:800">Artist 3</div>
       </div>
     </div>
   </main>
 
-  <footer>© 2025 XYZAROOM RECORDS • All Rights Reserved.</footer>
+  <footer>
+  <div class="footer-links">
+    <a href="/FAQ/privacy-policy.html">Privacy Policy</a>
+    <a href="/FAQ/terms-condition.html">Terms & Conditions</a>
+  </div>
+  <p>© 2025 XYZAROOM RECORDS • All Rights Reserved.</p>
+  </footer>
 
   <script>
     const overlay=document.getElementById('overlay'), typeText=document.getElementById('typeText');

@@ -93,7 +93,36 @@
     pre{background:#000;padding:12px;border-radius:8px;overflow:auto;font-size:13px;color:#ddd}
 
     /* FOOTER */
-    footer{padding:20px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03);font-size:14px}
+    footer{padding:20px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03);font-size:14px} footer {
+  padding: 40px 20px;
+  text-align: center;
+  background: #111;
+  border-top: 1px solid rgba(0,255,136,0.2);
+}
+
+.footer-links {
+  margin-bottom: 15px;
+}
+
+.footer-links a {
+  color: #00ff88;
+  margin: 0 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .3s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px #00ff88;
+}
+
+footer p {
+  font-family: monospace;
+  font-size: 14px;
+  color: #aaa;
+}
+    
 
     /* RESPONSIVE NOTE: sidebar stays hidden by default on all sizes; toggle opens it */
     @media(max-width:720px){

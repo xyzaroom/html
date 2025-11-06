@@ -6,45 +6,55 @@
   <link rel="icon" href="assets/logo.png" />
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
     body{background:#000;color:#fff;font-family:monospace;min-height:100vh;display:flex;flex-direction:column}
-    .overlay{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .6s}
+    .overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .5s}
     .overlay.hidden{opacity:0;visibility:hidden}
-    .typewriter{font-size:26px;color:#00ff88;margin-bottom:22px}
+    .typewriter{font-size:26px;color:#00ff88;margin-bottom:18px;min-height:1.2em}
     .cd{width:86px;height:86px;border-radius:50%;animation:spin 1.8s linear infinite;border:6px solid rgba(255,255,255,.06);background:conic-gradient(#00ff8822,#00ff8822)}
     @keyframes spin{to{transform:rotate(360deg)}}
-    header{position:fixed;top:0;left:0;width:100%;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.6);z-index:100}
-    .logo img{width:64px;border-radius:12px;border:2px solid #fff}
-    .toggle{display:none;font-size:26px;color:#00ff88;cursor:pointer}
-    .sidebar{position:fixed;left:0;top:88px;bottom:0;width:230px;padding:22px;background:#0b0b0b;border-right:2px solid rgba(0,255,136,.08)}
-    main{flex:1;margin-top:110px;margin-left:260px;padding:30px 5%}
-    .form{max-width:700px;background:#0b0b0b;padding:18px;border-radius:12px}
+
+    header{position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;z-index:90}
+    .toggle{font-size:28px;color:#00ff88;cursor:pointer;padding:8px;border-radius:8px}
+    .logo img{width:64px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88}
+
+    .sidebar{position:fixed;left:0;top:100px;bottom:0;width:260px;padding:20px;background:#070707;border-right:1px solid rgba(0,255,136,.06);transform:translateX(-100%);opacity:0;visibility:hidden;transition:transform .32s,opacity .32s;z-index:95}
+    .sidebar.open{transform:translateX(0);opacity:1;visibility:visible}
+    .sidebar nav a{display:block;padding:10px 10px;color:#fff;text-decoration:none;font-weight:700;margin-bottom:8px;border-radius:10px}
+    .sidebar nav a:hover{background:#00ff88;color:#000}
+
+    main{flex:1;margin-top:110px;padding:30px 5%;transition:opacity .36s;opacity:0}
+    main.visible{opacity:1}
+    .form{max-width:720px;background:#0b0b0b;padding:16px;border-radius:10px}
     .form label{display:block;margin-top:12px;font-weight:700}
     .form input,.form textarea{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,.06);background:#000;color:#fff}
     .btn{margin-top:12px;padding:10px 16px;border-radius:10px;background:#00ff88;color:#000;font-weight:800;border:none;cursor:pointer}
-    footer{padding:26px;text-align:center;background:#080808}
-    @media(max-width:900px){.toggle{display:block}.sidebar{top:74px}main{margin-left:0;padding:18px}}
+    footer{padding:20px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03)}
   </style>
 </head>
 <body>
   <div class="overlay" id="overlay"><div class="typewriter" id="typeText"></div><div class="cd"></div></div>
 
   <header>
-    <div class="logo"><img src="assets/logo.png" alt="XYZAROOM"></div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <img src="assets/logo.png" alt="logo" style="width:64px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88" onerror="this.style.filter='grayscale(80%)'">
+      <div style="font-weight:900">XYZAROOM</div>
+    </div>
     <div class="toggle" id="toggleBtn">☰</div>
   </header>
 
   <aside class="sidebar" id="sidebar">
     <nav>
-      <a href="#">Homepage</a>
-      <a href="/p/about.html">About</a>
-      <a href="/p/artists.html">Artists</a>
-      <a href="/p//albums.html">Albums</a>
-      <a href="/p/event.html">Event</a>
-      <a href="/p/contact.html">Contact</a>
+      <a href="index.html">Homepage</a>
+      <a href="about.html">About</a>
+      <a href="artists.html">Artists</a>
+      <a href="albums.html">Albums</a>
+      <a href="event.html">Event</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </aside>
 
-  <main>
+  <main id="mainContent">
     <h1 style="font-size:28px">Contact</h1>
     <div class="form" style="margin-top:12px">
       <label for="name">Nama</label>
@@ -54,30 +64,29 @@
       <label for="message">Pesan</label>
       <textarea id="message" rows="6" placeholder="Tulis pesan..."></textarea>
       <button class="btn" id="sendBtn">KIRIM</button>
-      <p style="color:#ccc;margin-top:10px">Atau chat langsung: <a href="https://wa.me/message/63P7KUGSCCZDE1!" style="color:#00ff88">WhatsApp</a></p>
+      <p style="color:#cbd9c6;margin-top:10px">Atau chat langsung: <a href="https://wa.me/message/63P7KUGSCCZDE1!" style="color:#00ff88">WhatsApp</a></p>
     </div>
   </main>
 
-  <footer>© 2025 Xyzaroom Records Inc.</footer>
+  <footer>© 2025 XYZAROOM RECORDS • All Rights Reserved.</footer>
 
   <script>
     const overlay=document.getElementById('overlay'), typeText=document.getElementById('typeText');
-    const full='XYZAROOM RECORDS'; let i=0;
-    function typeStep(){ if(i<=full.length){ typeText.innerText=full.slice(0,i); i++; setTimeout(typeStep,90) } else setTimeout(()=>overlay.classList.add('hidden'),600) }
-    document.addEventListener('DOMContentLoaded', ()=>{ setTimeout(typeStep,150);
-      document.getElementById('toggleBtn').addEventListener('click', ()=> document.getElementById('sidebar').classList.toggle('hidden'));
+    const toggleBtn=document.getElementById('toggleBtn'), sidebar=document.getElementById('sidebar');
+    const mainContent=document.getElementById('mainContent');
+    const full='XYZAROOM RECORDS'; let tIdx=0;
+    function typeStep(){ if(tIdx<=full.length){ typeText.innerText=full.slice(0,tIdx); tIdx++; setTimeout(typeStep,80)} else setTimeout(()=>{overlay.classList.add('hidden'); mainContent.classList.add('visible')},200) }
+    document.addEventListener('DOMContentLoaded', ()=>{ tIdx=0; typeText.innerText=''; setTimeout(typeStep,120);
+      toggleBtn.addEventListener('click', ()=> sidebar.classList.toggle('open'));
+      document.addEventListener('click',(e)=>{ if(!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) sidebar.classList.remove('open');});
       document.querySelectorAll('.sidebar nav a').forEach(a=>{
-        a.addEventListener('click', function(e){
-          const href=this.getAttribute('href'); if(!href || href.startsWith('http')) return;
-          e.preventDefault(); overlay.classList.remove('hidden'); typeText.innerText=''; i=0; setTimeout(typeStep,80); setTimeout(()=>location.href=href,1200);
-        });
+        a.addEventListener('click', function(e){ const href=this.getAttribute('href'); if(!href||href.startsWith('http')) return; e.preventDefault(); sidebar.classList.remove('open'); overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90); setTimeout(()=> location.href = href,700); });
       });
 
       document.getElementById('sendBtn').addEventListener('click', ()=>{
-        alert('Form bersifat demo. Implementasikan server-side untuk mengirim pesan.');
+        alert('Form ini bersifat demo. Implementasikan server-side untuk mengirim pesan.');
       });
     });
   </script>
 </body>
-  </html>
-  
+</html>

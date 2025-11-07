@@ -1,117 +1,225 @@
+[Artists]
+<!-- Save as: artists.html -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>XYZAROOM — Artists</title>
-<link rel="icon" href="assets/logo.png" />
-<style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%}
-  body{font-family:monospace;background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
-  .overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .45s}
-  .overlay.hidden{opacity:0;visibility:hidden}
-  .typewriter{font-size:26px;color:#00ff88;margin-bottom:18px;min-height:1.2em}
-  .cd{width:86px;height:86px;border-radius:50%;border:6px solid rgba(255,255,255,.06);background:conic-gradient(#00ff8822,#00ff8822);animation:spin 1.8s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  header{position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;z-index:90}
-  .toggle{font-size:26px;color:#00ff88;cursor:pointer}
-  .sidebar{position:fixed;left:0;top:100px;bottom:0;width:260px;padding:18px;background:#070707;border-right:1px solid rgba(0,255,136,.06);transform:translateX(-100%);opacity:0;visibility:hidden;z-index:95}
-  .sidebar.open{transform:translateX(0);opacity:1;visibility:visible}
-  .artists-grid{max-width:1200px;margin:0 auto;padding:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-  .artist-card{background:#0b0b0b;border-radius:12px;padding:12px;text-align:center;cursor:pointer;transition:transform .24s}
-  .artist-card:hover{transform:translateY(-6px)}
-  .artist-card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
-  .codebox{background:#050505;border:1px solid rgba(0,255,136,.04);padding:12px;border-radius:8px;color:#cbd9c6;margin:12px 5%}
-  footer{padding:24px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03)}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XYZAROOM — Artists</title>
+  <link rel="icon" href="/assets/logo.png" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      background:#000;color:#fff;font-family:monospace;min-height:100vh;
+      -webkit-font-smoothing:antialiased;display:flex;flex-direction:column;overflow-x:hidden;
+    }
+    /* Overlay (typing + CD) */
+    .overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .5s,visibility .5s;opacity:1;visibility:visible}
+    .overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .typewriter{font-size:26px;color:#00ff88;margin-bottom:18px;min-height:1.2em;letter-spacing:2px;font-weight:800}
+    .cd{width:86px;height:86px;border-radius:50%;border:6px solid rgba(255,255,255,.06);
+      background:conic-gradient(#00ff8822,#00ff8822);display:flex;align-items:center;justify-content:center;
+      animation:spin 1.8s linear infinite;box-shadow:0 6px 30px rgba(0,255,136,.06)}
+    .cd::after{content:"";width:18px;height:18px;border-radius:50%;background:#000;border:3px solid #00ff88;box-shadow:0 0 10px #00ff88}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Header */
+    header{position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;z-index:90}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo img{width:60px;height:60px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88}
+    .toggle{font-size:26px;color:#00ff88;cursor:pointer;padding:8px;border-radius:8px;user-select:none}
+
+    /* Sidebar hidden by default */
+    .sidebar{position:fixed;left:0;top:100px;bottom:0;width:260px;padding:18px;background:#070707;border-right:1px solid rgba(0,255,136,.06);
+      transform:translateX(-100%);opacity:0;visibility:hidden;transition:transform .32s,opacity .32s,visibility .32s;z-index:95}
+    .sidebar.open{transform:translateX(0);opacity:1;visibility:visible}
+    .sidebar nav a{display:block;padding:10px 8px;color:#fff;text-decoration:none;font-weight:700;margin-bottom:8px;border-radius:8px}
+    .sidebar nav a:hover{background:#00ff88;color:#000}
+
+    /* Main */
+    main{flex:1;margin-top:110px;padding:30px 5%;transition:opacity .36s;opacity:0}
+    main.visible{opacity:1}
+
+    /* Slider */
+    .slider-wrap{max-width:1200px;margin:0 auto 26px;position:relative;overflow:hidden;padding:12px}
+    .slider{display:flex;gap:14px;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
+    .slide{min-width:260px;flex:0 0 260px;background:#0b0b0b;border-radius:12px;padding:12px;text-align:center}
+    .slide img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+    .slide h3{margin-top:10px;font-size:16px}
+    .slider-controls{position:absolute;right:16px;top:10px;display:flex;gap:8px}
+
+    /* Artist list (vertical) */
+    .artists-list{max-width:1100px;margin:18px auto;display:flex;flex-direction:column;gap:12px}
+    .artist-item{display:flex;gap:12px;align-items:center;background:#0b0b0b;padding:12px;border-radius:10px}
+    .artist-item img{width:120px;height:100px;object-fit:cover;border-radius:8px}
+    .artist-info h4{font-size:18px;margin-bottom:6px}
+    .artist-info p{color:#cbd9c6;font-size:14px;margin-bottom:6px}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#000;color:#00ff88;font-weight:800;font-size:13px}
+
+    footer{padding:30px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03)}
+    .footer-links{margin-bottom:12px}
+    .footer-links a{color:#00ff88;margin:0 12px;text-decoration:none;font-weight:600}
+    .footer-links a:hover{color:#fff;text-shadow:0 0 8px #00ff88}
+    footer p{font-family:monospace;color:#aaa;font-size:14px}
+
+    @media(max-width:780px){ .slide{min-width:220px;flex:0 0 220px} .artist-item img{width:96px;height:80px} main{padding:18px} }
+  </style>
 </head>
 <body>
-  <!-- Embedded JSON data for artists & albums -->
+  <!-- EMBEDDED DATA: artists + albums (edit nanti jika perlu) -->
   <script id="artistsData" type="application/json">
   [
-    {"name":"Xyzaroom","genre":"Various","bio":"Indonesian Music Producer","image":"https://dl.dropboxusercontent.com/scl/fi/ipu27a7mjhps8qmx7jekd/AddText_03-28-05.44.25.png?rlkey=cmyqencbyrbmqquku5qy5gf8a"},
-    {"name":"Sukabumi Philharmonic Orchestra","genre":"Classic/Soundtrack","bio":"Indonesian Orchestra Group","image":"https://dl.dropboxusercontent.com/scl/fi/qzdvm8v9dp5mt5jyn4cxo/AddText_08-05-07.24.01.jpg?rlkey=4a1hyc36a2ksck0juv8n21v42"}
+    {"name":"Xyzaroom","genre":"Various","bio":"Indonesian Musican Producer","release_date":"2018-03-18","image":"placeholder"},
+    {"name":"Sukabumi Philharmonic Orchestra","genre":"Classic/Soundtrack","bio":"Indonesian Orchestra Group","release_date":"2018-03-18","image":"placeholder"}
   ]
   </script>
 
   <script id="albumsData" type="application/json">
   [
-    {"title":"Composer Framework","artist":"Xyzaroom","year":"2018","cover":"https://dl.dropboxusercontent.com/scl/fi/ipu27a7mjhps8qmx7jekd/AddText_03-28-05.44.25.png?rlkey=cmyqencbyrbmqquku5qy5gf8a"},
-    {"title":"Mise En Scene","artist":"Sukabumi Philharmonic Orchestra","year":"2019","cover":"https://dl.dropboxusercontent.com/scl/fi/qzdvm8v9dp5mt5jyn4cxo/AddText_08-05-07.24.01.jpg?rlkey=4a1hyc36a2ksck0juv8n21v42"}
+    {"title":"Composer Framework","artist":"Xyzaroom","year":"2018","cover":"https://dl.dropboxusercontent.com/scl/fi/ipu27a7mjhps8qmx7jekd/AddText_03-28-05.44.25.png?rlkey=cmyqencbyrbmqquku5qy5gf8a&st=nb7v19eq"},
+    {"title":"Composer Framework","artist":"Sukabumi Philharmonic Orchestra","year":"2018","cover":"https://dl.dropboxusercontent.com/scl/fi/ipu27a7mjhps8qmx7jekd/AddText_03-28-05.44.25.png?rlkey=cmyqencbyrbmqquku5qy5gf8a&st=nb7v19eq"},
+    {"title":"Mise En Scene","artist":"Sukabumi Philharmonic Orchestra","year":"2019","cover":"https://dl.dropboxusercontent.com/scl/fi/qzdvm8v9dp5mt5jyn4cxo/AddText_08-05-07.24.01.jpg?rlkey=4a1hyc36a2ksck0juv8n21v42&st=qua8y631"},
+    {"title":"Julid Fisabilillah","artist":"Sukabumi Philharmonic Orchestra","year":"2020","cover":"https://dl.dropboxusercontent.com/scl/fi/sykxsq91k3sbswk6rptl1/AddText_12-31-02.02.08.png?rlkey=mst14eg05cuqfxhefkwug5ysf&st=n07t7p59"}
   ]
   </script>
 
-  <div class="overlay" id="overlay"><div class="typewriter" id="typeText"></div><div class="cd"></div></div>
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"><div class="typewriter" id="typeText"></div><div class="cd" aria-hidden="true"></div></div>
 
+  <!-- Header -->
   <header>
-    <div style="display:flex;align-items:center;gap:12px">
-      <img src="assets/logo.png" alt="logo" style="width:60px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88" onerror="this.style.filter='grayscale(80%)'">
-      <div style="font-weight:900">XYZAROOM</div>
+    <div class="logo">
+      <img src="/assets/logo.png" alt="logo" onerror="this.style.filter='grayscale(80%)'">
+      <div style="display:flex;flex-direction:column"><div style="font-weight:900">XYZAROOM</div><div style="font-size:12px;color:#9fbf9f">Records</div></div>
     </div>
-    <div class="toggle" id="toggleBtn">☰</div>
+    <div class="toggle" id="toggleBtn" aria-controls="sidebar" aria-expanded="false">☰</div>
   </header>
 
+  <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
     <nav>
-      <a href="index.html">Homepage</a>
-      <a href="about.html">About</a>
-      <a href="artists.html">Artists</a>
-      <a href="albums.html">Albums</a>
-      <a href="event.html">Event</a>
-      <a href="contact.html">Contact</a>
+      <a href="https://xyzaroomrecords.github.io/">Homepage</a>
+      <a href="/p/about.html">About</a>
+      <a href="/p/artists.html">Artists</a>
+      <a href="/p/albums.html">Albums</a>
+      <a href="/p/event.html">Event</a>
+      <a href="/p/contact.html">Contact</a>
     </nav>
   </aside>
 
+  <!-- Main -->
   <main id="mainContent">
-    <h1 style="margin-left:5%">Artists</h1>
-    <p style="color:#cbd9c6;margin:8px 5%">Daftar artis & link ke biodata mereka. Klik kartu untuk melihat profil.</p>
+    <section class="slider-wrap" aria-label="Latest uploads">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h2 style="margin:0">Latest Uploads</h2>
+        <div class="slider-controls">
+          <button id="prevBtn" title="Prev" style="background:transparent;border:1px solid rgba(255,255,255,.04);color:#00ff88;padding:6px;border-radius:8px">‹</button>
+          <button id="nextBtn" title="Next" style="background:transparent;border:1px solid rgba(255,255,255,.04);color:#00ff88;padding:6px;border-radius:8px">›</button>
+        </div>
+      </div>
+      <div class="slider" id="slider"></div>
+    </section>
 
-    <div class="artists-grid" id="artistsGrid" aria-live="polite"></div>
-
-    <div class="codebox">
-      <div style="color:#00ff88;font-weight:800">Python Snippet (ornamental)</div>
-      <pre style="margin:6px 0;color:#cbd9c6;font-family:monospace;font-size:13px"># filter recent artists
-recent = [a for a in artists if a['genre']!='']</pre>
-    </div>
+    <section>
+      <h2 style="margin-bottom:12px">All Artists</h2>
+      <div class="artists-list" id="artistsList"></div>
+    </section>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <div style="color:#cbd9c6;font-size:13px">/* Languages: HTML · CSS · JS · JSON · Python · C++ · Java */</div>
-    <p style="color:#cbd9c6;margin-top:8px">© 2025 XYZAROOM RECORDS</p>
+    <div class="footer-links">
+      <a href="/FAQ/privacy-policy.html">Privacy Policy</a>
+      <a href="/FAQ/terms-condition.html">Terms Conditions</a>
+    </div>
+    <p>© 2025 XYZAROOM RECORDS • All Rights Reserved.</p>
   </footer>
 
-<script>
-  const overlay=document.getElementById('overlay'), typeText=document.getElementById('typeText'),
-        toggleBtn=document.getElementById('toggleBtn'), sidebar=document.getElementById('sidebar'),
-        mainContent=document.getElementById('mainContent');
-  const full='XYZAROOM RECORDS'; let tIdx=0;
-  function typeStep(){ if(tIdx<=full.length){ typeText.innerText=full.slice(0,tIdx); tIdx++; setTimeout(typeStep,80) } else setTimeout(()=>{overlay.classList.add('hidden'); mainContent.classList.add('visible')},200) }
-  document.addEventListener('DOMContentLoaded', ()=>{
-    tIdx=0; typeText.innerText=''; setTimeout(typeStep,120);
-    toggleBtn.addEventListener('click', ()=> { const open = sidebar.classList.toggle('open'); sidebar.setAttribute('aria-hidden', !open); toggleBtn.setAttribute('aria-expanded', open); });
-    document.addEventListener('click',(e)=>{ if(!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) sidebar.classList.remove('open'); });
-    document.querySelectorAll('.sidebar nav a').forEach(a=>{
-      a.addEventListener('click', function(e){ const href=this.getAttribute('href'); if(!href||href.startsWith('http')) return; e.preventDefault(); sidebar.classList.remove('open'); overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90); setTimeout(()=> location.href = href,600); });
+  <script>
+    /* Shared UI elements */
+    const overlay = document.getElementById('overlay');
+    const typeText = document.getElementById('typeText');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+
+    /* Typewriter overlay */
+    const fullText='XYZAROOM RECORDS';
+    let tIdx=0;
+    function typeStep(){
+      if(tIdx<=fullText.length){ typeText.innerText=fullText.slice(0,tIdx); tIdx++; setTimeout(typeStep,80) }
+      else setTimeout(()=>{ overlay.classList.add('hidden'); mainContent.classList.add('visible') },200);
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      tIdx=0; typeText.innerText=''; setTimeout(typeStep,120);
+
+      /* sidebar toggle */
+      toggleBtn.addEventListener('click', ()=> {
+        const open = sidebar.classList.toggle('open');
+        toggleBtn.setAttribute('aria-expanded', open);
+        sidebar.setAttribute('aria-hidden', !open);
+      });
+      document.addEventListener('click', (e)=> {
+        const inside = sidebar.contains(e.target) || toggleBtn.contains(e.target);
+        if(!inside) sidebar.classList.remove('open');
+      });
+
+      /* intercept nav links to show overlay then navigate */
+      document.querySelectorAll('.sidebar nav a').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const href=this.getAttribute('href'); if(!href||href.startsWith('http')) return;
+          e.preventDefault(); sidebar.classList.remove('open');
+          overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90);
+          setTimeout(()=> location.href = href,700);
+        });
+      });
+
+      initPage();
     });
 
-    // render artists from embedded JSON
-    const artists = JSON.parse(document.getElementById('artistsData').textContent);
-    const grid = document.getElementById('artistsGrid');
-    grid.innerHTML = '';
-    artists.forEach(a=>{
-      const card = document.createElement('div'); card.className='artist-card';
-      const img = document.createElement('img'); img.src = a.image; img.alt = a.name;
-      img.onerror = function(){ this.style.filter='grayscale(80%)'; this.src='assets/logo.png'; };
-      card.appendChild(img);
-      const h = document.createElement('h3'); h.innerText = a.name; card.appendChild(h);
-      const g = document.createElement('div'); g.style.color='#cbd9c6'; g.style.marginTop='6px'; g.innerText = a.genre; card.appendChild(g);
-      card.addEventListener('click', ()=> {
-        overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90);
-        setTimeout(()=> location.href = 'biodata.html?artist=' + encodeURIComponent(a.name), 600);
+    /* Init page: parse JSON and render slider + artists list */
+    function initPage(){
+      const artists = JSON.parse(document.getElementById('artistsData').textContent);
+      const albums = JSON.parse(document.getElementById('albumsData').textContent);
+
+      // Choose latest 3 uploads (by album year desc)
+      const latest = albums.slice().sort((a,b)=> (b.year||0) - (a.year||0)).slice(0,3);
+      const slider = document.getElementById('slider');
+      slider.innerHTML = '';
+      latest.forEach(a=>{
+        const div = document.createElement('div'); div.className='slide';
+        div.innerHTML = `<img src="${a.cover}" alt="${a.title}" onerror="this.style.filter='grayscale(80%)'">
+                         <h3>${a.title}<br><small style="color:#cbd9c6;font-weight:600">${a.artist} • ${a.year}</small></h3>`;
+        slider.appendChild(div);
+        // click to go to albums page filtered by artist
+        div.addEventListener('click', ()=> {
+          overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90);
+          setTimeout(()=> location.href = 'albums.html?artist=' + encodeURIComponent(a.artist),700);
+        });
       });
-      grid.appendChild(card);
-    });
-  });
-</script>
+
+      // slider controls
+      let pos = 0;
+      const slideWidth = slider.querySelector('.slide') ? slider.querySelector('.slide').offsetWidth + 14 : 274;
+      document.getElementById('prevBtn').addEventListener('click', ()=> { pos = Math.max(pos - 1, 0); slider.style.transform = `translateX(-${pos * (slideWidth)}px)` });
+      document.getElementById('nextBtn').addEventListener('click', ()=> { pos = Math.min(pos + 1, Math.max(0, latest.length - 1)); slider.style.transform = `translateX(-${pos * (slideWidth)}px)` });
+
+      // Artists list (unique artists from artists JSON)
+      const artistsList = document.getElementById('artistsList');
+      artistsList.innerHTML = '';
+      artists.forEach(ar=>{
+        const item = document.createElement('div'); item.className='artist-item';
+        const img = document.createElement('img'); img.src = (ar.image && ar.image !== 'placeholder') ? ar.image : 'assets/artists/placeholder.jpg';
+        img.alt = ar.name; img.onerror = ()=> img.style.filter='grayscale(80%)';
+        const info = document.createElement('div'); info.className='artist-info';
+        info.innerHTML = `<h4><a href="biodata.html?artist=${encodeURIComponent(ar.name)}" style="color:#00ff88;text-decoration:none">${ar.name}</a></h4>
+                          <p>${ar.bio}</p>
+                          <div class="tag">${ar.genre}</div>`;
+        item.appendChild(img); item.appendChild(info); artistsList.appendChild(item);
+      });
+    }
+  </script>
 </body>
 </html>

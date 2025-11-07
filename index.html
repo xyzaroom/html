@@ -3,117 +3,168 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>XYZAROOM — Artists</title>
-  <link rel="icon" href="/assets/logo.png" />
+  <title>XYZAROOM — Homepage</title>
+  <link rel="icon" href="assets/logo.png" />
+  <!--
+    ROOT STRUCTURE (place in repo root):
+    /xyzaroom/
+      index.html
+      about.html
+      artists.html
+      albums.html
+      event.html
+      contact.html
+      assets/
+        logo.png
+        artists/
+          artist1.jpg artist2.jpg artist3.jpg
+        albums/
+          album1.jpg album2.jpg album3.jpg
+
+    Image recommendation: 600x600 px, < ~200 KB
+  -->
   <style>
+    /* RESET */
     *{margin:0;padding:0;box-sizing:border-box}
     html,body{height:100%}
     body{
-      background:#000;color:#fff;font-family:monospace;min-height:100vh;
-      -webkit-font-smoothing:antialiased;display:flex;flex-direction:column;overflow-x:hidden;
+      background:#000;color:#fff;font-family:monospace;
+      -webkit-font-smoothing:antialiased;min-height:100vh;
+      display:flex;flex-direction:column;overflow-x:hidden;
     }
-    /* Overlay (typing + CD) */
-    .overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-      background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .5s,visibility .5s;opacity:1;visibility:visible}
+
+    /* OVERLAY LOADING (typewriter + CD) */
+    .overlay{
+      position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .5s ease,visibility .5s;
+      opacity:1;visibility:visible;
+    }
     .overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
-    .typewriter{font-size:26px;color:#00ff88;margin-bottom:18px;min-height:1.2em;letter-spacing:2px;font-weight:800}
-    .cd{width:86px;height:86px;border-radius:50%;border:6px solid rgba(255,255,255,.06);
+    .typewriter{font-size:28px;letter-spacing:4px;font-weight:800;color:#00ff88;margin-bottom:18px;min-height:1.2em}
+    .cd{
+      width:86px;height:86px;border-radius:50%;border:6px solid rgba(255,255,255,.06);
       background:conic-gradient(#00ff8822,#00ff8822);display:flex;align-items:center;justify-content:center;
-      animation:spin 1.8s linear infinite;box-shadow:0 6px 30px rgba(0,255,136,.06)}
-    .cd::after{content:"";width:18px;height:18px;border-radius:50%;background:#000;border:3px solid #00ff88;box-shadow:0 0 10px #00ff88}
+      box-shadow:0 6px 30px rgba(0,255,136,.06), inset 0 0 12px rgba(255,255,255,.02);
+      animation:spin 1.8s linear infinite;
+    }
+    .cd::after{
+      content:"";width:18px;height:18px;background:#000;border-radius:50%;border:3px solid #00ff88;
+      box-shadow:0 0 10px #00ff88;display:block;
+    }
     @keyframes spin{to{transform:rotate(360deg)}}
 
-    /* Header */
-    header{position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;z-index:90}
+    /* HEADER */
+    header{
+      position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;
+      z-index:90;pointer-events:auto;
+    }
     .logo{display:flex;align-items:center;gap:12px}
-    .logo img{width:60px;height:60px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88}
-    .toggle{font-size:26px;color:#00ff88;cursor:pointer;padding:8px;border-radius:8px;user-select:none}
+    .logo img{width:64px;height:64px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88}
+    .logo .brand{font-weight:900;letter-spacing:1px}
+    .toggle{font-size:28px;color:#00ff88;cursor:pointer;user-select:none;padding:8px;border-radius:8px}
 
-    /* Sidebar hidden by default */
-    .sidebar{position:fixed;left:0;top:100px;bottom:0;width:260px;padding:18px;background:#070707;border-right:1px solid rgba(0,255,136,.06);
-      transform:translateX(-100%);opacity:0;visibility:hidden;transition:transform .32s,opacity .32s,visibility .32s;z-index:95}
+    /* SIDEBAR (HIDDEN BY DEFAULT ON ALL DEVICES) */
+    .sidebar{
+      position:fixed;left:0;top:100px;bottom:0;width:260px;padding:20px;background:#070707;border-right:1px solid rgba(0,255,136,.06);
+      transform:translateX(-100%);opacity:0;visibility:hidden;transition:transform .32s ease,opacity .32s,visibility .32s;
+      z-index:95;
+    }
     .sidebar.open{transform:translateX(0);opacity:1;visibility:visible}
-    .sidebar nav a{display:block;padding:10px 8px;color:#fff;text-decoration:none;font-weight:700;margin-bottom:8px;border-radius:8px}
+    .sidebar nav a{display:block;padding:10px 10px;color:#fff;text-decoration:none;font-weight:700;margin-bottom:8px;border-radius:10px}
     .sidebar nav a:hover{background:#00ff88;color:#000}
 
-    /* Main — MUSIC STYLE, XYZAROOM COLOUR */
-    main{flex:1;margin-top:110px;padding:30px 5%;transition:opacity .36s;opacity:0}
+    /* MAIN */
+    main{flex:1;margin-top:110px;padding:40px 5%;transition:opacity .36s ease;opacity:0}
     main.visible{opacity:1}
+    .hero{min-height:65vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+    .hero h1{font-size:64px;letter-spacing:-2px;font-weight:900}
+    .hero h1 span{color:#00ff88}
+    .hero p{margin-top:16px;font-size:18px;color:#cfd8cc;max-width:780px}
+    .controls{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .btn{background:#00ff88;color:#000;padding:10px 20px;border-radius:40px;font-weight:800;border:none;cursor:pointer}
+    .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.06);color:#fff}
 
-    /* HERO ARTIS (XYZAROOM STYLE) */
-    .hero-artist{max-width:1100px;margin:0 auto 40px;text-align:center}
-    .hero-artist img{width:100%;max-width:600px;border-radius:20px;border:4px solid #00ff88;box-shadow:0 0 40px rgba(0,255,136,.4);object-fit:cover}
-    .hero-badge{position:absolute;top:20px;right:20px;background:#00ff88;color:#000;padding:8px 20px;border-radius:50px;font-weight:900;font-size:14px;letter-spacing:1px}
+    .grid{max-width:1200px;margin:40px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px}
+    .card{background:#0b0b0b;padding:20px;border-radius:12px;text-align:center;font-weight:800;cursor:pointer;transition:transform .28s}
+    .card:hover{transform:translateY(-8px);box-shadow:0 12px 30px rgba(0,255,136,.04)}
 
-    /* TRUST BADGES */
-    .trust-badges{text-align:center;margin:40px 0}
-    .trust-badges img{height:50px;margin:0 20px;filter:brightness(0) invert(1);opacity:.8;transition:.3s}
-    .trust-badges img:hover{opacity:1;transform:scale(1.1)}
+    /* DEMO BOX */
+    #demo{max-width:920px;margin:24px auto;background:#0b0b0b;padding:18px;border-radius:10px;border:1px solid rgba(0,255,136,.04);display:none}
+    pre{background:#000;padding:12px;border-radius:8px;overflow:auto;font-size:13px;color:#ddd}
 
-    /* LATEST UPLOADS — CARD HOVER */
-    .slider-wrap{max-width:1200px;margin:0 auto 50px;position:relative;overflow:hidden;padding:12px;border:1px solid rgba(0,255,136,.1);border-radius:16px}
-    .slider{display:flex;gap:20px;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
-    .slide{min-width:300px;flex:0 0 300px;background:#0f0f0f;border-radius:16px;overflow:hidden;position:relative;transition:.4s;box-shadow:0 8px 30px rgba(0,255,136,.1)}
-    .slide:hover{transform:translateY(-12px);box-shadow:0 20px 50px rgba(0,255,136,.4);border:1px solid #00ff88}
-    .slide img{width:100%;height:200px;object-fit:cover;transition:.4s}
-    .slide:hover img{transform:scale(1.05)}
-    .slide h3{padding:16px 12px 8px;font-size:18px;font-weight:900}
-    .slide small{display:block;padding:0 12px 16px;color:#00ff88}
+    /* FOOTER */
+    footer {
+      padding: 40px 20px;
+      text-align: center;
+      background: #111;
+      border-top: 1px solid rgba(0,255,136,0.2);
+    }
 
-    /* ALL ARTISTS — GRID */
-    .artists-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px}
-    .artist-card{background:#0f0f0f;padding:20px;border-radius:16px;transition:.4s;border:1px solid transparent;position:relative;overflow:hidden}
-    .artist-card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,255,136,.08),transparent);opacity:0;transition:.4s}
-    .artist-card:hover{border:1px solid #00ff88;transform:translateY(-8px)}
-    .artist-card:hover::before{opacity:1}
-    .artist-card img{width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:16px}
-    .artist-card h3{font-size:20px;margin-bottom:8px}
-    .artist-card .tag{margin-top:12px}
+    .footer-links {
+      margin-bottom: 15px;
+    }
 
-    footer{padding:30px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03)}
-    .footer-links{margin-bottom:12px}
-    .footer-links a{color:#00ff88;margin:0 12px;text-decoration:none;font-weight:600}
-    .footer-links a:hover{color:#fff;text-shadow:0 0 8px #00ff88}
-    footer p{font-family:monospace;color:#aaa;font-size:14px}
+    .footer-links a {
+      color: #00ff88;
+      margin: 0 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color .3s ease;
+    }
 
-    @media(max-width:780px){
-      .slide{min-width:260px;flex:0 0 260px}
-      .hero-artist img{max-width:90%}
-      .trust-badges img{height:40px;margin:0 12px}
+    .footer-links a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ff88;
+    }
+
+    footer p {
+      font-family: monospace;
+      font-size: 14px;
+      color: #aaa;
+    }
+    
+
+    /* RESPONSIVE NOTE: sidebar stays hidden by default on all sizes; toggle opens it */
+    @media(max-width:720px){
+      .hero h1{font-size:40px}
+      .logo img{width:56px;height:56px}
+    }
+
+    /* Tambahan CSS untuk canvas animasi kode JS */
+    #jsCodeCanvas {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 150px;
+      pointer-events: none;
+      z-index: 10;
     }
   </style>
 </head>
 <body>
-  <!-- DATA -->
-  <script id="artistsData" type="application/json">
-  [
-    {"name":"Xyzaroom","genre":"Various","bio":"Indonesian Musican Producer","release_date":"2018-03-18","image":"placeholder"},
-    {"name":"Sukabumi Philharmonic Orchestra","genre":"Classic/Soundtrack","bio":"Indonesian Orchestra Group","release_date":"2018-03-18","image":"placeholder"},
-    {"name":"Anna Laura Soeparno","genre":"Pop/Indie","bio":"Vocalist & Songwriter from Sukabumi","release_date":"2025-11-01","image":"assets/artists/anna-laura.jpg"}
-  ]
-  </script>
-
-  <script id="albumsData" type="application/json">
-  [
-    {"title":"Composer Framework","artist":"Xyzaroom","year":"2018","cover":"https://dl.dropboxusercontent.com/scl/fi/ipu27a7mjhps8qmx7jekd/AddText_03-28-05.44.25.png?rlkey=cmyqencbyrbmqquku5qy5gf8a&st=nb7v19eq"},
-    {"title":"Fading Heart","artist":"Anna Laura Soeparno","year":"2025","cover":"assets/albums/fading-heart.jpg"}
-  ]
-  </script>
-
-  <!-- Overlay & Header & Sidebar — 100% SAMA -->
-  <div class="overlay" id="overlay"><div class="typewriter" id="typeText"></div><div class="cd" aria-hidden="true"></div></div>
+  <!-- OVERLAY: typewriter + CD -->
+  <div class="overlay" id="overlay" role="status" aria-live="polite">
+    <div class="typewriter" id="typeText"></div>
+    <div class="cd" aria-hidden="true"></div>
+  </div>
 
   <header>
     <div class="logo">
-      <img src="/assets/logo.png" alt="logo" onerror="this.style.filter='grayscale(80%)'">
-      <div style="display:flex;flex-direction:column"><div style="font-weight:900">XYZAROOM</div><div style="font-size:12px;color:#9fbf9f">Records</div></div>
+      <img src="assets/logo.png" alt="XYZAROOM logo" onerror="this.style.filter='grayscale(80%)'">
+      <div style="display:flex;flex-direction:column">
+        <div class="brand">XYZAROOM</div>
+        <div style="font-size:12px;color:#9fbf9f">Records</div>
+      </div>
     </div>
-    <div class="toggle" id="toggleBtn" aria-controls="sidebar" aria-expanded="false">☰</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="toggle" id="toggleBtn" aria-controls="sidebar" aria-expanded="false">☰</div>
+    </div>
   </header>
 
-  <aside class="sidebar" id="sidebar">
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
     <nav>
-      <a href="https://xyzaroomrecords.github.io/">Homepage</a>
+      <a href="#">Homepage</a>
       <a href="/p/about.html">About</a>
       <a href="/p/artists.html">Artists</a>
       <a href="/p/albums.html">Albums</a>
@@ -122,138 +173,157 @@
     </nav>
   </aside>
 
-  <!-- MAIN MUSIC STYLE, XYZAROOM IDENTICALLY -->
-  <main id="mainContent">
-    <!-- HERO ARTIS (Anna Laura) -->
-    <div class="hero-artist" style="position:relative">
-      <img src="assets/artists/anna-laura-hero.jpg" alt="Anna Laura Soeparno">
-      <div class="hero-badge">NEW SIGNING</div>
-    </div>
-
-    <!-- TRUST BADGES -->
-    <div class="trust-badRussia">
-      <p style="text-align:center;margin-bottom:20px;color:#00ff88;font-weight:900">Distributed to 150+ stores worldwide</p>
-      <div class="trust-badges">
-        <img src="assets/stores/spotify.png" alt="Spotify">
-        <img src="assets/stores/apple.png" alt="Apple Music">
-        <img src="assets/stores/youtube.png" alt="YouTube">
-        <img src="assets/stores/tiktok.png" alt="TikTok">
-        <img src="assets/stores/joox.png" alt="Joox">
+  <main id="mainContent" class="">
+    <section class="hero" aria-labelledby="heroTitle">
+      <h1 id="heroTitle"><span>XYZA</span>ROOM</h1>
+      <p>Distribusi • Backup • Code • 1 Klik — Platform untuk artis & label independen.</p>
+      <div class="controls">
+        <button class="btn" onclick="openWA()">MULAI GRATIS</button>
+        <a class="btn ghost" href="https://wa.me/message/63P7KUGSCCZDE1!" target="_blank" rel="noopener">REQUEST DEMO</a>
       </div>
-    </div>
-
-    <!-- LATEST UPLOADS -->
-    <section class="slider-wrap">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <h2 style="margin:0;color:#00ff88">Latest Uploads</h2>
-        <div class="slider-controls">
-          <button id="prevBtn" title="Prev">‹</button>
-          <button id="nextBtn" title="Next">›</button>
-        </div>
-      </div>
-      <div class="slider" id="slider"></div>
     </section>
 
-    <!-- ALL ARTISTS GRID -->
-    <section>
-      <h2 style="text-align:center;margin:40px 0 30px;color:#00ff88">All Artists</h2>
-      <div class="artists-grid" id="artistsList"></div>
+    <section style="margin-top:32px">
+      <h2 style="margin-bottom:12px">Bahasa & Tools (contoh)</h2>
+      <div class="grid">
+        <div class="card">C++ <div style="margin-top:8px;color:#00ff88;font-weight:900">C++ MIDI</div></div>
+        <div class="card">Go <div style="margin-top:8px;color:#00ff88;font-weight:900">GO BEAT</div></div>
+        <div class="card">Java <div style="margin-top:8px;color:#00ff88;font-weight:900">JAVA COVER</div></div>
+        <div class="card">JavaScript <div style="margin-top:8px;color:#00ff88;font-weight:900">JS UPLOAD</div></div>
+        <div class="card">PHP <div style="margin-top:8px;color:#00ff88;font-weight:900">PHP ROYALTY</div></div>
+        <div class="card">Python <div style="margin-top:8px;color:#00ff88;font-weight:900">PY LYRIC</div></div>
+        <div class="card">Ruby <div style="margin-top:8px;color:#00ff88;font-weight:900">RB BACKUP</div></div>
+      </div>
+    </section>
+
+    <section id="demo" style="margin-top:28px;display:none">
+      <h3 id="title"></h3>
+      <pre id="code"></pre>
+      <pre id="out" style="color:#00ff88"></pre>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
-    <div class="footer-links">
-      <a href="/FAQ/privacy-policy.html">Privacy Policy</a>
-      <a href="/FAQ/terms-condition.html">Terms Conditions</a>
-    </div>
-    <p>© 2025 XYZAROOM RECORDS • All Rights Reserved.</p>
+  <div class="footer-links">
+    <a href="/FAQ/privacy-policy.html">Privacy Policy</a>
+    <a href="/FAQ/terms-condition.html">Terms Conditions</a>
+  </div>
+  <p>© 2025 XYZAROOM RECORDS • All Rights Reserved.</p>
   </footer>
 
+  <!-- Canvas untuk animasi kode JS -->
+  <canvas id="jsCodeCanvas"></canvas>
+
   <script>
-    /* SEMUA JS ASLI KAMU TETAP JALAN — GUE TAMBAH RENDER BARU DI initPage() */
+    /* Helper: open WA */
+    function openWA(){ window.open('https://wa.me/message/63P7KUGSCCZDE1!','_blank') }
+
+    /* ELEMENTS */
     const overlay = document.getElementById('overlay');
     const typeText = document.getElementById('typeText');
     const toggleBtn = document.getElementById('toggleBtn');
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContent');
 
-    const fullText='XYZAROOM RECORDS';
-    let tIdx=0;
+    /* TYPEWRITER */
+    const fullText = 'XYZAROOM RECORDS';
+    let tIdx = 0;
     function typeStep(){
-      if(tIdx<=fullText.length){ typeText.innerText=fullText.slice(0,tIdx); tIdx++; setTimeout(typeStep,80) }
-      else setTimeout(()=>{ overlay.classList.add('hidden'); mainContent.classList.add('visible') },200);
+      if(tIdx <= fullText.length){
+        typeText.innerText = fullText.slice(0, tIdx);
+        tIdx++;
+        setTimeout(typeStep, 80);
+      } else {
+        // hide overlay dan tampilkan main
+        setTimeout(()=> {
+          overlay.classList.add('hidden');
+          mainContent.classList.add('visible');
+        }, 220);
+      }
     }
 
-    document.addEventListener('DOMContentLoaded', ()=>{
-      tIdx=0; typeText.innerText=''; setTimeout(typeStep,120);
+    /* Start on DOM ready */
+    document.addEventListener('DOMContentLoaded', ()=> {
+      // start typing
+      tIdx = 0;
+      typeText.innerText = '';
+      setTimeout(typeStep, 120);
 
-      toggleBtn.addEventListener('click', ()=> {
+      // toggle sidebar
+      toggleBtn.addEventListener('click', ()=>{
         const open = sidebar.classList.toggle('open');
-        toggleBtn.setAttribute('aria-expanded', open);
         sidebar.setAttribute('aria-hidden', !open);
+        toggleBtn.setAttribute('aria-expanded', open);
       });
-      document.addEventListener('click', (e)=> {
+
+      // close sidebar on click outside
+      document.addEventListener('click', (e)=>{
         const inside = sidebar.contains(e.target) || toggleBtn.contains(e.target);
         if(!inside) sidebar.classList.remove('open');
       });
 
+      // intercept internal nav links
       document.querySelectorAll('.sidebar nav a').forEach(a=>{
         a.addEventListener('click', function(e){
-          const href=this.getAttribute('href'); if(!href||href.startsWith('http')) return;
-          e.preventDefault(); sidebar.classList.remove('open');
-          overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90);
-          setTimeout(()=> location.href = href,700);
+          const href = this.getAttribute('href');
+          if(!href || href.startsWith('http')) return;
+          e.preventDefault();
+          sidebar.classList.remove('open');
+          overlay.classList.remove('hidden');
+          typeText.innerText=''; tIdx=0;
+          setTimeout(typeStep, 90);
+          setTimeout(()=> location.href = href, 700);
         });
       });
 
-      initPage();
+      // demo card behavior
+      document.querySelectorAll('.card').forEach(c=>{
+        c.addEventListener('click', ()=>{
+          document.getElementById('demo').style.display='block';
+          document.getElementById('title').innerText = c.innerText.trim();
+          document.getElementById('code').innerText = '// contoh snippet for ' + c.innerText;
+          document.getElementById('out').innerText = '✔ Demo ready';
+          window.scrollTo({top:document.getElementById('demo').offsetTop-20,behavior:'smooth'});
+        });
+      });
     });
 
-    function initPage(){
-      const artists = JSON.parse(document.getElementById('artistsData').textContent);
-      const albums = JSON.parse(document.getElementById('albumsData').textContent);
+    // Animasi kode JavaScript sebagai hiasan
+    const canvas = document.getElementById('jsCodeCanvas');
+    const ctx = canvas.getContext('2d');
 
-      const latest = albums.slice().sort((a,b)=> (b.year||0) - (a.year||0)).slice(0,6);
-      const slider = document.getElementById('slider');
-      slider.innerHTML = '';
-      latest.forEach(a=>{
-        const div = document.createElement('div'); div.className='slide';
-        div.innerHTML = `<img src="${a.cover}" alt="${a.title}" onerror="this.src='assets/placeholder.jpg'">
-                         <h3>${a.title}</h3>
-                         <small>${a.artist} • ${a.year}</small>`;
-        slider.appendChild(div);
-        div.addEventListener('click', ()=> {
-          overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90);
-          setTimeout(()=> location.href = 'albums.html?artist=' + encodeURIComponent(a.artist),700);
-        });
-      });
-
-      let pos = 0;
-      const slideWidth = 320;
-      document.getElementById('prevBtn').onclick = () => {
-        pos = Math.max(pos - 1, 0);
-        slider.style.transform = `translateX(-${pos * slideWidth}px)`;
-      };
-      document.getElementById('nextBtn').onclick = () => {
-        pos = Math.min(pos + 1, latest.length - 3);
-        slider.style.transform = `translateX(-${pos * slideWidth}px)`;
-      };
-
-      const artistsList = document.getElementById('artistsList');
-      artistsList.innerHTML = '';
-      artists.forEach(ar=>{
-        const card = document.createElement('div'); card.className='artist-card';
-        card.innerHTML = `
-          <img src="${ar.image && ar.image !== 'placeholder' ? ar.image : 'assets/artists/' + ar.name.toLowerCase().replace(/ /g,'-') + '.jpg'}" 
-               onerror="this.src='assets/artists/placeholder.jpg'" alt="${ar.name}">
-          <h3><a href="biodata.html?artist=${encodeURIComponent(ar.name)}" style="color:#00ff88;text-decoration:none">${ar.name}</a></h3>
-          <p>${ar.bio}</p>
-          <div class="tag">${ar.genre}</div>
-        `;
-        artistsList.appendChild(card);
-      });
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = 150;
     }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const codeChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{}[]()=+-/*<>;:'.split('');
+    const linesCount = Math.floor(canvas.height / 20);
+    const columns = Math.floor(canvas.width / 15);
+    const drops = Array.from({ length: columns }, () => Math.random() * linesCount);
+
+    function drawJavaScriptCode() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = '14px monospace';
+      ctx.fillStyle = '#00ff88';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = codeChars[Math.floor(Math.random() * codeChars.length)];
+        ctx.fillText(text, i * 15, drops[i] * 20);
+
+        if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+
+      requestAnimationFrame(drawJavaScriptCode);
+    }
+    drawJavaScriptCode();
   </script>
 </body>
-</html>
+          </html>

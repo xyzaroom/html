@@ -1,84 +1,118 @@
+[About]
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>XYZAROOM — About</title>
-<link rel="icon" href="assets/logo.png" />
-<style>
-  /* reuse same styling as homepage (kept inline for portability) */
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%}
-  body{font-family:monospace;background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
-  .overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .45s}
-  .overlay.hidden{opacity:0;visibility:hidden}
-  .typewriter{font-size:26px;color:#00ff88;margin-bottom:18px;min-height:1.2em}
-  .cd{width:86px;height:86px;border-radius:50%;border:6px solid rgba(255,255,255,.06);background:conic-gradient(#00ff8822,#00ff8822);animation:spin 1.8s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  header{position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;z-index:90}
-  .logo img{width:60px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88}
-  .toggle{font-size:26px;color:#00ff88;cursor:pointer}
-  .sidebar{position:fixed;left:0;top:100px;bottom:0;width:260px;padding:18px;background:#070707;border-right:1px solid rgba(0,255,136,.06);transform:translateX(-100%);opacity:0;visibility:hidden;z-index:95}
-  .sidebar.open{transform:translateX(0);opacity:1;visibility:visible}
-  main{flex:1;margin-top:110px;padding:30px 5%;transition:opacity .36s;opacity:0}
-  main.visible{opacity:1}
-  .codebox{background:#050505;border:1px solid rgba(0,255,136,.04);padding:12px;border-radius:8px;color:#cbd9c6;margin-top:12px;font-size:13px}
-  footer{padding:24px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03)}
-</style>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XYZAROOM — About</title>
+  <link rel="icon" href="/assets/logo.png" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    body{background:#000;color:#fff;font-family:monospace;display:flex;flex-direction:column;min-height:100vh}
+    .overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .5s,visibility .5s}
+    .overlay.hidden{opacity:0;visibility:hidden}
+    .typewriter{font-size:26px;color:#00ff88;margin-bottom:18px;min-height:1.2em}
+    .cd{width:86px;height:86px;border-radius:50%;animation:spin 1.8s linear infinite;border:6px solid rgba(255,255,255,.06);background:conic-gradient(#00ff8822,#00ff8822)}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    header{position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;z-index:90}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo img{width:64px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88}
+    .toggle{font-size:28px;color:#00ff88;cursor:pointer;padding:8px;border-radius:8px}
+
+    .sidebar{position:fixed;left:0;top:100px;bottom:0;width:260px;padding:20px;background:#070707;border-right:1px solid rgba(0,255,136,.06);transform:translateX(-100%);opacity:0;visibility:hidden;transition:transform .32s ease,opacity .32s,visibility .32s;z-index:95}
+    .sidebar.open{transform:translateX(0);opacity:1;visibility:visible}
+    .sidebar nav a{display:block;padding:10px 10px;color:#fff;text-decoration:none;font-weight:700;margin-bottom:8px;border-radius:10px}
+    .sidebar nav a:hover{background:#00ff88;color:#000}
+
+    main{flex:1;margin-top:110px;padding:30px 5%;transition:opacity .36s;opacity:0}
+    main.visible{opacity:1}
+    .card{background:#0b0b0b;padding:14px;border-radius:10px;margin-bottom:14px;border:1px solid rgba(0,255,136,.04)}
+    h1{font-size:32px;margin-bottom:10px}
+    footer{padding:20px;text-align:center;background:#050505;border-top:1px solid rgba(0,255,136,.03)}
+  </style>
 </head>
 <body>
-  <div class="overlay" id="overlay"><div class="typewriter" id="typeText"></div><div class="cd"></div></div>
+  <div class="overlay" id="overlay">
+    <div class="typewriter" id="typeText"></div>
+    <div class="cd" aria-hidden="true"></div>
+  </div>
 
   <header>
-    <div style="display:flex;align-items:center;gap:12px">
-      <img src="assets/logo.png" alt="logo" onerror="this.style.filter='grayscale(80%)'">
-      <div style="font-weight:900">XYZAROOM</div>
+    <div class="logo">
+      <img src="/assets/logo.png" alt="logo" onerror="this.style.filter='grayscale(80%)'">
+      <div style="display:flex;flex-direction:column"><div style="font-weight:900">XYZAROOM</div><div style="font-size:12px;color:#9fbf9f">Records</div></div>
     </div>
     <div class="toggle" id="toggleBtn">☰</div>
   </header>
 
   <aside class="sidebar" id="sidebar">
     <nav>
-      <a href="index.html">Homepage</a>
-      <a href="about.html">About</a>
-      <a href="artists.html">Artists</a>
-      <a href="albums.html">Albums</a>
-      <a href="event.html">Event</a>
-      <a href="contact.html">Contact</a>
+      <a href="https://xyzaroomrecords.github.io/">Homepage</a>
+      <a href="/p/about.html">About</a>
+      <a href="/p/artists.html">Artists</a>
+      <a href="/p/albums.html">Albums</a>
+      <a href="/p/event.html">Event</a>
+      <a href="/p/contact.html">Contact</a>
     </nav>
   </aside>
 
   <main id="mainContent">
     <h1>About XYZAROOM</h1>
-    <p style="color:#cbd9c6;margin-top:10px">XYZAROOM adalah platform distribusi & backup untuk artis independen — memadukan teknologi dan estetika musik.</p>
-
-    <div class="codebox" aria-hidden="false">
-      <div style="color:#00ff88;font-weight:800;margin-bottom:8px">JS Snippet (ornamental)</div>
-      <pre style="margin:0;color:#cbd9c6;font-family:monospace;font-size:13px">// init XYZA demo
-function initXYZA(){ console.log('XYZA exploration'); }</pre>
+    <div class="card">
+      <h3>Visi</h3>
+      <p>Membantu artis independen mendistribusikan karya mereka secara efisien dan aman.</p>
+    </div>
+    <div class="card">
+      <h3>Misi</h3>
+      <ul style="margin-left:18px;line-height:1.8">
+        <li>Platform distribusi 1-klik.</li>
+        <li>Backup cloud aman untuk aset musik & artwork.</li>
+        <li>Alat monetisasi untuk label & artis kecil.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Teknologi (contoh)</h3>
+      <p>Demo menggunakan beberapa bahasa & konsep: C++, Go, Java, JS, PHP, Python, Ruby.</p>
     </div>
   </main>
 
   <footer>
-    <div class="footer-links"><a href="FAQ/privacy-policy.html">Privacy Policy</a> • <a href="FAQ/terms-condition.html">Terms & Conditions</a></div>
-    <div style="color:#cbd9c6;margin-top:8px;font-size:13px">/* JS reference: interactive layer */</div>
-    <p style="margin-top:6px;color:#cbd9c6">© 2025 XYZAROOM RECORDS</p>
+  <div class="footer-links">
+    <a href="/FAQ/privacy-policy.html">Privacy Policy</a>
+    <a href="/FAQ/terms-condition.html">Terms & Conditions</a>
+  </div>
+  <p>© 2025 XYZAROOM RECORDS • All Rights Reserved.</p>
   </footer>
 
-<script>
-  // typewriter + sidebar (same behavior)
-  const overlay = document.getElementById('overlay'), typeText=document.getElementById('typeText'),
-        toggleBtn=document.getElementById('toggleBtn'), sidebar=document.getElementById('sidebar'),
-        mainContent=document.getElementById('mainContent');
-  const fullText='XYZAROOM RECORDS'; let tIdx=0;
-  function typeStep(){ if(tIdx<=fullText.length){ typeText.innerText=fullText.slice(0,tIdx); tIdx++; setTimeout(typeStep,80) } else setTimeout(()=>{overlay.classList.add('hidden'); mainContent.classList.add('visible')},200) }
-  document.addEventListener('DOMContentLoaded', ()=>{
-    tIdx=0; typeText.innerText=''; setTimeout(typeStep,120);
-    toggleBtn.addEventListener('click', ()=> sidebar.classList.toggle('open'));
-    document.addEventListener('click',(e)=>{ if(!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) sidebar.classList.remove('open'); });
-    document.querySelectorAll('.sidebar nav a').forEach(a=>{
-      a.addEventListener('click', function(e){ const href=this.getAttribute('href'); if(!href||href.startsWith('http')) return; e.preventDefault(); sidebar.classList.remove('open'); overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90); setTimeout(()=> location.href = href,700); });
+  <script>
+    const overlay = document.getElementById('overlay');
+    const typeText = document.getElementById('typeText');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    const fullText = 'XYZAROOM RECORDS';
+    let tIdx = 0;
+    function typeStep(){
+      if(tIdx <= fullText.length){
+        typeText.innerText = fullText.slice(0,tIdx);
+        tIdx++; setTimeout(typeStep,80);
+      } else setTimeout(()=>{ overlay.classList.add('hidden'); mainContent.classList.add('visible'); },200);
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      tIdx=0; typeText.innerText=''; setTimeout(typeStep,120);
+      toggleBtn.addEventListener('click', ()=> sidebar.classList.toggle('open'));
+      document.addEventListener('click',(e)=>{ if(!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) sidebar.classList.remove('open'); });
+      document.querySelectorAll('.sidebar nav a').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const href=this.getAttribute('href'); if(!href||href.startsWith('http')) return;
+          e.preventDefault();
+          sidebar.classList.remove('open');
+          overlay.classList.remove('hidden'); typeText.innerText=''; tIdx=0; setTimeout(typeStep,90);
+          setTimeout(()=> location.href = href,700);
+        });
+      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>

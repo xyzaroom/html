@@ -25,72 +25,72 @@
   -->
   <style>
     /* RESET */
-    *{margin:0;padding:0;box-sizing:border-box}
-    html,body{height:100%}
-    body{
+    * {margin:0;padding:0;box-sizing:border-box}
+    html,body {height:100%}
+    body {
       background:#000;color:#fff;font-family:monospace;
       -webkit-font-smoothing:antialiased;min-height:100vh;
       display:flex;flex-direction:column;overflow-x:hidden;
     }
 
     /* OVERLAY LOADING (typewriter + CD) */
-    .overlay{
-      position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-      background:linear-gradient(180deg,#000,#00110b);z-index:9999;transition:opacity .5s ease,visibility .5s;
-      opacity:1;visibility:visible;
+    .overlay {
+      position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      background:linear-gradient(180deg,#000,#00110b); z-index:9999; transition:opacity .5s ease,visibility .5s;
+      opacity:1; visibility:visible;
     }
-    .overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
-    .typewriter{font-size:28px;letter-spacing:4px;font-weight:800;color:#00ff88;margin-bottom:18px;min-height:1.2em}
-    .cd{
-      width:86px;height:86px;border-radius:50%;border:6px solid rgba(255,255,255,.06);
-      background:conic-gradient(#00ff8822,#00ff8822);display:flex;align-items:center;justify-content:center;
+    .overlay.hidden { opacity:0; visibility:hidden; pointer-events:none }
+    .typewriter { font-size:28px; letter-spacing:4px; font-weight:800; color:#00ff88; margin-bottom:18px; min-height:1.2em }
+    .cd {
+      width:86px; height:86px; border-radius:50%; border:6px solid rgba(255,255,255,.06);
+      background:conic-gradient(#00ff8822,#00ff8822); display:flex; align-items:center; justify-content:center;
       box-shadow:0 6px 30px rgba(0,255,136,.06), inset 0 0 12px rgba(255,255,255,.02);
       animation:spin 1.8s linear infinite;
     }
-    .cd::after{
-      content:"";width:18px;height:18px;background:#000;border-radius:50%;border:3px solid #00ff88;
-      box-shadow:0 0 10px #00ff88;display:block;
+    .cd::after {
+      content:""; width:18px; height:18px; background:#000; border-radius:50%; border:3px solid #00ff88;
+      box-shadow:0 0 10px #00ff88; display:block;
     }
-    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes spin { to { transform:rotate(360deg) } }
 
     /* HEADER */
-    header{
-      position:fixed;top:14px;left:0;width:100%;padding:0 5%;display:flex;align-items:center;justify-content:space-between;
-      z-index:90;pointer-events:auto;
+    header {
+      position:fixed; top:14px; left:0; width:100%; padding:0 5%; display:flex; align-items:center; justify-content:space-between;
+      z-index:90; pointer-events:auto;
     }
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo img{width:64px;height:64px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 18px #00ff88}
-    .logo .brand{font-weight:900;letter-spacing:1px}
-    .toggle{font-size:28px;color:#00ff88;cursor:pointer;user-select:none;padding:8px;border-radius:8px}
+    .logo { display:flex; align-items:center; gap:12px }
+    .logo img { width:64px; height:64px; border-radius:10px; border:2px solid #fff; box-shadow:0 0 18px #00ff88 }
+    .logo .brand { font-weight:900; letter-spacing:1px }
+    .toggle { font-size:28px; color:#00ff88; cursor:pointer; user-select:none; padding:8px; border-radius:8px }
 
     /* SIDEBAR (HIDDEN BY DEFAULT ON ALL DEVICES) */
-    .sidebar{
-      position:fixed;left:0;top:100px;bottom:0;width:260px;padding:20px;background:#070707;border-right:1px solid rgba(0,255,136,.06);
-      transform:translateX(-100%);opacity:0;visibility:hidden;transition:transform .32s ease,opacity .32s,visibility .32s;
+    .sidebar {
+      position:fixed; left:0; top:100px; bottom:0; width:260px; padding:20px; background:#070707; border-right:1px solid rgba(0,255,136,.06);
+      transform:translateX(-100%); opacity:0; visibility:hidden; transition:transform .32s ease,opacity .32s,visibility .32s;
       z-index:95;
     }
-    .sidebar.open{transform:translateX(0);opacity:1;visibility:visible}
-    .sidebar nav a{display:block;padding:10px 10px;color:#fff;text-decoration:none;font-weight:700;margin-bottom:8px;border-radius:10px}
-    .sidebar nav a:hover{background:#00ff88;color:#000}
+    .sidebar.open { transform:translateX(0); opacity:1; visibility:visible }
+    .sidebar nav a { display:block; padding:10px 10px; color:#fff; text-decoration:none; font-weight:700; margin-bottom:8px; border-radius:10px }
+    .sidebar nav a:hover { background:#00ff88; color:#000 }
 
     /* MAIN */
-    main{flex:1;margin-top:110px;padding:40px 5%;transition:opacity .36s ease;opacity:0}
-    main.visible{opacity:1}
-    .hero{min-height:65vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-    .hero h1{font-size:64px;letter-spacing:-2px;font-weight:900}
-    .hero h1 span{color:#00ff88}
-    .hero p{margin-top:16px;font-size:18px;color:#cfd8cc;max-width:780px}
-    .controls{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-    .btn{background:#00ff88;color:#000;padding:10px 20px;border-radius:40px;font-weight:800;border:none;cursor:pointer}
-    .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.06);color:#fff}
+    main { flex:1; margin-top:110px; padding:40px 5%; transition:opacity .36s ease; opacity:0 }
+    main.visible { opacity:1 }
+    .hero { min-height:65vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center }
+    .hero h1 { font-size:64px; letter-spacing:-2px; font-weight:900 }
+    .hero h1 span { color:#00ff88 }
+    .hero p { margin-top:16px; font-size:18px; color:#cfd8cc; max-width:780px }
+    .controls { margin-top:20px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center }
+    .btn { background:#00ff88; color:#000; padding:10px 20px; border-radius:40px; font-weight:800; border:none; cursor:pointer }
+    .btn.ghost { background:transparent; border:2px solid rgba(255,255,255,.06); color:#fff }
 
-    .grid{max-width:1200px;margin:40px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px}
-    .card{background:#0b0b0b;padding:20px;border-radius:12px;text-align:center;font-weight:800;cursor:pointer;transition:transform .28s}
-    .card:hover{transform:translateY(-8px);box-shadow:0 12px 30px rgba(0,255,136,.04)}
+    .grid { max-width:1200px; margin:40px auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:18px }
+    .card { background:#0b0b0b; padding:20px; border-radius:12px; text-align:center; font-weight:800; cursor:pointer; transition:transform .28s }
+    .card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,255,136,.04) }
 
     /* DEMO BOX */
-    #demo{max-width:920px;margin:24px auto;background:#0b0b0b;padding:18px;border-radius:10px;border:1px solid rgba(0,255,136,.04);display:none}
-    pre{background:#000;padding:12px;border-radius:8px;overflow:auto;font-size:13px;color:#ddd}
+    #demo { max-width:920px; margin:24px auto; background:#0b0b0b; padding:18px; border-radius:10px; border:1px solid rgba(0,255,136,.04); display:none }
+    pre { background:#000; padding:12px; border-radius:8px; overflow:auto; font-size:13px; color:#ddd }
 
     /* FOOTER */
     footer {
@@ -99,11 +99,9 @@
       background: #111;
       border-top: 1px solid rgba(0,255,136,0.2);
     }
-
     .footer-links {
       margin-bottom: 15px;
     }
-
     .footer-links a {
       color: #00ff88;
       margin: 0 15px;
@@ -111,34 +109,38 @@
       text-decoration: none;
       transition: color .3s ease;
     }
-
     .footer-links a:hover {
       color: #fff;
       text-shadow: 0 0 8px #00ff88;
     }
-
     footer p {
       font-family: monospace;
       font-size: 14px;
       color: #aaa;
     }
-    
 
-    /* RESPONSIVE NOTE: sidebar stays hidden by default on all sizes; toggle opens it */
+    /* RESPONSIVE */
     @media(max-width:720px){
-      .hero h1{font-size:40px}
-      .logo img{width:56px;height:56px}
+      .hero h1 { font-size:40px }
+      .logo img { width:56px; height:56px }
     }
 
-    /* Tambahan CSS untuk canvas animasi kode JS */
-    #jsCodeCanvas {
+    /* Animasi kode JS di bawah header */
+    #jsCodeContainer {
       position: fixed;
       bottom: 0;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 100%;
+      max-width: 1000px;
       height: 150px;
       pointer-events: none;
       z-index: 10;
+    }
+    #jsCodeCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
   </style>
 </head>
@@ -149,9 +151,10 @@
     <div class="cd" aria-hidden="true"></div>
   </div>
 
+  <!-- HEADER -->
   <header>
     <div class="logo">
-      <img src="assets/logo.png" alt="XYZAROOM logo" onerror="this.style.filter='grayscale(80%)'">
+      <img src="assets/logo.png" alt="XYZAROOM logo" onerror="this.style.filter='grayscale(80%)'" />
       <div style="display:flex;flex-direction:column">
         <div class="brand">XYZAROOM</div>
         <div style="font-size:12px;color:#9fbf9f">Records</div>
@@ -162,6 +165,7 @@
     </div>
   </header>
 
+  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar" aria-hidden="true">
     <nav>
       <a href="#">Homepage</a>
@@ -173,6 +177,7 @@
     </nav>
   </aside>
 
+  <!-- MAIN -->
   <main id="mainContent" class="">
     <section class="hero" aria-labelledby="heroTitle">
       <h1 id="heroTitle"><span>XYZA</span>ROOM</h1>
@@ -190,9 +195,9 @@
         <div class="card">Go <div style="margin-top:8px;color:#00ff88;font-weight:900">GO BEAT</div></div>
         <div class="card">Java <div style="margin-top:8px;color:#00ff88;font-weight:900">JAVA COVER</div></div>
         <div class="card">JavaScript <div style="margin-top:8px;color:#00ff88;font-weight:900">JS UPLOAD</div></div>
-        <div class="card">PHP <div style="margin-top:8px;color:#00ff88;font-weight:900">PHP ROYALTY</div></div>
-        <div class="card">Python <div style="margin-top:8px;color:#00ff88;font-weight:900">PY LYRIC</div></div>
-        <div class="card">Ruby <div style="margin-top:8px;color:#00ff88;font-weight:900">RB BACKUP</div></div>
+        &lt;div class="card"&gt;PHP &lt;div style="margin-top:8px;color:#00ff88;font-weight:900"&gt;PHP ROYALTY&lt;/div&gt;&lt;/div&gt;
+        &lt;div class="card"&gt;Python &lt;div style="margin-top:8px;color:#00ff88;font-weight:900"&gt;PY LYRIC&lt;/div&gt;&lt;/div&gt;
+        &lt;div class="card"&gt;Ruby &lt;div style="margin-top:8px;color:#00ff88;font-weight:900"&gt;RB BACKUP&lt;/div&gt;&lt;/div&gt;
       </div>
     </section>
 
@@ -203,16 +208,19 @@
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer>
-  <div class="footer-links">
-    <a href="/FAQ/privacy-policy.html">Privacy Policy</a>
-    <a href="/FAQ/terms-condition.html">Terms Conditions</a>
-  </div>
-  <p>© 2025 XYZAROOM RECORDS • All Rights Reserved.</p>
+    <div class="footer-links">
+      <a href="/FAQ/privacy-policy.html">Privacy Policy</a>
+      <a href="/FAQ/terms-condition.html">Terms Conditions</a>
+    </div>
+    <p>© 2025 XYZAROOM RECORDS • All Rights Reserved.</p>
   </footer>
 
   <!-- Canvas untuk animasi kode JS -->
-  <canvas id="jsCodeCanvas"></canvas>
+  <div id="jsCodeContainer">
+    <canvas id="jsCodeCanvas"></canvas>
+  </div>
 
   <script>
     /* Helper: open WA */
@@ -235,7 +243,7 @@
         setTimeout(typeStep, 80);
       } else {
         // hide overlay dan tampilkan main
-        setTimeout(()=> {
+        setTimeout(()=>{
           overlay.classList.add('hidden');
           mainContent.classList.add('visible');
         }, 220);
@@ -243,7 +251,7 @@
     }
 
     /* Start on DOM ready */
-    document.addEventListener('DOMContentLoaded', ()=> {
+    document.addEventListener('DOMContentLoaded', ()=>{
       // start typing
       tIdx = 0;
       typeText.innerText = '';
@@ -288,12 +296,13 @@
       });
     });
 
-    // Animasi kode JavaScript sebagai hiasan
+    // Animasi kode JavaScript sebagai hiasan di bawah header
     const canvas = document.getElementById('jsCodeCanvas');
     const ctx = canvas.getContext('2d');
 
     function resizeCanvas() {
-      canvas.width = window.innerWidth;
+      const container = document.getElementById('jsCodeContainer');
+      canvas.width = container.offsetWidth;
       canvas.height = 150;
     }
     window.addEventListener('resize', resizeCanvas);
@@ -302,7 +311,7 @@
     const codeChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{}[]()=+-/*<>;:'.split('');
     const linesCount = Math.floor(canvas.height / 20);
     const columns = Math.floor(canvas.width / 15);
-    const drops = Array.from({ length: columns }, () => Math.random() * linesCount);
+    const drops = Array.from({ length: columns }, ()=> Math.random() * linesCount);
 
     function drawJavaScriptCode() {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
@@ -311,7 +320,7 @@
       ctx.font = '14px monospace';
       ctx.fillStyle = '#00ff88';
 
-      for (let i = 0; i < drops.length; i++) {
+      for (let i=0; i<drops.length; i++) {
         const text = codeChars[Math.floor(Math.random() * codeChars.length)];
         ctx.fillText(text, i * 15, drops[i] * 20);
 
@@ -326,4 +335,4 @@
     drawJavaScriptCode();
   </script>
 </body>
-          </html>
+  </html>

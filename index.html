@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Official | Xyzaroom Records</title>
+<title>Official| Xyzaroom Records</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
@@ -42,8 +42,8 @@ body, html {
     position: absolute;
     width: 60px;
     height: 60px;
-    background: rgba(255,255,255,0.1);
-    border: 2px solid rgba(255,255,255,0.24);
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.28);
 }
 
 .cube .front  { transform: translateZ(30px); }
@@ -58,6 +58,7 @@ body, html {
     to   { transform: rotateX(360deg) rotateY(360deg); }
 }
 
+/* Typing Effect */
 #typingText {
     margin-top: 25px;
     font-size: 1.25rem;
@@ -67,7 +68,8 @@ body, html {
     width: 0;
     white-space: nowrap;
     overflow: hidden;
-    animation: typing 5s steps(40) forwards, blink .85s infinite;
+    animation: typing 5.5s steps(40) forwards,
+               blink 0.85s infinite;
 }
 
 @keyframes typing { from { width: 0; } to { width: 260px; } }
@@ -85,9 +87,10 @@ body, html {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: .38;
+    opacity: 0.38;
 }
 
+/* Overlay text */
 .hero .overlay {
     position: absolute;
     inset: 0;
@@ -107,15 +110,23 @@ body, html {
 .hero p {
     max-width: 480px;
     font-size: 1.25rem;
-    line-height: 1.65;
+    line-height: 1.65em;
     margin-top: 20px;
     color: #e0e0e0;
 }
 
+/* ===== RESPONSIVE HERO ===== */
 @media (max-width: 768px) {
-    .hero .overlay { padding: 40px; }
-    .hero h1 { font-size: 2.2rem; }
-    .hero p { font-size: 1rem; max-width: 95%; }
+    .hero .overlay {
+        padding: 40px;
+    }
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+        max-width: 95%;
+    }
 }
 
 /* ================= ABOUT ================= */
@@ -135,13 +146,13 @@ body, html {
     color: #ccc;
 }
 
-/* ================= FOOTER ================= */
+/* ================= FOOTER — MONOKROM (ASLI PUNYAMU) ================= */
 .ditto-footer {
     background: #000;
     color: #aaa;
     padding: 60px 5% 30px;
+    font-family: Arial, sans-serif;
 }
-
 .footer-container {
     display: flex;
     justify-content: space-between;
@@ -149,20 +160,17 @@ body, html {
     max-width: 1200px;
     margin: 0 auto 40px;
 }
-
 .footer-column {
     flex: 1;
     min-width: 200px;
     margin: 20px 0;
 }
-
 .footer-column h4 {
     color: #fff;
     font-size: 1.1rem;
     margin-bottom: 20px;
     font-weight: 700;
 }
-
 .footer-column a {
     display: block;
     color: #aaa;
@@ -170,15 +178,14 @@ body, html {
     text-decoration: none;
     transition: 0.3s;
 }
-
-.footer-column a:hover { color: #fff; }
-
+.footer-column a:hover {
+    color: #fff;
+}
 .footer-bottom {
     text-align: center;
     border-top: 1px solid #333;
     padding-top: 30px;
 }
-
 .social-icons a {
     color: #fff;
     margin: 0 18px;
@@ -186,22 +193,27 @@ body, html {
     text-decoration: none;
     transition: 0.3s;
 }
-
-.social-icons a:hover { color: #ccc; }
-
+.social-icons a:hover {
+    color: #ccc;
+}
 .footer-bottom p {
     margin: 20px 0;
     color: #666;
     font-size: 0.9rem;
 }
-
 .legal-links a {
     color: #666;
     margin: 0 15px;
-    font-size: .9rem;
+    font-size: 0.9rem;
     text-decoration: none;
 }
-.legal-links a:hover { color: #fff; }
+.legal-links a:hover {
+    color: #fff;
+}
+@media (max-width: 768px) {
+    .footer-container { flex-direction: column; text-align: center; }
+    .social-icons a { margin: 0 14px; }
+}
 </style>
 </head>
 
@@ -217,11 +229,13 @@ body, html {
     <div id="typingText">Xyzaroom Records</div>
 </div>
 
-<!-- HERO -->
+<!-- HERO — VIDEO -->
 <div class="hero">
-    <video autoplay muted loop playsinline preload="auto">
-        <source src="https://videos.pexels.com/video-files/20148049/20148049-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline>
+        <!-- VIDEO CONCERT FREE (AMAN, FAST, TIDAK ERROR) -->
+        <source src="https://videos.pexels.com/video-files/15363182/15363182-hd_1920_1080_30fps.mp4" type="video/mp4">
     </video>
+
     <div class="overlay">
         <h1>Music Distribution<br>For New Era Artists</h1>
         <p>
@@ -235,12 +249,12 @@ body, html {
 <div class="about">
     <h2>About</h2>
     <p>
-        Xyzaroom Records adalah label independen yang berdiri pada 2018 dan kini beroperasi di bawah Algoritma Music Group. 
-        Kami berfokus pada distribusi musik global, publishing, dan layanan untuk creative artists modern.
+        “Xyzaroom” or Xyzaroom Records, and simply known officially name as Xyzaroom Records Inc. , is an Indonesian record label that subsidiary label and was acquired in 2019 by Algoritma Music Group, Company. Ltd. through the imprint of Algoritma Music Publishing.  
+        It was established as the first record label 2018 based in Parungkuda Kota Sukabumi in INDONESIA by Algoritma Records, Algoritma Music Group, and Algoritma Music Publishing.
     </p>
 </div>
 
-<!-- FOOTER -->
+<!-- FOOTER — ASLI -->
 <footer class="ditto-footer">
   <div class="footer-container">
     <div class="footer-column">
@@ -251,7 +265,6 @@ body, html {
       <a href="#">Event</a>
       <a href="#">Contact</a>
     </div>
-
     <div class="footer-column">
       <h4>as Record Label</h4>
       <a href="#">Music Distribution</a>
@@ -260,7 +273,6 @@ body, html {
       <a href="#">Music Publishing</a>
       <a href="#">White Label Inquiry</a>
     </div>
-
     <div class="footer-column">
       <h4>Resources</h4>
       <a href="#">Help Center</a>
@@ -270,22 +282,19 @@ body, html {
       <a href="#">Login</a>
     </div>
   </div>
-
   <div class="footer-bottom">
     <div class="social-icons">
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-x-twitter"></i></a>
-      <a href="#"><i class="fab fa-youtube"></i></a>
-      <a href="#"><i class="fab fa-spotify"></i></a>
+      <a href="https://instagram.com/xyzaroom" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com/xyzaroomrecords" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://x.com/xyzaroom" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://youtube.com/@xyzaroom" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://open.spotify.com/user/31duvjxmji6qa6bqqk547uotxfya" target="_blank"><i class="fab fa-spotify"></i></a>
     </div>
-
     <p>© 2025 Xyzaroom Records Inc. All rights reserved.</p>
-
     <div class="legal-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms Conditions</a>
-      <a href="#">Modern Slavery</a>
+      <a href="FAQ/privacy-policy.html">Privacy Policy</a>
+      <a href="FAQ/terms-condition.html">Terms Conditions</a>
+      <a href="FAQ/modern-slavery.html">Modern Slavery</a>
     </div>
   </div>
 </footer>

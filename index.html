@@ -1,292 +1,310 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>XYZAROOM — Homepage</title>
-  <link rel="icon" href="assets/logo.png" />
-  <style>
-    * {margin:0;padding:0;box-sizing:border-box}
-    html,body {height:100%}
-    body {
-      background:#000;color:#fff;font-family:monospace;
-      -webkit-font-smoothing:antialiased;min-height:100vh;
-      display:flex;flex-direction:column;overflow-x:hidden; position: relative;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xyzaroom Records | Official</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-    /* Background animation canvas container */
-    #jsBackgroundContainer {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    #jsCodeBackground {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
+<style>
+/* ================= GLOBAL ================= */
+body, html {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
 
-    /* Overlay loading */
-    .overlay {
-      position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-      background:linear-gradient(180deg,#000,#00110b); z-index:9999; transition:opacity .5s ease,visibility .5s;
-      opacity:1; visibility:visible;
-    }
-    .overlay.hidden { opacity:0; visibility:hidden; pointer-events:none }
-    .typewriter { font-size:28px; letter-spacing:4px; font-weight:800; color:#00ff88; margin-bottom:18px; min-height:1.2em }
-    .cd {
-      width:86px; height:86px; border-radius:50%; border:6px solid rgba(255,255,255,.06);
-      background:conic-gradient(#00ff8822,#00ff8822); display:flex; align-items:center; justify-content:center;
-      box-shadow:0 6px 30px rgba(0,255,136,.06), inset 0 0 12px rgba(255,255,255,.02);
-      animation:spin 1.8s linear infinite;
-    }
-    .cd::after {
-      content:""; width:18px; height:18px; background:#000; border-radius:50%; border:3px solid #00ff88;
-      box-shadow:0 0 10px #00ff88; display:block;
-    }
-    @keyframes spin { to { transform:rotate(360deg) } }
+/* ================= LOADING SCREEN ================= */
+#loadingScreen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease;
+}
 
-    /* HEADER */
-    header {
-      position:fixed; top:14px; left:0; width:100%; padding:0 5%; display:flex; align-items:center; justify-content:space-between;
-      z-index:90; pointer-events:auto;
-    }
-    .logo { display:flex; align-items:center; gap:12px }
-    .logo img { width:64px; height:64px; border-radius:10px; border:2px solid #fff; box-shadow:0 0 18px #00ff88 }
-    .logo .brand { font-weight:900; letter-spacing:1px }
-    .toggle { font-size:28px; color:#00ff88; cursor:pointer; user-select:none; padding:8px; border-radius:8px }
+.cube {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: spin 6s infinite linear;
+}
 
-    /* SIDEBAR */
-    .sidebar {
-      position:fixed; left:0; top:100px; bottom:0; width:260px; padding:20px; background:#070707; border-right:1px solid rgba(0,255,136,.06);
-      transform:translateX(-100%); opacity:0; visibility:hidden; transition:transform .32s ease,opacity .32s,visibility .32s;
-      z-index:95;
-    }
-    .sidebar.open { transform:translateX(0); opacity:1; visibility:visible }
-    .sidebar nav a { display:block; padding:10px 10px; color:#fff; text-decoration:none; font-weight:700; margin-bottom:8px; border-radius:10px }
-    .sidebar nav a:hover { background:#00ff88; color:#000 }
+.cube div {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.28);
+}
 
-    /* MAIN */
-    main { flex:1; margin-top:110px; padding:40px 5%; transition:opacity .36s ease; opacity:1; position:relative; z-index:1; }
-    .hero { min-height:65vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center }
-    .hero h1 { font-size:64px; letter-spacing:-2px; font-weight:900 }
-    .hero h1 span { color:#00ff88 }
-    .hero p { margin-top:16px; font-size:18px; color:#cfd8cc; max-width:780px }
-    .controls { margin-top:20px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center }
-    .btn { background:#00ff88; color:#000; padding:10px 20px; border-radius:40px; font-weight:800; border:none; cursor:pointer }
-    .btn.ghost { background:transparent; border:2px solid rgba(255,255,255,.06); color:#fff }
+.cube .front  { transform: translateZ(30px); }
+.cube .back   { transform: rotateY(180deg) translateZ(30px); }
+.cube .right  { transform: rotateY(90deg) translateZ(30px); }
+.cube .left   { transform: rotateY(-90deg) translateZ(30px); }
+.cube .top    { transform: rotateX(90deg) translateZ(30px); }
+.cube .bottom { transform: rotateX(-90deg) translateZ(30px); }
 
-    /* Grid Tools */
-    .grid { max-width:1200px; margin:40px auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:18px }
-    .card { background:#0b0b0b; padding:20px; border-radius:12px; text-align:center; font-weight:800; cursor:pointer; transition:transform .28s }
-    .card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,255,136,.04) }
+@keyframes spin {
+    from { transform: rotateX(0) rotateY(0); }
+    to   { transform: rotateX(360deg) rotateY(360deg); }
+}
 
-    /* Demo box */
-    #demo { max-width:920px; margin:24px auto; background:#0b0b0b; padding:18px; border-radius:10px; border:1px solid rgba(0,255,136,.04); display:none }
-    pre { background:#000; padding:12px; border-radius:8px; overflow:auto; font-size:13px; color:#ddd }
+/* Typing Effect */
+#typingText {
+    margin-top: 25px;
+    font-size: 1.25rem;
+    letter-spacing: 2px;
+    color: #e0e0e0;
+    border-right: 2px solid #fff;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 5.5s steps(40) forwards,
+               blink 0.85s infinite;
+}
 
-    /* FOOTER */
-    footer {
-      padding: 40px 20px;
-      text-align: center;
-      background: #111;
-      border-top: 1px solid rgba(0,255,136,0.2);
-    }
-    .footer-links {
-      margin-bottom: 15px;
-    }
-    .footer-links a {
-      color: #00ff88;
-      margin: 0 15px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color .3s ease;
-    }
-    .footer-links a:hover {
-      color: #fff;
-      text-shadow: 0 0 8px #00ff88;
-    }
-    footer p {
-      font-family: monospace;
-      font-size: 14px;
-      color: #aaa;
-    }
+@keyframes typing { from { width: 0; } to { width: 260px; } }
+@keyframes blink { 50% { border-color: transparent; } }
 
-    /* RESPONSIVE */
-    @media(max-width:720px){
-      .hero h1 { font-size:40px }
-      .logo img { width:56px; height:56px }
+/* ================= HERO ================= */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+
+.hero video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.38;
+}
+
+.hero .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.82));
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.hero p {
+    max-width: 480px;
+    font-size: 1.25rem;
+    line-height: 1.65em;
+    margin-top: 20px;
+    color: #e0e0e0;
+}
+
+/* ===== RESPONSIVE HERO ===== */
+@media (max-width: 768px) {
+    .hero .overlay {
+        padding: 40px;
     }
-  </style>
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+        max-width: 95%;
+    }
+}
+
+/* ================= ABOUT ================= */
+.about {
+    padding: 80px 40px;
+    background: #111;
+}
+
+.about h2 {
+    font-size: 2.6rem;
+    margin-bottom: 25px;
+}
+
+.about p {
+    max-width: 780px;
+    line-height: 1.7rem;
+    color: #ccc;
+}
+
+/* ================= FOOTER — MONOKROM ================= */
+.ditto-footer {
+    background: #000;
+    color: #aaa;
+    padding: 60px 5% 30px;
+    font-family: Arial, sans-serif;
+}
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+}
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 20px 0;
+}
+.footer-column h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+.footer-column a {
+    display: block;
+    color: #aaa;
+    margin: 10px 0;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.footer-column a:hover {
+    color: #fff;
+}
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 30px;
+}
+.social-icons a {
+    color: #fff;
+    margin: 0 18px;
+    font-size: 1.7rem;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.social-icons a:hover {
+    color: #ccc;
+}
+.footer-bottom p {
+    margin: 20px 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+.legal-links a {
+    color: #666;
+    margin: 0 15px;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+.legal-links a:hover {
+    color: #fff;
+}
+@media (max-width: 768px) {
+    .footer-container { flex-direction: column; text-align: center; }
+    .social-icons a { margin: 0 14px; }
+}
+</style>
 </head>
+
 <body>
-  <!-- Canvas background for animated code -->
-  <div id="jsBackgroundContainer" aria-hidden="true">
-    <canvas id="jsCodeBackground"></canvas>
+
+<!-- LOADING -->
+<div id="loadingScreen">
+    <div class="cube">
+        <div class="front"></div><div class="back"></div>
+        <div class="right"></div><div class="left"></div>
+        <div class="top"></div><div class="bottom"></div>
+    </div>
+    <div id="typingText">Xyzaroom Records</div>
+</div>
+
+<!-- HERO — VIDEO -->
+<div class="hero">
+    <video autoplay muted loop playsinline>
+        <source src="#" type="video/mp4">
+        Your browser does not support video.
+    </video>
+    <div class="overlay">
+        <h1>Music Distribution<br>For New Era Artists</h1>
+        <p>
+            Independent label support, innovative release tools,<br>
+            and global publishing management — all made for creators.
+        </p>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about">
+    <h2>About</h2>
+    <p>
+        “Xyzaroom” or Xyzaroom Records, and simply known officially name as Xyzaroom Records Inc. , is an Indonesian record label that subsidiary label and was acquired in 2019 by Algoritma Music Group, Company. Ltd. through the imprint of Algoritma Music Publishing.  
+        It was established as the first record label 2018 based in Parungkuda Kota Sukabumi in INDONESIA by Algoritma Records, Algoritma Music Group, and Algoritma Music Publishing.
+    </p>
+</div>
+
+<!-- FOOTER — MONOKROM -->
+<footer class="ditto-footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">News</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-column">
+      <h4>Services</h4>
+      <a href="#">Music Distribution</a>
+      <a href="#">Playlist Pitching</a>
+      <a href="#">Sync Licensing</a>
+      <a href="#">Publishing</a>
+      <a href="#">Xyzaroom Plus</a>
+    </div>
+    <div class="footer-column">
+      <h4>Resources</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Blog</a>
+      <a href="#">Pricing</a>
+      <a href="#">Free Sign Up</a>
+      <a href="#">Login</a>
+    </div>
   </div>
-
-  <!-- OVERLAY: typewriter + CD -->
-  <div class="overlay" id="overlay" role="status" aria-live="polite">
-    <div class="typewriter" id="typeText"></div>
-    <div class="cd" aria-hidden="true"></div>
+  <div class="footer-bottom">
+    <div class="social-icons">
+      <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-spotify"></i></a>
+    </div>
+    <p>© 2025 Xyzaroom Records Inc. All rights reserved.</p>
+    <div class="legal-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
   </div>
+</footer>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">
-      <img src="assets/logo.png" alt="XYZAROOM logo" onerror="this.style.filter='grayscale(80%)'" />
-      <div style="display:flex;flex-direction:column">
-        <div class="brand">XYZAROOM</div>
-        <div style="font-size:12px;color:#9fbf9f">Records</div>
-      </div>
-    </div>
-    <div style="display:flex;gap:12px;align-items:center">
-      <div class="toggle" id="toggleBtn" aria-controls="sidebar" aria-expanded="false">☰</div>
-    </div>
-  </header>
+<script>
+window.onload = () => {
+    setTimeout(() => {
+        const ls = document.getElementById("loadingScreen");
+        ls.style.opacity = "0";
+        setTimeout(() => ls.style.display = "none", 900);
+    }, 2500);
+};
+</script>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar" aria-hidden="true">
-    <nav>
-      <a href="#">Homepage</a>
-      <a href="/p/about.html">About</a>
-      <a href="/p/artists.html">Artists</a>
-      <a href="/p/albums.html">Albums</a>
-      <a href="/p/event.html">Event</a>
-      <a href="/p/contact.html">Contact</a>
-    </nav>
-  </aside>
-
-  <!-- MAIN -->
-  <main id="mainContent" class="">
-    <section class="hero" aria-labelledby="heroTitle">
-      <h1 id="heroTitle"><span>XYZAROOM</span>RECORDS</h1>
-      <p> Unlimited • Music • Distribution • Software </p>
-      <div class="controls">
-        <button class="btn" onclick="openWA()">FREE</button>
-        <a class="btn ghost" href="https://wa.me/message/63P7KUGSCCZDE1!" target="_blank" rel="noopener">REQUEST DEMO</a>
-      </div>
-    </section>
-
-    <section style="margin-top:32px">
-      <h2 style="margin-bottom:12px">Programing & Tools (example)</h2>
-      <div class="grid">
-        <div class="card">C++ <div style="margin-top:8px;color:#00ff88;font-weight:900">C++ MIDI</div></div>
-        <div class="card">Go <div style="margin-top:8px;color:#00ff88;font-weight:900">GO BEAT</div></div>
-        <div class="card">Java <div style="margin-top:8px;color:#00ff88;font-weight:900">JAVA COVER</div></div>
-        <div class="card">JavaScript <div style="margin-top:8px;color:#00ff88;font-weight:900">JS UPLOAD</div></div>
-        <!-- Kode lainnya tetap sama -->
-      </div>
-    </section>
-
-    <section id="demo" style="margin-top:28px;display:none">
-      <h3 id="title"></h3>
-      <pre id="code"></pre>
-      <pre id="out" style="color:#00ff88"></pre>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-links">
-      <a href="https://xyzaroom.github.io/privacy-policy">Privacy Policy</a>
-      <a href="https://xyzaroom.github.io/terms-condition">Terms Conditions</a>
-    </div>
-    <p>© 2025 XYZAROOM RECORDS • All Rights Reserved.</p>
-  </footer>
-
-  <!-- Script animasi kode background -->
-  <script>
-    const bgCanvas = document.getElementById('jsCodeBackground');
-    const bgCtx = bgCanvas.getContext('2d');
-
-    function resizeBgCanvas() {
-      bgCanvas.width = window.innerWidth;
-      bgCanvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeBgCanvas);
-    resizeBgCanvas();
-
-    const codeChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ{}[]()=+-/*<>;:'.split('');
-    const columns = Math.floor(window.innerWidth / 15);
-    const drops = Array.from({ length: columns }, () => Math.random() * (window.innerHeight / 20));
-
-    function drawBackground() {
-      bgCtx.fillStyle = 'rgba(0, 0, 0, 0.02)';
-      bgCtx.fillRect(0, 0, window.innerWidth, window.innerHeight);
-
-      bgCtx.font = '14px monospace';
-      bgCtx.fillStyle = '#00ff88';
-
-      for (let i=0; i<drops.length; i++) {
-        const text = codeChars[Math.floor(Math.random() * codeChars.length)];
-        bgCtx.fillText(text, i * 15, drops[i] * 20);
-
-        if (drops[i] * 20 > window.innerHeight && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-
-      requestAnimationFrame(drawBackground);
-    }
-    drawBackground();
-
-    // Overlay dan lainnya tetap sama...
-    const overlay = document.getElementById('overlay');
-    const typeText = document.getElementById('typeText');
-    const toggleBtn = document.getElementById('toggleBtn');
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('mainContent');
-
-    const fullText = 'XYZAROOM RECORDS';
-    let tIdx = 0;
-    function typeStep(){
-      if(tIdx <= fullText.length){
-        typeText.innerText = fullText.slice(0, tIdx);
-        tIdx++;
-        setTimeout(typeStep, 80);
-      } else {
-        setTimeout(()=>{
-          overlay.classList.add('hidden');
-          mainContent.classList.add('visible');
-        }, 220);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', ()=>{
-      tIdx = 0;
-      typeText.innerText = '';
-      setTimeout(typeStep, 120);
-
-      toggleBtn.addEventListener('click', ()=>{
-        const open = sidebar.classList.toggle('open');
-        sidebar.setAttribute('aria-hidden', !open);
-        toggleBtn.setAttribute('aria-expanded', open);
-      });
-
-      document.addEventListener('click', (e)=>{
-        const inside = sidebar.contains(e.target) || toggleBtn.contains(e.target);
-        if(!inside) sidebar.classList.remove('open');
-      });
-
-      document.querySelectorAll('.card').forEach(c=>{
-        c.addEventListener('click', ()=>{
-          document.getElementById('demo').style.display='block';
-          document.getElementById('title').innerText = c.innerText.trim();
-          document.getElementById('code').innerText = '// contoh snippet for ' + c.innerText;
-          document.getElementById('out').innerText = '✔ Demo ready';
-          window.scrollTo({top:document.getElementById('demo').offsetTop-20,behavior:'smooth'});
-        });
-      });
-    });
-
-    // Animasi kode JS sebagai background di atas, sudah lengkap
-  </script>
 </body>
- </html>
+</html>

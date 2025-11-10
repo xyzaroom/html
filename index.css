@@ -1,0 +1,71 @@
+/* ================= GLOBAL ================= */
+body, html {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* ================= ARTISTS GALLERY ================= */
+.artists-gallery {
+    padding: 40px;
+    background: #222;
+    text-align: center;
+}
+
+.artists-gallery h2 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+#artistsContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#artistsContainer img {
+    width: 200px;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: border 0.3s, transform 0.3s;
+}
+
+#artistsContainer img:hover {
+    border-color: #fff;
+    transform: scale(1.05);
+}
+
+/* ================= ARTIST BIODATA OVERLAY ================= */
+#bioOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+#bioOverlay &gt; div {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+#bioOverlay button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #f00;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}

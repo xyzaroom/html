@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xyzaroom Records | Official Website</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+  /* RESET & BASE */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { min-height:100vh; font-family:'Helvetica Neue', Arial, sans-serif; background:#000; color:#eee; line-height:1.6; overflow-x:hidden; position:relative; }
+  body { display:flex; flex-direction:column; }
+  a { color:inherit; text-decoration:none; }
+  /* PROGRESS BAR */
+  #progress-bar { position:fixed; top:0; left:0; height:2px; background:#fff; width:0%; z-index:1001; transition:width 0.1s ease; }
+  /* HEADER */
+  header { position:fixed; top:0; width:100%; z-index:1000; padding:20px 5%; display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.7); backdrop-filter:blur(10px); transition:all 0.4s ease; }
+  header.scrolled { background:rgba(0,0,0,0.95); padding:15px 5%; }
+  .logo { font-size:1.8rem; font-weight:200; letter-spacing:3px; }
+  .desktop-nav { display:flex; }
+  .desktop-nav a { margin:0 15px; font-size:0.95rem; position:relative; }
+  .desktop-nav a::after { content:''; position:absolute; bottom:-5px; left:0; width:0; height:1px; background:#fff; transition:width 0.4s; }
+  .desktop-nav a:hover::after { width:100%; }
+  .mobile-toggle { display:none; font-size:1.6rem; cursor:pointer; }
+  .mobile-nav { position:fixed; top:0; right:-100%; width:280px; height:100vh; background:rgba(0,0,0,0.98); padding:80px 30px 40px; transition:right 0.4s ease; z-index:999; display:flex; flex-direction:column; align-items:center; }
+  .mobile-nav.open { right:0; }
+  .mobile-nav a { margin:15px 0; font-size:1.2rem; width:100%; text-align:center; padding:12px 0; border-bottom:1px solid #222; }
+  .mobile-nav a:last-child { border-bottom:none; }
+
+  /* HERO */
+  #hero { position:relative; min-height:100vh; display:flex; justify-content:center; align-items:center; text-align:center; }
+  .slider-container { position:relative; width:90%; max-width:1200px; overflow:hidden; border-radius:12px; }
+  .slider-wrapper { display:flex; transition:transform 0.6s ease; }
+  .slider-item { min-width:100%; position:relative; }
+  .slider-item img { width:100%; display:block; border-radius:12px; }
+
+  /* SLIDER NAV */
+  .slider-nav { position:absolute; top:50%; width:100%; display:flex; justify-content:space-between; transform:translateY(-50%); padding:0 10px; z-index:10; }
+  .slider-nav button { background:rgba(0,0,0,0.6); color:#fff; border:none; font-size:2rem; padding:10px 15px; cursor:pointer; border-radius:50%; transition:0.3s; }
+  .slider-nav button:hover { background:rgba(255,255,255,0.4); color:#000; }
+
+  /* FOOTER */
+  footer { background:#000; color:#aaa; padding:60px 5% 40px; font-family:Arial, sans-serif; width:100%; margin-top:auto; }
+  .footer-container { display:flex; justify-content:space-between; flex-wrap:wrap; max-width:1200px; margin:0 auto 50px; gap:40px; }
+  .footer-column { flex:1; min-width:200px; margin:20px 0; }
+  .footer-column h4 { color:#fff; font-size:1.1rem; margin-bottom:20px; font-weight:700; }
+  .footer-column a { display:block; color:#aaa; margin:10px 0; text-decoration:none; transition:0.3s; }
+  .footer-column a:hover { color:#fff; }
+  .footer-bottom { text-align:center; border-top:1px solid #333; padding-top:30px; width:100%; }
+  .social-icons { margin-bottom:20px; }
+  .social-icons a { color:#fff; margin:0 18px; font-size:1.7rem; text-decoration:none; transition:0.3s; }
+  .social-icons a:hover { color:#ccc; }
+  .footer-bottom p { margin:15px 0; color:#666; font-size:0.9rem; }
+  .legal-links { display:flex; justify-content:center; gap:30px; flex-wrap:wrap; }
+  .legal-links a { color:#666; font-size:0.9rem; text-decoration:none; }
+  .legal-links a:hover { color:#fff; }
+
+  /* Responsive */
+  @media(max-width:768px){ .desktop-nav{display:none;} .mobile-toggle{display:block;} }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="logo">XYZAROOM</div>
+  <nav class="desktop-nav">
+    <a href="#hero">Home</a>
+    <a href="p/artists.html">Artists</a>
+    <a href="#service">Services</a>
+    <a href="#footer">Contact</a>
+  </nav>
+  <div class="mobile-toggle" onclick="toggleMobileNav()">Menu</div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#hero">Home</a>
+  <a href="p/artists.html">Artists</a>
+  <a href="#service">Services</a>
+  <a href="#footer">Contact</a>
+</nav>
+
+<!-- HERO SLIDER -->
+<section id="hero">
+  <div class="slider-container">
+    <div class="slider-wrapper" id="artistSlider">
+      <div class="slider-item"><img src="https://www.dropbox.com/s/nc9qcm130vsiqfhcvwc84/artist001.png?dl=1" alt="Anna Laura Soeparno"></div>
+      <div class="slider-item"><img src="https://www.dropbox.com/s/webn5s2hir4jijqdp9tti/artist002.png?dl=1" alt="Abde Negara"></div>
+      <div class="slider-item"><img src="https://www.dropbox.com/s/t51v25riu6n7sya2nc110/artist003.png?dl=1" alt="Thibo Band"></div>
+    </div>
+    <div class="slider-nav">
+      <button onclick="prevSlide()">&#10094;</button>
+      <button onclick="nextSlide()">&#10095;</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>A Producer</h4>
+      <a href="p/about.html">About</a>
+      <a href="p/artists.html">Artists</a>
+      <a href="p/albums.html">Albums</a>
+      <a href="p/event.html">Event</a>
+      <a href="p/contact.html">Contact</a>
+    </div>
+    <div class="footer-column">
+      <h4>A Record Label</h4>
+      <a href="#">Music Distribution</a>
+      <a href="#">Playlist Pitching</a>
+      <a href="#">Sync Licensing</a>
+      <a href="#">Publishing</a>
+      <a href="#">Xyzaroom Direct</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="social-icons">
+      <a href="https://instagram.com/xyzaroom" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com/xyzaroomrecords" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://x.com/xyzaroom" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://tiktok.com/@xyzaroom" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://youtube.com/@xyzaroom" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p><strong>© 2025 Xyzaroom Records Inc. All rights reserved.</strong></p>
+    <div class="legal-links">
+      <a href="FAQ/privacy-policy.html"><strong>Privacy Policy</strong></a>
+      <a href="FAQ/terms-condition.html"><strong>Terms Conditions</strong></a>
+      <a href="FAQ/modern-slavery.html"><strong>Modern Slavery Statement</strong></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Nav Toggle
+  function toggleMobileNav() { document.getElementById('mobileNav').classList.toggle('open'); }
+  document.addEventListener('click',(e)=>{const nav=document.getElementById('mobileNav'); const toggle=document.querySelector('.mobile-toggle'); if(!nav.contains(e.target)&&!toggle.contains(e.target)&&nav.classList.contains('open')){nav.classList.remove('open');} });
+
+  // Slider
+  let currentSlide=0;
+  const slides=document.querySelectorAll('#artistSlider .slider-item');
+  function showSlide(n){slides.forEach((s,i)=>{s.style.transform=`translateX(${100*(i-n)}%)`;});}
+  function nextSlide(){currentSlide=(currentSlide+1)%slides.length; showSlide(currentSlide);}
+  function prevSlide(){currentSlide=(currentSlide-1+slides.length)%slides.length; showSlide(currentSlide);}
+  showSlide(currentSlide);
+  setInterval(nextSlide,4000); // auto-play every 4s
+
+  // Progress Bar
+  window.addEventListener('scroll',()=>{const winScroll=document.body.scrollTop||document.documentElement.scrollTop; const height=document.documentElement.scrollHeight-document.documentElement.clientHeight; document.getElementById('progress-bar').style.width=(winScroll/height*100)+'%';});
+</script>
+</body>
+</html>

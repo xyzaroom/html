@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xyzaroom Records | Official Website</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+  /* Reset */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* Base */
+  html, body {
+    min-height: 100vh;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: #000;
+    color: #eee;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Canvas for Particles */
+  #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+  /* Cursor Trail */
+  .cursor-trail { position: absolute; width: 6px; height: 6px; background: #fff; border-radius: 50%; pointer-events: none; z-index: 9999; opacity: 0.6; transform: translate(-50%, -50%); transition: opacity 0.3s ease; }
+  .cursor-trail.fade { opacity: 0; }
+
+  /* Scroll Progress Bar */
+  #progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: #fff; width: 0%; z-index: 1001; transition: width 0.1s ease; }
+
+  /* Container */
+  .section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Background overlay */
+  .section::before {
+    content: '';
+    position: absolute;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+    z-index:1;
+  }
+
+  /* Titles & text */
+  h1, h2, h3 {
+    font-weight: 300;
+    z-index:2;
+    position: relative;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  p {
+    max-width: 800px;
+    margin: 10px auto 30px auto;
+    z-index:2;
+    position: relative;
+    font-size: 1.1rem;
+  }
+
+  /* Fade-in */
+  .fade-in { opacity: 0; transform: translateY(30px); animation: fadeIn 1.8s forwards; }
+  @keyframes fadeIn { to { opacity:1; transform: translateY(0); } }
+
+  /* Ghost fade */
+  .ghost-fade { opacity: 0.03; transition: opacity 2.2s ease; }
+  .ghost-fade.visible { opacity: 1; }
+
+  /* Blur reveal */
+  .blur-reveal { filter: blur(20px); opacity: 0; transition: all 2s ease; }
+  .blur-reveal.visible { filter: blur(0); opacity: 1; }
+
+  /* Zoom smooth */
+  .zoom-in { transform: scale(0.85); opacity: 0; transition: all 1.5s ease; }
+  .zoom-in.visible { transform: scale(1); opacity:1; }
+
+  /* Parallax */
+  .parallax {
+    position: absolute; top:0; left:0; width:100%; height:100%;
+    background-size: cover; background-position: center;
+    z-index:0;
+    transform: translateY(0);
+    transition: transform 0.25s ease-out;
+    filter: grayscale(100%) brightness(0.7);
+  }
+
+  /* Overlay gradient */
+  .gradient-overlay {
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+    z-index:1;
+  }
+
+  /* Header */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+  }
+  header.scrolled { background: rgba(0,0,0,0.95); padding: 15px 5%; }
+  .logo { font-size: 1.8rem; font-weight: 200; letter-spacing: 3px; }
+
+  /* Desktop Nav */
+  .desktop-nav { display: flex; }
+  .desktop-nav a { margin: 0 15px; font-size: 0.95rem; position: relative; }
+  .desktop-nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.4s; }
+  .desktop-nav a:hover::after { width: 100%; }
+
+  /* Mobile Menu Toggle */
+  .mobile-toggle { display: none; font-size: 1.6rem; cursor: pointer; }
+
+  /* Mobile Nav */
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: rgba(0,0,0,0.98);
+    padding: 80px 30px 40px;
+    transition: right 0.4s ease;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .mobile-nav.open { right: 0; }
+  .mobile-nav a {
+    margin: 15px 0;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #222;
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+
+  /* Glitch Effect */
+  .glitch {
+    position: relative;
+    animation: glitch 3s infinite alternate-reverse;
+  }
+  @keyframes glitch {
+    0% { text-shadow: 0.05em 0 0 #fff, -0.05em 0 0 #fff; }
+    15% { text-shadow: 0.05em 0 0 #fff, -0.05em 0 0 #fff; }
+    16% { text-shadow: -0.05em -0.025em 0 #fff, 0.025em 0.035em 0 #fff; }
+    49% { text-shadow: -0.05em -0.025em 0 #fff, 0.025em 0.035em 0 #fff; }
+    50% { text-shadow: 0.025em 0.035em 0 #fff, 0.05em 0 0 #fff; }
+    99% { text-shadow: 0.025em 0.035em 0 #fff, 0.05em 0 0 #fff; }
+    100% { text-shadow: -0.025em 0 0 #fff, -0.05em 0 0 #fff; }
+  }
+
+  /* Section Divider SVG */
+  .divider { width: 100%; height: 60px; position: relative; overflow: hidden; }
+  .divider svg { position: absolute; bottom: 0; width: 100%; height: 100px; fill: #000; }
+
+  /* About */
+  #about .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin-top: 40px;
+    z-index: 2;
+  }
+  .about-card {
+    background: rgba(255,255,255,0.03);
+    padding: 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Service */
+  #service .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin-top: 50px;
+    z-index: 2;
+  }
+  .service-card {
+    background: rgba(255,255,255,0.05);
+    padding: 35px 25px;
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+  }
+  .service-card:hover {
+    transform: translateY(-12px);
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+  .service-card i {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #ccc;
+  }
+
+  /* Footer — HILANGKAN RESOURCES + SCROLL FULL */
+  footer {
+    background: #000;
+    color: #aaa;
+    padding: 60px 5% 40px;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    margin-top: auto;
+  }
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    gap: 40px;
+  }
+  .footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 20px 0;
+  }
+  .footer-column h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  .footer-column a {
+    display: block;
+    color: #aaa;
+    margin: 10px 0;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  .footer-column a:hover {
+    color: #fff;
+  }
+  .footer-bottom {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 30px;
+    width: 100%;
+  }
+  .social-icons {
+    margin-bottom: 20px;
+  }
+  .social-icons a {
+    color: #fff;
+    margin: 0 18px;
+    font-size: 1.7rem;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  .social-icons a:hover {
+    color: #ccc;
+  }
+  .footer-bottom p {
+    margin: 15px 0;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  .legal-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .legal-links a {
+    color: #666;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .legal-links a:hover {
+    color: #fff;
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .hero-content h1 { font-size: 3.5rem; }
+    #about .about-grid, .footer-container { display: block; }
+  }
+  @media (max-width: 768px) {
+    .section { padding: 60px 15px; min-height: 80vh; }
+    h1 { font-size: 2.5rem !important; }
+    h2 { font-size: 2rem !important; }
+    .hero-content p { font-size: 1rem !important; }
+    .service-grid, .about-grid { grid-template-columns: 1fr !important; gap: 25px; }
+    .service-card, .about-card { padding: 25px 20px; }
+    header { padding: 12px 4% !important; }
+    .logo { font-size: 1.5rem !important; }
+    .desktop-nav { display: none; }
+    .mobile-toggle { display: block; }
+    .divider { height: 40px; }
+    #about { scroll-snap-align: start; }
+    .footer-container { padding: 0 5%; gap: 30px; }
+  }
+  @media (max-width: 480px) {
+    h1 { font-size: 2rem !important; }
+    .hero-content p { font-size: 0.95rem !important; }
+    .section { padding: 50px 10px; }
+    .social-icons a { margin: 0 12px; font-size: 1.5rem; }
+    .legal-links { gap: 20px; }
+  }
+
+  /* Scroll Snap for Mobile */
+  html { scroll-snap-type: y mandatory; }
+  .section, .divider { scroll-snap-align: start; }
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Canvas for Particles -->
+<canvas id="particles"></canvas>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="logo fade-in">XYZAROOM</div>
+  <!-- Desktop Nav -->
+  <nav class="desktop-nav">
+    <a href="#hero" class="fade-in">Home</a>
+    <a href="#about" class="fade-in">About</a>
+    <a href="#service" class="fade-in">Services</a>
+    <a href="#footer" class="fade-in">Contact</a>
+  </nav>
+  <!-- Mobile Toggle -->
+  <div class="mobile-toggle" onclick="toggleMobileNav()">Menu</div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#hero">Home</a>
+  <a href="#about">About</a>
+  <a href="#service">Services</a>
+  <a href="#footer">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="section">
+  <div class="parallax" style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+  <div class="gradient-overlay"></div>
+  <div class="hero-content">
+    <h1 class="blur-reveal glitch">Music Distribution<br>For The New Era</h1>
+    <p class="ghost-fade">Independent label support • Global publishing • Innovative release tools • Full artist control</p>
+    <p class="zoom-in">Xyzaroom Records Inc. — Established 2018 in Sukabumi, Indonesia. Subsidiary of Algoritma Music Group. Empowering creators since day one.</p>
+    <p class="fade-in">From bedroom producers to stadium headliners — we deliver your sound to the world.</p>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="divider">
+  <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+    <path d="M0,0 C320,100 1120,0 1440,80 L1440,100 L0,100 Z"></path>
+  </svg>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="parallax" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+  <div class="gradient-overlay"></div>
+  <h2 class="fade-in">About Xyzaroom Records</h2>
+  <p class="blur-reveal">Founded in 2018 in Parungkuda, Sukabumi, Xyzaroom Records is Indonesia's pioneering independent music distribution platform. Acquired by Algoritma Music Group in 2019, we empower artists with cutting-edge tools and global reach.</p>
+  <p class="ghost-fade">We believe every artist deserves transparency, control, and fair revenue — no gatekeepers, no hidden fees.</p>
+  <div class="about-grid">
+    <div class="about-card fade-in">
+      <h3>Our Mission</h3>
+      <p>To democratize music distribution and give every creator full control over their art, revenue, and global presence.</p>
+      <p class="zoom-in">From zero streams to millions — we scale with you.</p>
+    </div>
+    <div class="about-card fade-in">
+      <h3>Our Vision</h3>
+      <p>A world where independent artists thrive alongside major labels, powered by technology and transparency.</p>
+      <p class="zoom-in">No middlemen. Just music and money.</p>
+    </div>
+    <div class="about-card fade-in">
+      <h3>Our Team</h3>
+      <p>Engineers, producers, and music lovers from Jakarta to LA — united by one goal: your success.</p>
+    </div>
+    <div class="about-card fade-in">
+      <h3>Milestones</h3>
+      <p>10M+ streams delivered • 500+ artists onboarded • 150+ countries reached</p>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="divider">
+  <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+    <path d="M0,20 C320,80 1120,20 1440,80 L1440,100 L0,100 Z"></path>
+  </svg>
+</div>
+
+<!-- SERVICE -->
+<section id="service" class="section">
+  <div class="parallax" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+  <div class="gradient-overlay"></div>
+  <h2 class="ghost-fade">Our Services</h2>
+  <p class="zoom-in">End-to-end solutions for modern artists and labels</p>
+  <div class="service-grid">
+    <div class="service-card blur-reveal" data-tilt>
+      <i class="fas fa-globe"></i>
+      <h3>Global Distribution</h3>
+      <p>Release to 150+ platforms including Spotify, Apple Music, YouTube, TikTok, and more.</p>
+      <p class="fade-in">100% ownership. Zero upfront cost.</p>
+    </div>
+    <div class="service-card blur-reveal" data-tilt>
+      <i class="fas fa-list-ol"></i>
+      <h3>Playlist Pitching</h3>
+      <p>Direct access to editorial playlists and algorithm boosting through proven strategies.</p>
+      <p class="fade-in">We pitch. You win.</p>
+    </div>
+    <div class="service-card blur-reveal" data-tilt>
+      <i class="fas fa-sync"></i>
+      <h3>Sync Licensing</h3>
+      <p>Get your music in films, TV, ads, and games with our dedicated sync team.</p>
+      <p class="fade-in">From indie films to global brands.</p>
+    </div>
+    <div class="service-card blur-reveal" data-tilt>
+      <i class="fas fa-copyright"></i>
+      <h3>Publishing Admin</h3>
+      <p>Collect all your royalties worldwide. YouTube, PRS, ASCAP, and performance rights.</p>
+      <p class="fade-in">Every cent. Every stream.</p>
+    </div>
+    <div class="service-card blur-reveal" data-tilt>
+      <i class="fas fa-star"></i>
+      <h3>Xyzaroom Plus</h3>
+      <p>Premium tools: analytics, promo campaigns, advance funding, and artist development.</p>
+      <p class="fade-in">For artists ready to level up.</p>
+    </div>
+    <div class="service-card blur-reveal" data-tilt>
+      <i class="fas fa-headset"></i>
+      <h3>24/7 Support</h3>
+      <p>Dedicated account manager and instant chat support for all artists.</p>
+      <p class="fade-in">We’re here when you need us.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="divider">
+  <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+    <path d="M0,0 C320,100 1120,0 1440,80 L1440,100 L0,100 Z"></path>
+  </svg>
+</div>
+
+<!-- FOOTER — TANPA RESOURCES -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>A Producer</h4>
+      <a href="p/about.html">About</a>
+      <a href="p/artists.html">Artists</a>
+      <a href="p/albums.html">Albums</a>
+      <a href="p/event.html">Event</a>
+      <a href="P/contact.html">Contact</a>
+    </div>
+    <div class="footer-column">
+      <h4>A Record Label</h4>
+      <a href="#">Music Distribution</a>
+      <a href="#">Playlist Pitching</a>
+      <a href="#">Sync Licensing</a>
+      <a href="#">Publishing</a>
+      <a href="#">Xyzaroom Direct</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="social-icons">
+      <a href="https://instagram.com/xyzaroom" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com/xyzaroomrecords" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://x.com/xyzaroom" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://tiktok.com/@xyzaroom" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://youtube.com/@xyzaroom" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p><strong>© 2025 Xyzaroom Records Inc. All rights reserved.</strong></p>
+    <div class="legal-links">
+      <a href="FAQ/privacy-policy.html"><strong>Privacy Policy</strong></a>
+      <a href="FAQ/terms-condition.html"><strong>Terms Conditions</strong></a>
+      <a href="FAQ/modern-slavery.html"><strong>Modern Slavery</strong></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Nav Toggle
+  function toggleMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    nav.classList.toggle('open');
+  }
+
+  // Close mobile nav when clicking outside
+  document.addEventListener('click', (e) => {
+    const nav = document.getElementById('mobileNav');
+    const toggle = document.querySelector('.mobile-toggle');
+    if (!nav.contains(e.target) && !toggle.contains(e.target) && nav.classList.contains('open')) {
+      nav.classList.remove('open');
+    }
+  });
+
+  // === 1. PARTICLE BACKGROUND ===
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const particles = [];
+  for (let i = 0; i < 100; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.8,
+      speed: Math.random() * 0.6 + 0.2
+    });
+  }
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#fff';
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fill();
+      p.y += p.speed;
+      if (p.y > canvas.height) p.y = 0;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  // === 2. CURSOR TRAIL ===
+  const trails = [];
+  document.addEventListener('mousemove', (e) => {
+    const trail = document.createElement('div');
+    trail.className = 'cursor-trail';
+    trail.style.left = e.pageX + 'px';
+    trail.style.top = e.pageY + 'px';
+    document.body.appendChild(trail);
+    trails.push(trail);
+    setTimeout(() => trail.classList.add('fade'), 50);
+    setTimeout(() => trail.remove(), 600);
+  });
+
+  // === 3. SCROLL PROGRESS BAR ===
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById('progress-bar').style.width = scrolled + '%';
+  });
+
+  // === 4. 3D TILT ON SERVICE CARD ===
+  document.querySelectorAll('[data-tilt]').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 10;
+      const rotateY = (centerX - x) / 10;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(-12px)';
+    });
+  });
+
+  // === 5. INTERSECTION OBSERVER ===
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.blur-reveal, .ghost-fade, .zoom-in, .fade-in').forEach(el => observer.observe(el));
+
+  // === 6. PARALLAX & HEADER ===
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    document.querySelectorAll('.parallax').forEach(parallax => {
+      const speed = 0.35;
+      parallax.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+    const header = document.getElementById('header');
+    if (scrolled > 100) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+</script>
+
+</body>
+</html>

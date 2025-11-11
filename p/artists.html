@@ -1,40 +1,103 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-&lt;meta charset="UTF-8" /&gt;
-&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
-&lt;title&gt;Artists | Xyzaroom Records&lt;/title&gt;
-&lt;link rel="stylesheet" href="index.css" /&gt;
-&lt;/head&gt;
-&lt;body&gt;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artists | Xyzaroom Records</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Helvetica Neue', Arial,sans-serif;background:#000;color:#eee;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  header,footer{background:#000;}
+  header{position:fixed;top:0;width:100%;z-index:1000;padding:20px 5%;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);}
+  .logo{font-size:1.8rem;font-weight:200;letter-spacing:3px;}
+  .desktop-nav a{margin:0 15px;font-size:0.95rem;position:relative;}
+  .desktop-nav a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:1px;background:#fff;transition:width 0.4s;}
+  .desktop-nav a:hover::after{width:100%;}
+  .mobile-toggle{display:none;font-size:1.6rem;cursor:pointer;}
+  .mobile-nav{position:fixed;top:0;right:-100%;width:280px;height:100vh;background:rgba(0,0,0,0.98);padding:80px 30px 40px;transition:right 0.4s ease;z-index:999;display:flex;flex-direction:column;align-items:center;}
+  .mobile-nav.open{right:0;}
+  .mobile-nav a{margin:15px 0;font-size:1.2rem;width:100%;text-align:center;padding:12px 0;border-bottom:1px solid #222;}
+  .mobile-nav a:last-child{border-bottom:none;}
 
-&lt;!-- ARTISTS GALLERY --&gt;
-&lt;div class="artists-gallery"&gt;
-    &lt;h2 style="color:#fff;"&gt;Artis Kami&lt;/h2&gt;
-    &lt;div id="artistsContainer"&gt;&lt;/div&gt;
-&lt;/div&gt;
+  .artist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;padding:120px 5% 60px;}
+  .artist-card{cursor:pointer;transition:0.3s;border-radius:12px;overflow:hidden; border:1px solid rgba(255,255,255,0.1);}
+  .artist-card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;}
+  .artist-card:hover{transform:scale(1.05);}
 
-&lt;!-- ARTIST BIODATA OVERLAY --&gt;
-&lt;div id="bioOverlay"&gt;
-  &lt;div&gt;
-    &lt;button onclick="closeBio()"&gt;Tutup&lt;/button&gt;
-    &lt;h2 id="artistName"&gt;&lt;/h2&gt;
-    &lt;img id="bioImage" src="" alt="" style="width:100%; max-height:300px; object-fit:cover; margin-top:10px; border-radius:8px;"&gt;
-    &lt;div style="margin-top:10px;"&gt;
-      &lt;h3&gt;Biodata&lt;/h3&gt;
-      &lt;p id="artistBio"&gt;&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div style="margin-top:10px;"&gt;
-      &lt;h3&gt;Tulisan&lt;/h3&gt;
-      &lt;p id="artistText"&gt;&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div style="margin-top:10px;"&gt;
-      &lt;h3&gt;Rilisan Terkait&lt;/h3&gt;
-      &lt;p id="artistRelease"&gt;&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+  /* POPUP */
+  .popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:0.4s;}
+  .popup.active{opacity:1;visibility:visible;}
+  .popup-content{position:relative;width:90%;max-width:900px;}
+  .popup-content img{width:100%;border-radius:12px;aspect-ratio:16/9;object-fit:cover;}
+  .popup-close{position:absolute;top:10px;right:10px;font-size:2rem;color:#fff;cursor:pointer;}
 
-&lt;script src="index.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+  footer{color:#aaa;padding:60px 5% 40px;font-family:Arial,sans-serif;}
+  .footer-container{display:flex;justify-content:space-between;flex-wrap:wrap;max-width:1200px;margin:0 auto 50px;gap:40px;}
+  .footer-column{flex:1;min-width:200px;margin:20px 0;}
+  .footer-column h4{color:#fff;font-size:1.1rem;margin-bottom:20px;font-weight:700;}
+  .footer-column a{display:block;color:#aaa;margin:10px 0;text-decoration:none;transition:0.3s;}
+  .footer-column a:hover{color:#fff;}
+  .footer-bottom{text-align:center;border-top:1px solid #333;padding-top:30px;width:100%;}
+  .social-icons{margin-bottom:20px;}
+  .social-icons a{color:#fff;margin:0 18px;font-size:1.7rem;text-decoration:none;transition:0.3s;}
+  .social-icons a:hover{color:#ccc;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">XYZAROOM</div>
+  <nav class="desktop-nav">
+    <a href="index.html">Home</a>
+    <a href="#">Artists</a>
+    <a href="#footer">Contact</a>
+  </nav>
+  <div class="mobile-toggle" onclick="toggleMobileNav()">Menu</div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="#">Artists</a>
+  <a href="#footer">Contact</a>
+</nav>
+
+<!-- ARTIST GRID -->
+<section class="artist-grid">
+  <div class="artist-card" onclick="openPopup('https://www.dropbox.com/s/nc9qcm130vsiqfhcvwc84/artist001.png?dl=1')"> <img src="https://www.dropbox.com/s/nc9qcm130vsiqfhcvwc84/artist001.png?dl=1" alt="Anna Laura Soeparno"> </div>
+  <div class="artist-card" onclick="openPopup('https://www.dropbox.com/s/webn5s2hir4jijqdp9tti/artist002.png?dl=1')"> <img src="https://www.dropbox.com/s/webn5s2hir4jijqdp9tti/artist002.png?dl=1" alt="Abde Negara"> </div>
+  <div class="artist-card" onclick="openPopup('https://www.dropbox.com/s/t51v25riu6n7sya2nc110/artist003.png?dl=1')"> <img src="https://www.dropbox.com/s/t51v25riu6n7sya2nc110/artist003.png?dl=1" alt="Thibo Band"> </div>
+</section>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <span class="popup-close" onclick="closePopup()">&times;</span>
+    <img id="popupImg" src="" alt="Artist Bio">
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>A Producer</h4>
+      <a href="p/about.html">About</a>
+      <a href="p/artists.html">Artists</a>
+      <a href="p/albums.html">Albums</a>
+      <a href="p/event.html">Event</a>
+      <a href="p/contact.html">Contact</a>
+    </div>
+    <div class="footer-column">
+      <h4>A Record Label</h4>
+      <a href="#">Music Distribution</a>
+      <a href="#">Playlist Pitching</a>
+      <a href="#">Sync Licensing</a>
+      <a href="#">Publishing</a>
+      <a href="#">Xyzaroom Direct</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <
